@@ -31,7 +31,6 @@ function App() {
       <Navbar />
       <div>
         <Routes>
-          <HashRouter basename="/">
             <Route path="/" element={<Home />}></Route>
             <Route path="Home" element={<Home />}></Route>
             <Route path="About" element={<About />}></Route>
@@ -48,7 +47,6 @@ function App() {
             <Route path="Osignup" element={<Osignup />}></Route>
             <Route path="Ologin" element={<Ologin />}></Route>
             <Route path="*" element={<Home />}></Route>
-          </HashRouter>
         </Routes>
       </div>
       {/*<Footer />*/}

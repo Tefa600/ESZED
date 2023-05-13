@@ -186,7 +186,7 @@ export default function Login() {
         alert(`Logging in Welcome ${e.data.data.user.userName}`);
         const {user} = e.data.data;
         console.log(user);
-        window.sessionStorage.setItem('token', e.data.token);
+        // window.sessionStorage.setItem('token', e.data.token);
         Cookies.set("token",e.data.token);
         axios.defaults.headers.common["Authorization"] = `Bearer ${e.data.token}`; // this is how you send token in the Authorization as a header
         const decodedToken = jwtDecode(e.data.token);

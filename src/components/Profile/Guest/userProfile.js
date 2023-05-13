@@ -5,6 +5,7 @@ import { Link, Navigate } from "react-router-dom";
 import UserDetails from "./UserDetails/UserDetails";
 import ShowHistory from "./Showhistory/ShowHistory";
 import axios from "../../../api/axios";
+import Cookies from "js-cookie";
 // function PGNavigator() {
 
 // }
@@ -26,7 +27,7 @@ function UserProfile() {
 
   const [userData, setUserData] = useState([]);
   useEffect(() => {
-    axios.get("api/user/me", {headers:{Authorization:`Bearer ${sessionStorage.getItem("token")}`}}).then((e) => {
+    axios.get("api/user/me", {headers:{Authorization:`Bearer ${Cookies.getItem("token")}`}}).then((e) => {
       // axios.defaults.headers.common["Authorization"] = `Bearer ${e.data.token}`;
       setUserData(e.data.data)
       console.log(userData);

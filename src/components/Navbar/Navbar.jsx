@@ -3,6 +3,7 @@ import {Link} from "react-router-dom";
 import styles from "./Navbar.module.css";
 import Logo from "../../images/SpaceZone.svg";
 import axios from "../../api/axios";
+import Cookies from "js-cookie";
 
 export default function Navbar() {
     const [userData, setUserData] = useState([]);
@@ -15,6 +16,9 @@ export default function Navbar() {
     }, []);
 
     function Logout() {
+        axios.post("api/user/logout").then((e)=>{
+            console.log(e.status);
+        }).catch()
 
     }
 
@@ -97,16 +101,27 @@ export default function Navbar() {
                                 to="OwnerProfile"
                             ></Link>
                         </li>
+                        {(Cookies.get("token")) ?
+                            <li></li>
+
+                            :
+                            <li className="nav-item mx-2">
+                                <Link className="nav-link" to="Register">
+                                    Register
+                                </Link>
+                            </li>
+
+                        }
+                        {(Cookies.get("token")) ?
+                            <li></li>
+
+                            :
                         <li className="nav-item mx-2">
                             <Link className="nav-link" to="Login">
                                 Login
                             </Link>
                         </li>
-                        <li className="nav-item mx-2">
-                            <Link className="nav-link" to="Register">
-                                Register
-                            </Link>
-                        </li>
+                        }
                         <li className="nav-item mx-2">
                             <Link className="nav-link" onClick={Logout} to="Login">
                                 Logout

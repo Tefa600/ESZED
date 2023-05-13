@@ -131,13 +131,13 @@
 //   );
 // }
 import "./Login.css";
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import Joi from "joi";
-import axios from "axios";
+import axios from '../../api/axios';
 import { useNavigate } from "react-router";
 import LoginBg from "../../images/70315747_2503614136348024_2059368429667745792_o.jpg";
 import { Link } from "react-router-dom";
-
+import jwtDecode from "jwt-decode";
 export default function Login() {
   let [user, setUser] = useState({
     email: "",
@@ -146,6 +146,8 @@ export default function Login() {
   let [errorMsg, setErrorMsg] = useState("");
   let [errorList, setErrorList] = useState([]);
   let [loading, setLoading] = useState(false);
+  const [userId, setUserId]= useState(null);
+
   // let isShownRepeated;
   // let isShown;
 
@@ -153,9 +155,16 @@ export default function Login() {
 
   function goToHome() {
     let path = "/Home";
-    navigate(path);
+    navigate(`UserProfile`);
   }
 
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      const decodedToken = jwtDecode(token);
+      setUserId(decodedToken.userId);
+    }
+  }, []);
   async function submitFormData(e) {
     e.preventDefault();
     setLoading(true);
@@ -166,16 +175,27 @@ export default function Login() {
       setErrorList(validationResult.error.details);
       setLoading(false);
     } else {
-      let { data } = await axios.post(
-        "https://spacezone-backend.cyclic.app/api/user/loginUser",
-        user
-      );
-      if (data.status == "success") {
-        alert("Logging in");
-        // goToHome();
-      } else {
-        setErrorMsg(data.status);
-      }
+      let data = await axios.post(
+        "/api/user/loginUser",
+        user,
+        {
+          headers: {'Content-Type': 'application/json'},
+        }
+      ).then((e)=>{
+        alert(`Logging in Welcome ${e.data.data.user.userName}`);
+        const {user} = e.data.data;
+        console.log(user);
+        window.sessionStorage.setItem('token', e.data.token);
+        axios.defaults.headers.common["Authorization"] = `Bearer ${e.data.token}`; // this is how you send token in the Authorization as a header
+        const decodedToken = jwtDecode(e.data.token);
+        setUserId(decodedToken.userId);
+        console.log(sessionStorage.getItem("token"))
+        // this is how you get the token every time as it is stored in sessionStorage
+        console.log(e.data.data._id)
+        console.log(decodedToken);
+      }).catch((err)=>{
+        alert(err.message)
+      })
       setLoading(false);
     }
   }
@@ -183,8 +203,8 @@ export default function Login() {
   function validateForm() {
     const schema = Joi.object({
       email: Joi.string()
-        .required()
-        .email({ tlds: { allow: ["com", "net"] } }),
+        .required(),
+        //.email({ tlds: { allow: ["com", "net"] } }),
       password: Joi.string().required(),
     });
     return schema.validate(user, { abortEarly: false });
@@ -251,15 +271,7 @@ export default function Login() {
                   name="password"
                 />
               </div>
-
-              {/* <div className={"justify-content-between"}>
-              {/* <div className={"btn btn-primary m-lg-3"}>Sign Up</div> */}
-              {/* <button type="button" className="btn btn-secondary m-lg-3">Sing Up</button> */}
-              {/* <button type="button" className="btn btn-secondary m-lg-3">Become a partner</button>
-              <button type="button" className="btn btn-secondary m-lg-3">Sign in</button> */}
             </div>
-            {/* </div> */}
-
             <button
               className="btn px-5 float-end text-white text-bold"
               style={{ backgroundColor: "#63ace5" }}

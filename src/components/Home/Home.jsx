@@ -8,6 +8,7 @@ import serpic2 from "../../images/10.jpg";
 import Footer from "../Footer/Footer";
 
 export default function Home() {
+
   return (
     <>
       <div
@@ -48,7 +49,7 @@ export default function Home() {
           </div>
         </div>
         <Services />
-        {/*<Footer></Footer>*/}
+        <Footer></Footer>
       </div>
     </>
   );

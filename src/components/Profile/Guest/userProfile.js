@@ -1,16 +1,15 @@
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import "./Profile.css";
 import deleteAccount from "../../../images/deleteAccount.png";
 import { Link, Navigate } from "react-router-dom";
 import UserDetails from "./UserDetails/UserDetails";
 import ShowHistory from "./Showhistory/ShowHistory";
-
+import axios from "../../../api/axios";
 // function PGNavigator() {
 
 // }
 
 function UserProfile() {
-  let data = ["Guest Name", "GUESTEMAIL@EMAIL.COM"];
   // let elements = [{ name: 'Expand Details', value: 1 },
   // { name: 'Show History', value: 2 },
   // { name: 'Contact US', value: 3 },
@@ -22,6 +21,17 @@ function UserProfile() {
   const [isDetailActive, setIsDetailActive] = useState(false);
   const [isHistoryActive, setIsHistoryActive] = useState(false);
 
+
+
+
+  const [userData, setUserData] = useState([]);
+  useEffect(() => {
+    axios.get("api/user/me", {headers:{Authorization:`Bearer ${sessionStorage.getItem("token")}`}}).then((e) => {
+      // axios.defaults.headers.common["Authorization"] = `Bearer ${e.data.token}`;
+      setUserData(e.data.data)
+      console.log(userData);
+    });
+  }, []);
   function hideDeleteBox() {
     var element = document.getElementById("deleteBox");
     element.style.display = "none";
@@ -40,6 +50,8 @@ function UserProfile() {
     setIsHistoryActive((current) => true);
     setIsDetailActive(false);
   }
+  let data = [userData.userName, userData.email];
+
 
   return (
     // big container

@@ -132,6 +132,7 @@
 // }
 import "./Login.css";
 import React, {useEffect, useState} from "react";
+import Cookies from "js-cookie"
 import Joi from "joi";
 import axios from '../../api/axios';
 import { useNavigate } from "react-router";
@@ -186,6 +187,7 @@ export default function Login() {
         const {user} = e.data.data;
         console.log(user);
         window.sessionStorage.setItem('token', e.data.token);
+        Cookies.set("token",e.data.token,{expires:7});
         axios.defaults.headers.common["Authorization"] = `Bearer ${e.data.token}`; // this is how you send token in the Authorization as a header
         const decodedToken = jwtDecode(e.data.token);
         setUserId(decodedToken.userId);

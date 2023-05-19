@@ -10,6 +10,7 @@ import Footer from "../Footer/Footer";
 import R3 from "../../images/eco.jpg";
 import R4 from "../../images/3.jpg";
 import R5 from "../../images/4.jpg";
+import Reviews from "./Reviews/Reviews";
 export default function WorkSpace() {
     const cardData = [
         {
@@ -136,7 +137,9 @@ export default function WorkSpace() {
                         </div>
                     </div>
                 </div>
+                <Reviews/>
             </div>
+
             <Footer />
         </>
     );

@@ -25,10 +25,12 @@ function Cards (){
                     <div key={pace.id}>
                         <CardsUI
                             imgsrc={pace.placePhotos}
-                            name={pace.placeName}
+                            title={pace.placeName}
+                            price={pace.hourPrice}
+                            vip={pace.vipHourPrice}
                             location={pace.zone}
                             capacity={pace.numberOfSeats}
-                            duration={pace.number}
+                            phone={pace.number}
                         />
                     </div>
                 ))}

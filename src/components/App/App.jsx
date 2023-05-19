@@ -21,6 +21,7 @@ import MeetingRoom from "../ourWorkSpaces/Rooms/MeetingRoom/MeetingRoom";
 import Booking from "../Booking/Booking";
 import BB from "../Booking/BB";
 import Payment from "../Booking/Payment";
+import Reviews from "../ourWorkSpaces/Reviews/Reviews";
 
 //className="App"
 function App() {
@@ -34,7 +35,8 @@ function App() {
           <Route path="About" element={<About />}></Route>
           <Route path="Services" element={<Services />}></Route>
           <Route path={"MeetingRoom"} element={<MeetingRoom/>}/>
-          <Route path="Workspace" element={<WorkSpace />}/>
+          <Route path="Workspace" element={<WorkSpace />}>
+          </Route>
           <Route path="Booking" element={<Booking />}></Route>
           <Route path="BB" element={<BB/>}></Route>
           <Route path="Payment" element={<Payment/>}></Route>

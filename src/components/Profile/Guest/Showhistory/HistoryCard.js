@@ -27,8 +27,6 @@ const HistoryCard = ({bookings}) => {
                                     <p>{booking.date}</p>
                                     <p>{booking.description}</p>
                                 </div>
-
-
                             </div>
                         </div>
                     </Col>

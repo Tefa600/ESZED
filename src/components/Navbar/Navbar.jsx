@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import {Link} from "react-router-dom";
 import styles from "./Navbar.module.css";
 import Logo from "../../images/SpaceZone.svg";
@@ -90,29 +90,37 @@ export default function Navbar() {
                             to="OwnerProfile"
                         ></Link>
                     </li>
-                    {(Cookies.expires >= Date.now()) ? <li></li>
 
-                        : <li className="nav-item mx-2">
-                            <Link className="nav-link" to="Register">
-                                Register
-                            </Link>
-                        </li>
 
-                    }
-                    {(Cookies.expires >= Date.now()) ? <li></li>
+                    <li>
+                        <div className={`${styles.dropdown}`}>
+                            <button className={` px-2 ${styles.dropbtn}`}>Login
+                                <i className="fa fa-caret-down px-1 "/>
+                            </button>
+                            <div className={`${styles.dropdownContent}`}>
+                                <a href="Login">as a guest</a>
+                                <a href="Ologin">as a owner</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div className={`${styles.dropdown}`}>
+                            <button className={`px-2 ${styles.dropbtn}`}>Sign up
+                                <i className="fa fa-caret-down px-1"/>
+                            </button>
+                            <div className={`${styles.dropdownContent}`}>
+                                <a href="Register">as a guest</a>
+                                <a href="Osignup">as a owner</a>
 
-                        : <li className="nav-item mx-2">
-                            <Link className="nav-link" to="Login">
-                                Login
-                            </Link>
-                        </li>}
-                    {(Cookies.expires <= Date.now()) ? <li></li> : <li className="nav-item mx-2">
-                        <Link className="nav-link" onClick={Logout} to="Login">
-                            Logout
-                        </Link>
-                    </li>}
+                            </div>
+                        </div>
+                    </li>
+                    <Link className="nav-link" onClick={Logout} to="Login">
+                        Logout
+                    </Link>
                 </ul>
             </div>
         </div>
-    </nav>);
+    </nav>)
+        ;
 }

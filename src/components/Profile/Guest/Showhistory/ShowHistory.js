@@ -104,35 +104,6 @@ const bookingHistory = [
 const ShowHistory = () => {
     return (
         <HistoryCard bookings={bookingHistory}></HistoryCard>
-        // <div>
-        //   <Row>
-        //     {/*<Col>*/}
-        //     {/*  <Image src={BookingPic} fluid />*/}
-        //     {/*</Col>*/}
-        //     <Col>
-        //       <Card>
-        //         <Card.Body>
-        //           <Card.Title>Booking History</Card.Title>
-        //           <ul>
-        //             {bookingHistory.map((booking) => (
-        //               //
-        //               <li key={booking.id}>
-        //                 <Image
-        //                   className="me-3"
-        //                   style={{ height: 100, width: 100 }}
-        //                   src={booking.img}
-        //                   alt={"This is the history of booking " + booking.id}
-        //                 />
-        //                 <strong>{booking.date}</strong>: {booking.description}{" "}
-        //                 {booking.price} for <span>{booking.duration}</span> Hours
-        //               </li>
-        //             ))}
-        //           </ul>
-        //         </Card.Body>
-        //       </Card>
-        //     </Col>
-        //   </Row>
-        // </div>
     );
 };
 

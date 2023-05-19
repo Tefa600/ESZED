@@ -1,41 +1,42 @@
 import React from "react";
-import pic1 from "../../images/1.jpg";
-import pic2 from '../../images/8.jpg'
+import pic1 from "../../images/7.jpg";
+import pic2 from "../../images/8.jpg";
 import pic3 from "../../images/9.jpg";
 import pic4 from "../../images/10.jpg";
 import styles from "./Workspace.module.css";
-import R1 from "../../images/1.jpg";
-import R2 from "../../images/1.jpg";
+import R1 from "../../images/creativo-3.jpg";
+import R2 from "../../images/coworking.jpg";
 import Footer from "../Footer/Footer";
-
+import R3 from "../../images/eco.jpg";
+import R4 from "../../images/3.jpg";
+import R5 from "../../images/4.jpg";
 export default function WorkSpace() {
     const cardData = [
         {
             id: 1,
             title: "Meeting Room",
-            image: pic2,
-            numSeats: 8
+            image: pic4,
+            numSeats: 8,
         },
         {
             id: 2,
-            title: "Training/Courses Room",
-            image: pic4,
-            numSeats: 35
+            title: "Training Room",
+            image: pic1,
+            numSeats: 35,
         },
         {
             id: 3,
             title: "Shared Area",
-            image: pic3,
-            numSeats: 15
+            image: R1,
+            numSeats: 15,
         },
         {
             id: 4,
             title: "Silent Room",
-            image: pic2,
-            numSeats: 5
-        }
+            image: pic3,
+            numSeats: 5,
+        },
     ];
-
     return (
         <>
             <div
@@ -56,129 +57,39 @@ export default function WorkSpace() {
             <div className={`${styles.Rooms}`}>
                 <div className="container">
                     <h4 className="my-3">Rooms</h4>
-                    <div className="row row-cols-1 cardHolder row-cols-md-2 g-4">
+                    <div className="row row-cols-1  row-cols-md-2 g-4">
                         {cardData.map((card) => (
-                            <div className="col-le-1 cardHolder">
-                                <div key={card.id} className={`card ${styles.cardss}`}>
-                                    <img className={`card-img ${styles.cardImg}`} src={card.image} alt={card.title}/>
+                            // <div className="col-le-1 cardHolder">
+                            <div className="col-lg-3">
+                                <div key={card.id} className={`card ${styles.cards}`}>
+                                    <img
+                                        src={card.image}
+                                        className={`card-img-top ${styles.cardImg}`}
+                                        alt={card.title}
+                                    />
                                     <div className="card-body">
                                         <div className="row">
                                             <div className="col-lg-8">
-                                                <h3 className="card-title">{card.title}</h3>
-                                                <p className="card-text">{card.numSeats}</p>
+                                                <h6 className="card-title">{card.title}</h6>
+                                                <p className="card-text">{card.numSeats} Seats</p>
                                             </div>
-                                        </div>
-                                    </div>
-                                    <button>Book now</button>
-                                </div>
-                            </div>
-
-                        ))}
-                        <div className="col-lg-3 mmaarrgg">
-                            <div className={`card ${styles.cardss}`}>
-                                <img
-                                    src={pic4}
-                                    className={`card-img ${styles.cardImg}`}
-                                    alt="Room1"
-                                />
-                                <div className="card-body">
-                                    <div className="row">
-                                        <div className="col-lg-8">
-                                            <h6 className="card-title">Meeting Room</h6>
-                                            <p className="card-text">8 Seats</p>
-                                        </div>
-                                        {/* <div className="col-lg-4 m-0">
+                                            {/* <div className="col-lg-4 m-0">
           <p>from</p>
           <h6>100.0</h6>
           <p>EGP/H</p>
         </div> */}
+                                        </div>
                                     </div>
+                                    <a
+                                        href={"/Booking"}
+                                        className={`btn text-white m-auto ${styles.btnCard}`}
+                                    >
+                                        <span>Book now</span>
+                                    </a>
                                 </div>
-                                <button
-                                    className={`btn text-white m-auto`}
-                                    style={{
-                                        backgroundColor: "#63ace5",
-                                        paddingBottom: "2px",
-                                        width: "90%",
-                                        borderRadius: "20px",
-                                    }}
-                                >
-                                    Book now
-                                </button>
                             </div>
-                        </div>
-                        <div className="col-lg-3 ">
-                            <div className={`card ${styles.cardss}`}>
-                                <img
-                                    src={pic1}
-                                    className={`card-img ${styles.cardImg}`}
-                                    alt="Room1"
-                                />
-                                <div className="card-body">
-                                    <h6 className="card-title">Training/Courses Room</h6>
-                                    <p className="card-text">35 Seats</p>
-                                </div>
-                                <button
-                                    className={`btn text-white m-auto`}
-                                    style={{
-                                        backgroundColor: "#63ace5",
-                                        paddingBottom: "2px",
-                                        width: "90%",
-                                        borderRadius: "20px",
-                                    }}
-                                >
-                                    Book now
-                                </button>
-                            </div>
-                        </div>
-                        <div className="col-lg-3 ">
-                            <div className={`card ${styles.cardss}`}>
-                                <img
-                                    src={R1}
-                                    className={`card-img ${styles.cardImg}`}
-                                    alt="Room1"
-                                />
-                                <div className="card-body">
-                                    <h6 className="card-title">Shared Area</h6>
-                                    <p className="card-text">15 Seats</p>
-                                </div>
-                                <button
-                                    className={`btn text-white m-auto`}
-                                    style={{
-                                        backgroundColor: "#63ace5",
-                                        paddingBottom: "2px",
-                                        width: "90%",
-                                        borderRadius: "20px",
-                                    }}
-                                >
-                                    Book now
-                                </button>
-                            </div>
-                        </div>
-                        <div className="col-lg-3 ">
-                            <div className={`card ${styles.cardss}`}>
-                                <img
-                                    src={pic3}
-                                    className={`card-img ${styles.cardImg}`}
-                                    alt="Room1"
-                                />
-                                <div className="card-body">
-                                    <h6 className="card-title">Silent Room</h6>
-                                    <p className="card-text">5 Seats</p>
-                                </div>
-                                <button
-                                    className={`btn text-white m-auto`}
-                                    style={{
-                                        backgroundColor: "#63ace5",
-                                        paddingBottom: "2px",
-                                        width: "90%",
-                                        borderRadius: "20px",
-                                    }}
-                                >
-                                    Book now
-                                </button>
-                            </div>
-                        </div>
+                            // </div>
+                        ))}
                     </div>
                 </div>
             </div>
@@ -226,7 +137,7 @@ export default function WorkSpace() {
                     </div>
                 </div>
             </div>
-            <Footer></Footer>
+            <Footer />
         </>
     );
 }

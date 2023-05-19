@@ -7,13 +7,6 @@ import Cookies from "js-cookie";
 
 export default function Navbar() {
     const [userData, setUserData] = useState([]);
-    useEffect(() => {
-        axios.get("api/user/me", {headers: {Authorization: `Bearer ${sessionStorage.getItem("token")}`}}).then((e) => {
-            // axios.defaults.headers.common["Authorization"] = `Bearer ${e.data.token}`;
-            setUserData(e.data.data)
-            console.log(userData);
-        });
-    }, []);
 
     function Logout() {
         axios.post("api/user/logout").then((e) => {
@@ -33,12 +26,7 @@ export default function Navbar() {
                 <a href="Home" className="logoHome">
                     <img src={Logo} alt="Space Logo"/>
                 </a>
-
             </div>
-            <div>
-                <div>Hi {userData.userName}  </div>
-            </div>
-
             <button
                 className="navbar-toggler"
                 type="button"

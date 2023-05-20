@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import {Route, Routes} from "react-router-dom";
 import About from "../About/About";
 import Contact from "../ContactUs/Contact";
 import Home from "../Home/Home";
@@ -21,44 +21,40 @@ import MeetingRoom from "../ourWorkSpaces/Rooms/MeetingRoom/MeetingRoom";
 import Booking from "../Booking/Booking";
 import BB from "../Booking/BB";
 import Payment from "../Booking/Payment";
-import Reviews from "../ourWorkSpaces/Reviews/Reviews";
 
 //className="App"
 function App() {
-  return (
-    <>
-      <Navbar />
-      <div>
-        <Routes>
-          <Route path="/" element={<Home />}></Route>
-          <Route path="Home" element={<Home />}></Route>
-          <Route path="About" element={<About />}></Route>
-          <Route path="Services" element={<Services />}></Route>
-          <Route path={"MeetingRoom"} element={<MeetingRoom/>}/>
-          <Route path="Workspace/:spaceId" element={<WorkSpace />}>
-          </Route>
-          <Route path="Booking" element={<Booking />}></Route>
-          <Route path="BB" element={<BB/>}></Route>
-          <Route path="Payment" element={<Payment/>}></Route>
-          <Route path="Recommendation" element={<Recommendation />}></Route>
-          <Route path="Cards" element={<Cards />}></Route>
-          <Route path="Contact" element={<Contact />}></Route>
-          <Route path="Login" element={<Login />}></Route>
-          <Route path="Register" element={<Register />}></Route>
-          <Route path="/ResetPassword" element={<ResetPassword />}></Route>
-          <Route path="ForgetPassword" element={<ForgetPassword />}></Route>
-          <Route path="UserProfile/" element={<UserProfile />}>
-
-          </Route>
-          <Route path="OwnerProfile" element={<OwnerProfile />}></Route>
-          <Route path="Osignup" element={<Osignup />}></Route>
-          <Route path="Ologin" element={<Ologin />}></Route>
-          <Route path="*" element={<NotFound />}></Route>
-        </Routes>
-      </div>
-      {/*<Footer />*/}
-    </>
-  );
+    return (
+        <>
+            <Navbar/>
+            <div>
+                <Routes>
+                    <Route path="/" element={<Home/>}></Route>
+                    <Route path="Home" element={<Home/>}></Route>
+                    <Route path="About" element={<About/>}></Route>
+                    <Route path="Services" element={<Services/>}></Route>
+                    <Route path="MeetingRoom" element={<MeetingRoom/>}/>
+                    <Route path="Workspace/:spaceId" element={<WorkSpace/>}></Route>
+                    <Route path="Booking" element={<Booking/>}></Route>
+                    <Route path="BB" element={<BB/>}></Route>
+                    <Route path="Payment" element={<Payment/>}></Route>
+                    <Route path="Recommendation" element={<Recommendation/>}></Route>
+                    <Route path="Cards" element={<Cards/>}></Route>
+                    <Route path="Contact" element={<Contact/>}></Route>
+                    <Route path="Login" element={<Login/>}></Route>
+                    <Route path="Register" element={<Register/>}></Route>
+                    <Route path="/ResetPassword" element={<ResetPassword/>}></Route>
+                    <Route path="ForgetPassword" element={<ForgetPassword/>}></Route>
+                    <Route path="UserProfile/" element={<UserProfile/>}>   </Route>
+                    <Route path="OwnerProfile" element={<OwnerProfile/>}></Route>
+                    <Route path="Osignup" element={<Osignup/>}></Route>
+                    <Route path="Ologin" element={<Ologin/>}></Route>
+                    <Route path="*" element={<NotFound/>}></Route>
+                </Routes>
+            </div>
+            {/*<Footer />*/}
+        </>
+    );
 }
 
 export default App;

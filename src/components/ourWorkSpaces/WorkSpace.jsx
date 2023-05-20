@@ -13,8 +13,9 @@ export default function WorkSpace() {
     useEffect(() => {
         axios.get(`api/places/${spaceId}`).then((response) => {
             setRrooms(response.data.data.rooms);
-            console.log(response.data.data);
-            console.log(response.data.data.rooms);
+            // console.log("workspace")
+            // console.log(response.data.data);
+            // console.log(response.data.data.rooms);
             setPP(response.data.data.placePhotos)
             // console.log(rr);
         });
@@ -121,7 +122,7 @@ export default function WorkSpace() {
                         </div>
                     </div>
                 </div>
-                <Reviews/>
+                <Reviews id={spaceId}/>
             </div>
 
             <Footer/>

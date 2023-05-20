@@ -1,43 +1,25 @@
-import React from "react";
-import pic1 from "../../images/7.jpg";
-import pic2 from "../../images/8.jpg";
-import pic3 from "../../images/9.jpg";
-import pic4 from "../../images/10.jpg";
+import React, {useEffect, useState} from "react";
 import styles from "./Workspace.module.css";
-import R1 from "../../images/creativo-3.jpg";
 import R2 from "../../images/coworking.jpg";
 import Footer from "../Footer/Footer";
-import R3 from "../../images/eco.jpg";
-import R4 from "../../images/3.jpg";
-import R5 from "../../images/4.jpg";
 import Reviews from "./Reviews/Reviews";
+import axios from "../../api/axios";
+
 export default function WorkSpace() {
-    const cardData = [
-        {
-            id: 1,
-            title: "Meeting Room",
-            image: pic4,
-            numSeats: 8,
-        },
-        {
-            id: 2,
-            title: "Training Room",
-            image: pic1,
-            numSeats: 35,
-        },
-        {
-            id: 3,
-            title: "Shared Area",
-            image: R1,
-            numSeats: 15,
-        },
-        {
-            id: 4,
-            title: "Silent Room",
-            image: pic3,
-            numSeats: 5,
-        },
-    ];
+    const pathSegments = window.location.pathname.split('/');
+    const spaceId = pathSegments[pathSegments.length - 1];
+    const [rooms, setRrooms] = useState([]);
+    const [pp, setPP] = useState([]);
+    useEffect(() => {
+        axios.get(`api/places/${spaceId}`).then((response) => {
+            setRrooms(response.data.data.rooms);
+            console.log(response.data.data);
+            console.log(response.data.data.rooms);
+            setPP(response.data.data.placePhotos)
+            // console.log(rr);
+        });
+    }, []);
+    R2 = pp[1];
     return (
         <>
             <div
@@ -55,24 +37,26 @@ export default function WorkSpace() {
             <div className={`container ${styles.wsName}`}>
                 <h2>Majal Coworking space</h2>
             </div>
+            <p>{spaceId}</p>
+            {/*<p><p>Type: {queryParameters.get("name")}</p></p>*/}
             <div className={`${styles.Rooms}`}>
                 <div className="container">
                     <h4 className="my-3">Rooms</h4>
                     <div className="row row-cols-1  row-cols-md-2 g-4">
-                        {cardData.map((card) => (
+                        {rooms.map((card) => (
                             // <div className="col-le-1 cardHolder">
                             <div className="col-lg-3">
                                 <div key={card.id} className={`card ${styles.cards}`}>
                                     <img
                                         src={card.image}
                                         className={`card-img-top ${styles.cardImg}`}
-                                        alt={card.title}
+                                        alt={card.roomType}
                                     />
                                     <div className="card-body">
                                         <div className="row">
                                             <div className="col-lg-8">
                                                 <h6 className="card-title">{card.title}</h6>
-                                                <p className="card-text">{card.numSeats} Seats</p>
+                                                <p className="card-text">{card.roomNumber} Seats</p>
                                             </div>
                                             {/* <div className="col-lg-4 m-0">
           <p>from</p>
@@ -140,7 +124,7 @@ export default function WorkSpace() {
                 <Reviews/>
             </div>
 
-            <Footer />
+            <Footer/>
         </>
     );
 }

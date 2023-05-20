@@ -1,9 +1,19 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import styles from "./Reviews.module.css";
 import client2 from "../../../images/client-2.png";
 import client3 from "../../../images/client-5.png";
+import axios from "../../../api/axios";
 
 function Reviews() {
+    // const [feedback, setFeedback] = useState([]);
+    // useEffect(() => {
+    //     axios.get("api/places/getFeedBacks/:id").then((response) => {
+    //         setFeedback(response.data.data.places.rooms);
+    //         console.log(response.data.data.places.rooms);
+    //     });
+    // }, []);
+
+
     return (
         <>
             <div className={`${styles.reviews}`}>

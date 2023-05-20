@@ -35,7 +35,7 @@ function App() {
           <Route path="About" element={<About />}></Route>
           <Route path="Services" element={<Services />}></Route>
           <Route path={"MeetingRoom"} element={<MeetingRoom/>}/>
-          <Route path="Workspace" element={<WorkSpace />}>
+          <Route path="Workspace/:spaceId" element={<WorkSpace />}>
           </Route>
           <Route path="Booking" element={<Booking />}></Route>
           <Route path="BB" element={<BB/>}></Route>

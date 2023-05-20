@@ -12,6 +12,7 @@ function Cards (){
         axios.get("api/places/getAllPlaces").then((response) => {
             setCardData(response.data.data.places);
             console.log(response.data.data.places);
+            console.log(response.data.data.places[10]._id);
         });
     }, []);
     if (!cardData) {
@@ -21,7 +22,7 @@ function Cards (){
       <div className='container-fluid d-flex justify-content-center'>
         <div className="row">
             <div className="col-md-4">
-                {cardData.map((pace) => (
+                {cardData.map((pace,) => (
                     <div key={pace.id}>
                         <CardsUI
                             imgsrc={pace.placePhotos}
@@ -31,6 +32,7 @@ function Cards (){
                             location={pace.zone}
                             capacity={pace.numberOfSeats}
                             phone={pace.number}
+                            id={pace._id}
                         />
                     </div>
                 ))}

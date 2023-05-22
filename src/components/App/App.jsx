@@ -35,7 +35,9 @@ function App() {
                     <Route path="Services" element={<Services/>}></Route>
                     <Route path="MeetingRoom" element={<MeetingRoom/>}/>
                     <Route path="Workspace/:spaceId" element={<WorkSpace/>}></Route>
-                    <Route path="Booking" element={<Booking/>}></Route>
+                    <Route path="Booking/:spaceId/:index/:roomId" element={<Booking/>}></Route>
+                    <Route path="Booking/SharedArea/:spaceId" element={<Booking/>}></Route>
+                    <Route path="Booking/SilentRoom/:spaceId" element={<Booking/>}></Route>
                     <Route path="BB" element={<BB/>}></Route>
                     <Route path="Payment" element={<Payment/>}></Route>
                     <Route path="Recommendation" element={<Recommendation/>}></Route>

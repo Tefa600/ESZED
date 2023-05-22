@@ -64,7 +64,7 @@ function UserProfile() {
                 </div>
             </div>
             {/*    left Container*  for the long detailed guest info*/}
-            <div className={`${styles.leftContainer} col-md-2`}>
+            <div className={`${styles.leftContainer} col-2`}>
                 <div className={`${styles.PGButtonHolder}  mt-5 m-auto`}>
                     {data.map(function (value, index, array) {
                         return (

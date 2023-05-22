@@ -1,134 +1,181 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import Footer from '../Footer/Footer'
 import styles from '../Booking/Booking.module.css'
 import Pic from '../../images/10.jpg'
-import client2 from "../../images/client-2.png";
-import client3 from "../../images/client-5.png";
-import { Link } from 'react-router-dom';
+import axios from "../../api/axios";
+
 export default function Booking() {
 
-var currentDateTime = new Date();
-var year = currentDateTime.getFullYear();
-var month = (currentDateTime.getMonth() + 1);
-var date = (currentDateTime.getDate() + 1);
+    var currentDateTime = new Date();
+    var year = currentDateTime.getFullYear();
+    var month = (currentDateTime.getMonth() + 1);
+    var date = (currentDateTime.getDate() + 1);
+    var dateTomorrow = year + "-" + month + "-" + date;
+    var checkinElem = document.querySelector("#checkin-date");
+    var checkoutElem = document.querySelector("#checkout-date");
 
-if(date < 10) {
-  date = '0' + date;
-}
-if(month < 10) {
-  month = '0' + month;
-}
+    const [spaceId, setSpaceId] = useState("");
+    const [data,setData] = useState([]);
+    const [title,setTitle] = useState([]);
+    let roomID, roomIndex;
+    // if (date < 10) {
+    //     date = '0' + date;
+    // }
+    // if (month < 10) {
+    //     month = '0' + month;
+    // }
 
-var dateTomorrow = year + "-" + month + "-" + date;
-var checkinElem = document.querySelector("#checkin-date");
-var checkoutElem = document.querySelector("#checkout-date");
+    // checkinElem.setAttribute("min", dateTomorrow);
+    //
+    // checkinElem.onchange = function () {
+    //     checkoutElem.setAttribute("min", this.value);
+    const [loading, setLoading] = useState(false);
+    // }
+    const pathSegments = window.location.pathname.split('/');
+let zoneId;
+    useEffect(() => {
 
-// checkinElem.setAttribute("min", dateTomorrow);
 
-// checkinElem.onchange = function () {
-//     checkoutElem.setAttribute("min", this.value);
-// }
-    return (
-       <>
- <div>
-  <div className={`${styles.breadcrumbSection}`}>
-    <div className="container">
-      <div className="row">
-        <div className="col-lg-12">
-          <div className={`${styles.breadcrumbText}`}>
-            <h2>Our Rooms</h2>
-            <div className={`${styles.btOption}`}>
-              <a href="./Home">Home</a>
-              <span>{">"}</span>
-              <span className='ms-2'>Rooms</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  {/* Breadcrumb Section End */}
-  {/* Room Details Section Begin */}
-  <section className={`spad ${styles.roomDetailsSection}`}>
-    <div className="container">
-      <div className="row">
-        <div className="col-lg-8">
-          <div className={`${styles.roomDetailsItem}`}>
-            <img className={`${styles.roomDetailsImg}`} src={Pic} alt />
-            <div className={`${styles.rdText}`}>
-              <div className={`${styles.rdTitle}`}>
-                <h3>Meeting Room</h3>
-                <div className={`${styles.rdtRight}`}>
-                  <div className="rating">
-                    <i className="icon_star" />
-                    <i className="icon_star" />
-                    <i className="icon_star" />
-                    <i className="icon_star" />
-                    <i className="icon_star-half_alt" />
-                  </div>
-                  <a href="/BB" >Booking Now</a>
+        if (pathSegments[pathSegments.length - 2] === "SharedArea") {
+            // title="SharedArea";
+            setTitle("SharedArea")
+            zoneId=pathSegments[pathSegments.length - 1];
+        } else if (pathSegments[pathSegments.length - 2] === "SilentArea") {
+            // title= "SilentArea";
+            setTitle("SilentArea");
+            zoneId=pathSegments[pathSegments.length - 1];
+            console.log(title)
+
+        } else {
+            roomID=pathSegments[pathSegments.length - 1];
+            zoneId=pathSegments[pathSegments.length - 1];
+
+            roomIndex=pathSegments[pathSegments.length - 2];
+        }
+
+        axios.get(`api/places/${zoneId}`)
+            .then((response) => {
+                setData(response.data.data);
+                console.log(response.data.data);
+            });
+
+    }, []);
+
+
+    {/*async function isAvail(e) {*/}
+    {/*    e.preventDefault();*/}
+    //     setLoading(true);
+    //     let testData = await axios
+    //         .post(`/api/booking/${spaceId}`)
+    //         .then((response) => {
+    //
+    //         })
+    // }
+
+    return (<>
+        <div>
+            <div className={`${styles.breadcrumbSection}`}>
+                <div className="container">
+                    <div className="row">
+                        <div className="col-lg-12">
+                            <div className={`${styles.breadcrumbText}`}>
+                                <h2>Our Rooms</h2>
+                                <div className={`${styles.btOption}`}>
+                                    <a href="./Home">Home</a>
+                                    <span>{">"}</span>
+                                    <span className='ms-2'>Rooms</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
-              <h2>30$<span>/Perhour</span></h2>
-              <table>
-                <tbody>
-                <tr>
-                    <td className={`${styles.ro}`}>Seats:</td>
-                    <td>20</td>
-                  </tr>
-                  <tr>
-                    <td className={`${styles.ro}`}>Size:</td>
-                    <td>30 ft</td>
-                  </tr>
-                  <tr>
-                    <td className={`${styles.ro}`}>Capacity:</td>
-                    <td>Max person 20</td>
-                  </tr>
-                  <tr>
-                    <td className={`${styles.ro}`}>Services:</td>
-                    <td>Wifi, Television,...</td>
-                  </tr>
-                </tbody>
-              </table>
             </div>
-          </div>
-        </div>
-        <div className="col-lg-4">
-          <div className={`shadow ${styles.roomBooking}`}>
-            <h3>Your Reservation</h3>
-            <form action="#">
-              <div className={`${styles.checkDate}`}>
-                <label htmlFor="date-in">Check In:</label>
-                <input type="time" className="date-input" id="date-in" />
-                <i className="icon_calendar" />
-              </div>
-              <div className={`${styles.checkDate}`}>
-                <label htmlFor="date-out">Check Out:</label>
-                <input type="time" className="date-input" id="date-out" />
-                <i className="icon_calendar" />
-              </div>
-              <div className={`${styles.selectOption}`}>
-                <label htmlFor="guest">Guests:</label>
-                <select id="guest">
-                  <option value>3</option>
-                </select>
-              </div>
-              <div className={`${styles.selectOption}`}>
-                <label htmlFor="room">Room:</label>
-                <select id="room">
-                  <option value>1 Room</option>
-                </select>
-              </div>
-              <button type="submit"><span className='label'>Check Availability</span>
-              
-              <span class="icon">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"></path><path fill="currentColor" d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z"></path></svg>
+            {/* Breadcrumb Section End */}
+            {/* Room Details Section Begin */}
+            <section className={`spad ${styles.roomDetailsSection}`}>
+                <div className="container">
+                    <div className="row">
+                        <div className="col-lg-8">
+                            <div className={`${styles.roomDetailsItem}`}>
+                                <img className={`${styles.roomDetailsImg}`} src={Pic} alt/>
+                                <div className={`${styles.rdText}`}>
+                                    <div className={`${styles.rdTitle}`}>
+                                        {roomIndex ? data.rooms[roomIndex].roomType: title }
+                                        <h3></h3>
+                                        <div className={`${styles.rdtRight}`}>
+                                            <div className="rating">
+                                                <i className="icon_star"/>
+                                                <i className="icon_star"/>
+                                                <i className="icon_star"/>
+                                                <i className="icon_star"/>
+                                                <i className="icon_star-half_alt"/>
+                                            </div>
+                                            <a href="/BB">Booking Now</a>
+                                        </div>
+                                    </div>
+                                    <h2>{data.hourPrice} EGP<span>/ hour</span></h2>
+                                    <table>
+                                        <tbody>
+                                        <tr>
+                                            <td className={`${styles.ro}`}>Seats:</td>
+                                            <td>{data.numberOfSeats}</td>
+                                        </tr>
+                                        <tr>
+                                            <td className={`${styles.ro}`}>Size:</td>
+                                            <td>30 ft</td>
+                                        </tr>
+                                        <tr>
+                                            <td className={`${styles.ro}`}>Capacity:</td>
+                                            <td>Max person 20</td>
+                                        </tr>
+                                        <tr>
+                                            <td className={`${styles.ro}`}>Services:</td>
+                                            <td>Wifi, Television,...</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="col-lg-4">
+                            <div className={`shadow ${styles.roomBooking}`}>
+                                <h3>Your Reservation</h3>
+                                <form  action="#">
+                                    <div className={`${styles.checkDate}`}>
+                                        <label htmlFor="date-in">Check In:</label>
+                                        <input type="time" className="date-input" id="date-in"/>
+                                        <i className="icon_calendar"/>
+                                    </div>
+                                    <div className={`${styles.checkDate}`}>
+                                        <label htmlFor="date-out">Check Out:</label>
+                                        <input type="time" className="date-input" id="date-out"/>
+                                        <i className="icon_calendar"/>
+                                    </div>
+                                    <div className={`${styles.selectOption}`}>
+                                        <label htmlFor="guest">Guests:</label>
+                                        <select id="guest">
+                                            <option value>3</option>
+                                        </select>
+                                    </div>
+                                    <div className={`${styles.selectOption}`}>
+                                        <label htmlFor="room">Room:</label>
+                                        <select id="room">
+                                            <option value>1 Room</option>
+                                        </select>
+                                    </div>
+                                    <button type="submit"><span className='label'>Check Availability</span>
+
+                                        <span class="icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none"
+                                                                                             d="M0 0h24v24H0z"></path><path
+        fill="currentColor"
+        d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z"></path></svg>
   </span>
-              </button>
-            </form>
-          </div>
-          
-        {/* <form action="reservation.php" method="post">
+                                    </button>
+                                </form>
+                            </div>
+
+                            {/* <form action="reservation.php" method="post">
   <div className="elem-group">
     <label htmlFor="name">Your Name</label>
     <input type="text" id="name" name="visitor_name" placeholder="John Doe" pattern="[A-Z\sa-z]{3,20}" required />
@@ -175,15 +222,14 @@ var checkoutElem = document.querySelector("#checkout-date");
   <button type="submit">Book The Rooms</button>
 </form> */}
 
-        </div>
-      </div>
-    </div>
-  </section>
-  {/* Room Details Section End */}
-  
-</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            {/* Room Details Section End */}
 
-<Footer/>
-       </>
-    )
+        </div>
+
+        <Footer/>
+    </>)
 }

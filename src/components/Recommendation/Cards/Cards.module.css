@@ -2,26 +2,24 @@ body{
     background:radial-gradient(#e5e5e5,#ffff,#e5e5e5);
 }
 .card{
-    width: 22rem;
+    width: 300px;
+    margin-top: 20px;
+    border-radius: 25px!important;
     
 }
 .card:hover{
     box-shadow: 5px 10px 20px rgba(0, 0, 0, 0.253)!important;
 }
-.card-body{
+.cardBody{
     padding: 1rem 0!important;
 }
-.card-text{
-    font-size: 1rem;
+.cardText{
+    font-size: 1.2rem;
     padding: 0.1rem 1rem;
 }
 .container-fluid{
-    /*margin-top:5rem;*/
-    /*padding-bottom:5rem;*/
-}
-.ttotta{
-    display: flex;
-    margin-top: 7rem;
+    padding-top:5rem;
+    padding-bottom:5rem;
 }
 .col-md-4{
     padding-bottom: 5rem;
@@ -29,15 +27,15 @@ body{
 .overflow{
     overflow: hidden;
 }
-.card-img-top{
-
+.cardImg{
     transform: scale(1);
     transition:transform 0.5s ease;
+    border-radius: 10px!important;
+
 }
-.card-img-top:hover{
+.cardImg:hover{
     transform: scale(1.8);
 }
-
-.carrd{
-    margin: 2rem;
+.btnWs:hover{
+    width: max-content;
 }

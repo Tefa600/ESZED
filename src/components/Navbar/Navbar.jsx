@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import {Link} from "react-router-dom";
 import styles from "./Navbar.module.css";
 import Logo from "../../images/SpaceZone.svg";
@@ -7,13 +7,6 @@ import Cookies from "js-cookie";
 
 export default function Navbar() {
     const [userData, setUserData] = useState([]);
-    useEffect(() => {
-        axios.get("api/user/me", {headers: {Authorization: `Bearer ${sessionStorage.getItem("token")}`}}).then((e) => {
-            // axios.defaults.headers.common["Authorization"] = `Bearer ${e.data.token}`;
-            setUserData(e.data.data)
-            console.log(userData);
-        });
-    }, []);
 
     function Logout() {
         axios.post("api/user/logout").then((e) => {
@@ -33,12 +26,7 @@ export default function Navbar() {
                 <a href="Home" className="logoHome">
                     <img src={Logo} alt="Space Logo"/>
                 </a>
-
             </div>
-            <div>
-                <div>Hi {userData.userName}  </div>
-            </div>
-
             <button
                 className="navbar-toggler"
                 type="button"
@@ -102,29 +90,37 @@ export default function Navbar() {
                             to="OwnerProfile"
                         ></Link>
                     </li>
-                    {(Cookies.expires >= Date.now()) ? <li></li>
 
-                        : <li className="nav-item mx-2">
-                            <Link className="nav-link" to="Register">
-                                Register
-                            </Link>
-                        </li>
 
-                    }
-                    {(Cookies.expires >= Date.now()) ? <li></li>
+                    <li>
+                        <div className={`${styles.dropdown}`}>
+                            <button className={` px-2 ${styles.dropbtn}`}>Login
+                                <i className="fa fa-caret-down px-1 "/>
+                            </button>
+                            <div className={`${styles.dropdownContent}`}>
+                                <a href="Login">as a guest</a>
+                                <a href="Ologin">as a owner</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div className={`${styles.dropdown}`}>
+                            <button className={`px-2 ${styles.dropbtn}`}>Sign up
+                                <i className="fa fa-caret-down px-1"/>
+                            </button>
+                            <div className={`${styles.dropdownContent}`}>
+                                <a href="Register">as a guest</a>
+                                <a href="Osignup">as a owner</a>
 
-                        : <li className="nav-item mx-2">
-                            <Link className="nav-link" to="Login">
-                                Login
-                            </Link>
-                        </li>}
-                    {(Cookies.expires <= Date.now()) ? <li></li> : <li className="nav-item mx-2">
-                        <Link className="nav-link" onClick={Logout} to="Login">
-                            Logout
-                        </Link>
-                    </li>}
+                            </div>
+                        </div>
+                    </li>
+                    <Link className="nav-link" onClick={Logout} to="Login">
+                        Logout
+                    </Link>
                 </ul>
             </div>
         </div>
-    </nav>);
+    </nav>)
+        ;
 }

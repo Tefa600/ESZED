@@ -15,8 +15,8 @@ export default function Booking() {
     var checkoutElem = document.querySelector("#checkout-date");
 
     const [spaceId, setSpaceId] = useState("");
-    const [data,setData] = useState([]);
-    const [title,setTitle] = useState([]);
+    const [data, setData] = useState([]);
+    const [title, setTitle] = useState([]);
     let roomID, roomIndex;
     // if (date < 10) {
     //     date = '0' + date;
@@ -32,25 +32,25 @@ export default function Booking() {
     const [loading, setLoading] = useState(false);
     // }
     const pathSegments = window.location.pathname.split('/');
-let zoneId;
+    let zoneId;
     useEffect(() => {
 
 
         if (pathSegments[pathSegments.length - 2] === "SharedArea") {
             // title="SharedArea";
             setTitle("SharedArea")
-            zoneId=pathSegments[pathSegments.length - 1];
+            zoneId = pathSegments[pathSegments.length - 1];
         } else if (pathSegments[pathSegments.length - 2] === "SilentArea") {
             // title= "SilentArea";
             setTitle("SilentArea");
-            zoneId=pathSegments[pathSegments.length - 1];
+            zoneId = pathSegments[pathSegments.length - 1];
             console.log(title)
 
         } else {
-            roomID=pathSegments[pathSegments.length - 1];
-            zoneId=pathSegments[pathSegments.length - 1];
+            roomID = pathSegments[pathSegments.length - 1];
+            zoneId = pathSegments[pathSegments.length - 1];
 
-            roomIndex=pathSegments[pathSegments.length - 2];
+            roomIndex = pathSegments[pathSegments.length - 2];
         }
 
         axios.get(`api/places/${zoneId}`)
@@ -62,8 +62,10 @@ let zoneId;
     }, []);
 
 
-    {/*async function isAvail(e) {*/}
-    {/*    e.preventDefault();*/}
+    {/*async function isAvail(e) {*/
+    }
+    {/*    e.preventDefault();*/
+    }
     //     setLoading(true);
     //     let testData = await axios
     //         .post(`/api/booking/${spaceId}`)
@@ -100,7 +102,7 @@ let zoneId;
                                 <img className={`${styles.roomDetailsImg}`} src={Pic} alt/>
                                 <div className={`${styles.rdText}`}>
                                     <div className={`${styles.rdTitle}`}>
-                                        <h3>{roomIndex ? data.rooms[roomIndex].roomType: title }</h3>
+                                        <h3>{roomIndex ? data.rooms[roomIndex].roomType : title}</h3>
                                         <div className={`${styles.rdtRight}`}>
                                             <div className="rating">
                                                 <i className="icon_star"/>
@@ -139,7 +141,7 @@ let zoneId;
                         <div className="col-lg-4">
                             <div className={`shadow ${styles.roomBooking}`}>
                                 <h3>Your Reservation</h3>
-                                <form  action="#">
+                                <form action="#">
                                     <div className={`${styles.checkDate}`}>
                                         <label htmlFor="date-in">Check In:</label>
                                         <input type="time" className="date-input" id="date-in"/>

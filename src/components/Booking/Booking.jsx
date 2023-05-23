@@ -100,8 +100,7 @@ let zoneId;
                                 <img className={`${styles.roomDetailsImg}`} src={Pic} alt/>
                                 <div className={`${styles.rdText}`}>
                                     <div className={`${styles.rdTitle}`}>
-                                        {roomIndex ? data.rooms[roomIndex].roomType: title }
-                                        <h3></h3>
+                                        <h3>{roomIndex ? data.rooms[roomIndex].roomType: title }</h3>
                                         <div className={`${styles.rdtRight}`}>
                                             <div className="rating">
                                                 <i className="icon_star"/>

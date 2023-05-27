@@ -1,0 +1,12 @@
+.sp {
+  display: flex;
+  background-color: white;
+}
+
+.spImgae {
+  height: 40px;
+}
+.spName {
+  font-size: large;
+  font-family: "Courier New", Courier, monospace;
+}

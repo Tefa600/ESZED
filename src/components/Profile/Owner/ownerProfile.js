@@ -8,6 +8,7 @@ import OwnerDetails from "./OwnerDetails/OwnerDetails";
 import WorkspaceForm from "./WorkspaceForm/WorkspaceForm";
 import Amenities from "./Amenities/Amenities";
 import axios from 'axios';
+import Spaces from "./Spaces/Spaces";
 
 function OwnerProfile() {
   let data = ["Owner Name", "OWNER_EMAIL@EMAIL.COM"];
@@ -15,6 +16,7 @@ function OwnerProfile() {
   const [isOwnerDetailActive, setIsOwnerDetailActive] = useState(true);
   const [isOwnerHistoryActive, setIsOwnerHistoryActive] = useState(false);
   const [isWorkspaceFormActive, setWorkspaceFormActive] = useState(false);
+  const [isSpaces, setIsSpaces] = useState(false);
 
 
 
@@ -33,19 +35,24 @@ function OwnerProfile() {
     setIsOwnerHistoryActive(false);
     setWorkspaceFormActive(false);
     setIsOwnerDetailActive(true);
+    setIsSpaces(false);
+
   }
   function showHODetails() {
     // setIsOwnerHistoryActive((current) => !current);
     setIsOwnerDetailActive(false);
     setWorkspaceFormActive(false);
     setIsOwnerHistoryActive(true);
+    setIsSpaces(false);
+
   }
 
   function showOSpaces() {
     // setIsOwnerHistoryActive((current) => !current);
     setIsOwnerDetailActive(false);
     setIsOwnerHistoryActive(false);
-    setWorkspaceFormActive(true);
+    setWorkspaceFormActive(false);
+    setIsSpaces(true);
   }
 
   const handleWorkspaceCreate = (workspaceData) => {
@@ -107,12 +114,12 @@ function OwnerProfile() {
           >
             Spaces
           </button>
-          <button
+          {/* <button
             className={"btn btn-primary  m-lg-1 PGButtons"} id="button"
             onClick={showOSpaces}
           >
             Add Spaces
-          </button>
+          </button> */}
           <button
             className={"btn btn-primary  m-lg-1 PGButtons"} id="button"
             onClick={showHODetails}
@@ -157,6 +164,14 @@ function OwnerProfile() {
           >
             <WorkspaceForm onWorkspaceCreate={handleWorkspaceCreate} />
           </div>
+          
+          <div
+            className="OSpaces"
+            style={{ display: isSpaces ? "block" : "none" }}
+          >
+            <Spaces/>
+          </div>
+          
 
           
         </div>

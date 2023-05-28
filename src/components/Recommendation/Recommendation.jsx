@@ -14,24 +14,23 @@ import Cards from "../Recommendation/Cards/Cards";
 import Filter from "./Filter/Filter";
 
 export default function Recommendation() {
-
   return (
     <>
-      <div className="container ">
-        <div id="reviews" className={` text-center ${styles.client}`}>
-          <div className="mt-5  text-center position-relative d-flex justify-content-center align-items-center">
-            <h2 className=" mb-0 position-absolute">Workspaces</h2>
-            <h3 className=" mb-0">W</h3>
-          </div>
+      <div className="row ">
+        {/* <div className=" row ttotta "> */}
+        <div className="col-md-2" style={{ fontSize: "12px" }}>
+          <Filter />
         </div>
-        <div className=" row ttotta ">
-          <div className="col-2" style={{ fontSize: "12px" }}>
-            <Filter />
+        <div className="col-md-10">
+          <div id="reviews" className={` text-center ${styles.client}`}>
+            <div className="mt-5  text-center position-relative d-flex justify-content-center align-items-center">
+              <h2 className=" mb-0 position-absolute">Workspaces</h2>
+              <h3 className=" mb-0">W</h3>
+            </div>
           </div>
-          <div className="col-10">
-            <Cards />
-          </div>
+          <Cards />
         </div>
+        {/* </div> */}
       </div>
       <Footer />
       {/* cards

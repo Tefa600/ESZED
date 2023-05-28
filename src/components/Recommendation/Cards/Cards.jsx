@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import CardsUI from "./CardsUI";
-import img1 from "../../images/eco.jpg";
-import img2 from "../../images/creativo-3.jpg";
-import img3 from "../../images/workspace2.jpg";
-import axios from "../../api/axios";
+import img1 from "../../../images/eco.jpg";
+import img2 from "../../../images/creativo-3.jpg";
+import img3 from "../../../images/workspace2.jpg";
+import axios from "../../../api/axios";
 import { Grid } from "rsuite";
 function Cards() {
   const [cardData, setCardData] = useState([]);

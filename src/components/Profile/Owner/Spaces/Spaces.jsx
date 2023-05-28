@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./Spaces.css";
 import axios from "../../../../api/axios";
 import Cookies from "js-cookie";
-import CardsUI from "../../../Cards/CardsUI";
+import CardsUI from "../../../Recommendation/Cards/CardsUI";
 
 function Spaces(props) {
   const [spaceData, setSpaceData] = useState([]);

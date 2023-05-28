@@ -10,15 +10,15 @@ import styles from "../Recommendation/Recommendation.module.css";
 // import client8 from "../../images/client-8.png";
 // import client9 from "../../images/client-9.png";
 import Footer from "../Footer/Footer";
-import Cards from "../Recommendation/Cards/Cards";
+import Cards from "../Cards/Cards";
 import Filter from "./Filter/Filter";
 
 export default function Recommendation() {
   return (
     <>
-      <div className="row ">
+      <div className=" ">
         {/* <div className=" row ttotta "> */}
-        <div className="col-md-2" style={{ fontSize: "12px" }}>
+        <div className="filterCont col-md-2" style={{ fontSize: "12px" }}>
           <Filter />
         </div>
         <div className="col-md-10">

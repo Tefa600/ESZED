@@ -75,4 +75,6 @@
         background-color: #4b86b4;
         border-radius: 10px;
         }
-    
+.filterCont{
+    position: fixed;
+}

@@ -16,7 +16,7 @@ import ResetPassword from "../Login/ResetPassword";
 import ForgetPassword from "../Login/ForgetPassword";
 import "./App.css";
 import WorkSpace from "../ourWorkSpaces/WorkSpace";
-import Cards from "../Recommendation/Cards/Cards";
+import Cards from "../Cards/Cards";
 import MeetingRoom from "../ourWorkSpaces/Rooms/MeetingRoom/MeetingRoom";
 import Booking from "../Booking/Booking";
 import BB from "../Booking/BB";

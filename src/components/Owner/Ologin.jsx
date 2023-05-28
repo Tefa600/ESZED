@@ -28,7 +28,7 @@ export default function Ologin() {
     e.preventDefault();
     setLoading(true);
     let validationResult = validateForm();
-    console.log(validationResult);
+    // console.log(validationResult);
     if (validationResult.error) {
       alert("Validation Error");
       setErrorList(validationResult.error.details);
@@ -39,9 +39,25 @@ export default function Ologin() {
           headers: { "Content-Type": "application/json" },
         })
         .then((e) => {
-          console.log(e.data.data);
+          console.log(e.data.data.owner);
+          // let ownerData;
+          // console.log("token");
+          // console.log(e.data.token);
+          // console.log(Cookies.getItem("token"));
+          window.sessionStorage.setItem("ownerRole", e.data.data.owner.role);
+          // window.sessionStorage.setItem("ownerToken", e.data.token);
+          window.sessionStorage.setItem(
+            "ownerNumber",
+            e.data.data.owner.number
+          );
+          window.sessionStorage.setItem(
+            "ownerName",
+            e.data.data.owner.userName
+          );
+          window.sessionStorage.setItem("ownerEmail", e.data.data.owner.email);
+          // console.log(window.sessionStorage.getItem("ownerName"));
           //   alert(`Logging in Welcome ${e.data.data.user.userName}`);
-          const { user } = e.data.data;
+          // const { user } = e.data.data;
           //   console.log(user);
           // window.sessionStorage.setItem('token', e.data.token);
           Cookies.set("token", e.data.token);
@@ -50,15 +66,16 @@ export default function Ologin() {
           ] = `Bearer ${e.data.token}`; // this is how you send token in the Authorization as a header
           const decodedToken = jwtDecode(e.data.token);
           setUserId(decodedToken.userId);
-          console.log(sessionStorage.getItem("token"));
+          // console.log(sessionStorage.getItem("token"));
           // this is how you get the token every time as it is stored in sessionStorage
-          console.log(e.data.data._id);
-          console.log(decodedToken);
+          // console.log(e.data.data._id);
+          setLoading(false);
+          goToHome();
+          // console.log(decodedToken);
         })
         .catch((err) => {
           alert(err.message);
         });
-      setLoading(false);
     }
   }
   function validateForm() {

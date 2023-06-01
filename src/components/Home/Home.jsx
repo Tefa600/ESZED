@@ -6,9 +6,11 @@ import serpic from "../../images/7.jpg";
 import serpic1 from "../../images/9.jpg";
 import serpic2 from "../../images/10.jpg";
 import Footer from "../Footer/Footer";
+import About from "../About/About";
+import "../About/About.module.css";
+import Contact from "../ContactUs/Contact";
 
 export default function Home() {
-
   return (
     <>
       <div
@@ -20,7 +22,7 @@ export default function Home() {
           backgroundRepeat: "no-repeat",
           width: "100%",
           height: "100vh",
-          color: "#f5f5f5",
+          // color: "#f5f5f5",
         }}
       >
         <div className={`buttonBg ${styles.butBg}`}>
@@ -49,6 +51,8 @@ export default function Home() {
           </div>
         </div>
         <Services />
+        <About />
+        <Contact />
         <Footer></Footer>
       </div>
     </>

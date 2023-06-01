@@ -37,7 +37,7 @@ export default function Login() {
     e.preventDefault();
     setLoading(true);
     let validationResult = validateForm();
-    console.log(validationResult);
+    // console.log(validationResult);
     if (validationResult.error) {
       alert("Validation Error");
       setErrorList(validationResult.error.details);
@@ -48,9 +48,14 @@ export default function Login() {
           headers: { "Content-Type": "application/json" },
         })
         .then((e) => {
-          alert(`Logging in Welcome ${e.data.data.user.userName}`);
+          // alert(`Logging in Welcome ${e.data.data.user.userName}`);
+          goToHome();
           const { user } = e.data.data;
           console.log(user);
+          window.sessionStorage.setItem("userName", user.userName);
+          window.sessionStorage.setItem("userEmail",user.email );
+          window.sessionStorage.setItem("userPhone",user.number );
+          window.sessionStorage.setItem("userRole", user.role);
           // window.sessionStorage.setItem('token', e.data.token);
           Cookies.set("token", e.data.token);
           axios.defaults.headers.common[
@@ -58,10 +63,10 @@ export default function Login() {
           ] = `Bearer ${e.data.token}`; // this is how you send token in the Authorization as a header
           const decodedToken = jwtDecode(e.data.token);
           setUserId(decodedToken.userId);
-          console.log(sessionStorage.getItem("token"));
+          // console.log(sessionStorage.getItem("token"));
           // this is how you get the token every time as it is stored in sessionStorage
-          console.log(e.data.data._id);
-          console.log(decodedToken);
+          // console.log(e.data.data._id);
+          // console.log(decodedToken);
         })
         .catch((err) => {
           alert(err.message);
@@ -83,7 +88,7 @@ export default function Login() {
     let myUser = { ...user };
     myUser[e.target.name] = e.target.value;
     setUser(myUser);
-    console.log(myUser);
+    // console.log(myUser);
   }
 
   return (

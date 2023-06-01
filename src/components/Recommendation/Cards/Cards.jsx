@@ -40,11 +40,11 @@ function Cards() {
     // </div>
 
     <>
-      <div style={{ display: "flex" }}>
-        <Grid className="row m-auto mt-1" style={{ display: "flex" }}>
+      <div  style={{ display: "flex" }}>
+        <Grid className="row row-cols-4  mt-1" style={{width:"fit-content", display: "flex",marginLeft: "10rem" }}>
           {cardData.map((pace) => (
             <div key={pace.id}>
-              <div style={{ display: "flex" }}>
+              <div style={{ display: "flex" ,width: "auto"}}>
                 <CardsUI
                   imgsrc={pace.placePhotos}
                   title={pace.placeName}

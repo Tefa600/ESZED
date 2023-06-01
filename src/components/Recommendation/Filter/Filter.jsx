@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Slider, RangeSlider } from "rsuite";
 import styles from "./Filter.module.css";
+// Footer/Footer
 // import RangeSlider from "rsuit/RangeSlider";
 import "rsuite/dist/rsuite.css";
 
@@ -117,6 +118,7 @@ export default function Filter() {
           </div>
         </div>
       </div>
+      {/* <Footer /> */}
     </>
   );
 }

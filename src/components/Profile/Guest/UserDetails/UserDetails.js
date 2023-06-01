@@ -4,11 +4,20 @@ import ProfilePic from "../Profile-Male-PNG.png";
 import { Form, Button, Image } from "react-bootstrap";
 import "./UserDetails.css";
 export default function UserDetails() {
+
   // Set up initial profile data
+  // const [userProfileData , setUserProfileData] = useState({
+  //   name:window.sessionStorage.getItem("userName"),
+  //   email:window.sessionStorage.getItem("userEmail"),
+  //   phone:window.sessionStorage.getItem("userphone"),
+  //   role:window.sessionStorage.getItem("userRole"),
+  // })
   const [profileData, setProfileData] = useState({
-    name: "John Doe",
-    email: "john.doe@example.com",
-    phone: "0123456789",
+    name:window.sessionStorage.getItem("userName"),
+    email:window.sessionStorage.getItem("userEmail"),
+    phone:window.sessionStorage.getItem("userPhone"),
+    role:window.sessionStorage.getItem("userRole"),
+
     bio: "I love React!",
     profilePictureUrl: ProfilePic,
   });

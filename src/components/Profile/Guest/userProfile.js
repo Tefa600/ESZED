@@ -11,6 +11,7 @@ import Cookies from "js-cookie";
 // }
 
 function UserProfile() {
+
     const [isDetailActive, setIsDetailActive] = useState(false);
     const [isHistoryActive, setIsHistoryActive] = useState(false);
     const [userData, setUserData] = useState([]);

@@ -15,7 +15,7 @@ function AddReviews() {
             </h4>
 
             <form action="#" className={`${styles.raForm}`}>
-                <div className="row">
+                <div className="row" style={{marginBottom:"15px"}}>
                     <div className="col-lg-6">
                         <textarea placeholder="Your Review" defaultValue={""}/>
                         <button type="submit">Submit Now</button>

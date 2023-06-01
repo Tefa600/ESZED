@@ -22,3 +22,9 @@ font-size: 18px;
 color: rgb(82, 82, 82);
 margin-bottom: 50px;
 }
+
+.homeUsInfo{
+    margin: 20px;
+    font-family: "Courier New", Courier, monospace;
+    font-size: xx-large;
+}

@@ -87,7 +87,7 @@ function CardsUI(props) {
               </span>
             </div>
             <div className="phnum d-flex">
-              <Link className="w-100" to={"/WorkSpace"}>
+              <Link className="w-100" to={`/WorkSpace/${props.id}`}>
                 <button
                   type="submit"
                   className={`shadow float-left ${styles.btnnWs}`}

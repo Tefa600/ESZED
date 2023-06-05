@@ -1,7 +1,6 @@
 // import React, { useState } from "react";
 // import "./ownerPofile.css";
 // import { Link } from "react-router-dom";
-
 // import deleteAccount from "../../../images/deleteAccount.png";
 // import ShowHistoryOwner from "./ShowHistoryOwner/ShowHistoryOwner";
 // import OwnerDetails from "./OwnerDetails/OwnerDetails";
@@ -9,32 +8,26 @@
 // import Amenities from "./Amenities/Amenities";
 // import axios from 'axios';
 // import Spaces from "./Spaces/Spaces";
-
 // function OwnerProfile() {
 //   let data = ["Owner Name", "OWNER_EMAIL@EMAIL.COM"];
-
 //   const [isOwnerDetailActive, setIsOwnerDetailActive] = useState(true);
 //   const [isOwnerHistoryActive, setIsOwnerHistoryActive] = useState(false);
 //   const [isWorkspaceFormActive, setWorkspaceFormActive] = useState(false);
 //   const [isSpaces, setIsSpaces] = useState(false);
-
 //   function hideDeleteBox() {
 //     const element = document.getElementById("deleteBox");
 //     element.style.display = "none";
 //   }
-
 //   function showDeleteBox() {
 //     const element = document.getElementById("deleteBox");
 //     element.style.display = "flex";
 //   }
-
 //   function showODetails() {
 //     // setIsOwnerDetailActive((current) => !current);
 //     setIsOwnerHistoryActive(false);
 //     setWorkspaceFormActive(false);
 //     setIsOwnerDetailActive(true);
 //     setIsSpaces(false);
-
 //   }
 //   function showHODetails() {
 //     // setIsOwnerHistoryActive((current) => !current);
@@ -42,9 +35,7 @@
 //     setWorkspaceFormActive(false);
 //     setIsOwnerHistoryActive(true);
 //     setIsSpaces(false);
-
 //   }
-
 //   function showOSpaces() {
 //     // setIsOwnerHistoryActive((current) => !current);
 //     setIsOwnerDetailActive(false);
@@ -52,7 +43,6 @@
 //     setWorkspaceFormActive(false);
 //     setIsSpaces(true);
 //   }
-
 //   const handleWorkspaceCreate = (workspaceData) => {
 //     // Send the workspaceData to the backend API for creation
 //     axios
@@ -64,7 +54,6 @@
 //         console.error('Error creating workspace:', error);
 //       });
 //   };
-
 //   return (
 //     <div className="bigContainer">
 //       <div id={"deleteBox"} className="alerts">
@@ -153,29 +142,24 @@
 //           >
 //             <ShowHistoryOwner/>
 //           </div>
-
 //           <div
 //             className="OHistory"
 //             style={{ display: isWorkspaceFormActive ? "block" : "none" }}
 //           >
 //             <WorkspaceForm onWorkspaceCreate={handleWorkspaceCreate} />
 //           </div>
-
 //           <div
 //             className="OSpaces"
 //             style={{ display: isSpaces ? "block" : "none" }}
 //           >
 //             <Spaces/>
 //           </div>
-
 //         </div>
 //       </div>
 //     </div>
 //   );
 // }
-
 // export default OwnerProfile;
-
 // // import "./ownerPofile.css";
 // // import React, { useState } from "react";
 // // import Joi from "joi";
@@ -183,7 +167,6 @@
 // // import { useNavigate } from "react-router";
 // // import LoginBg from "../../../images/10.jpg";
 // // import { Link } from "react-router-dom";
-
 // // export default function Login() {
 // //   let [user, setUser] = useState({
 // //     email: "",
@@ -192,9 +175,7 @@
 // //   let [errorMsg, setErrorMsg] = useState("");
 // //   let [errorList, setErrorList] = useState([]);
 // //   let [loading, setLoading] = useState(false);
-
 // //   const navigate = useNavigate();
-
 // //   function goToHome() {
 // //     let path = "/Home";
 // //     navigate(path);
@@ -242,7 +223,6 @@
 // //     setUser(myUser);
 // //     console.log(myUser);
 // //   }
-
 // //   return (
 // //     <>
 // //     <div
@@ -258,7 +238,6 @@
 // //       }}
 // //     >
 // //     <div className="filter">
-
 // //         <div className="container">
 // //         <div className="row">
 // //         <div className=" col-lg-12">
@@ -292,20 +271,15 @@
 // //               <a href={"/Register"} className="text-white text-decoration-none btnSignUp">Sign up</a>
 // //             </div> */}
 // //           </form>
-
 // //         </div>
-
 // //         </div>
 // //         </div>
 // //     </div>
 // //     </div>
 // //     </>
-
 // //   );
 // // }
-
 // ********************************************************
-
 import React, { useState } from "react";
 import styles from "./ownerPofile.module.css";
 import { Link } from "react-router-dom";
@@ -315,7 +289,6 @@ import OwnerDetails from "./OwnerDetails/OwnerDetails";
 import WorkspaceForm from "./WorkspaceForm/WorkspaceForm";
 import Amenities from "./Amenities/Amenities";
 import axios from "axios";
-// import LeftSideBar from "../../Navbar/LeftSideBar";
 import {
   FaTh,
   FaBars,
@@ -334,16 +307,18 @@ import { TiDelete } from "react-icons/ti";
 import { TbFileReport } from "react-icons/tb";
 
 import { NavLink } from "react-router-dom";
+import Spaces from "./Spaces/Spaces";
 
 export default function OwnerProfile({ children }) {
   let oName = window.sessionStorage.getItem("ownerName");
   let oEmail = window.sessionStorage.getItem("ownerEmail");
-
-  let data = [, "OWNER_EMAIL@EMAIL.COM"];
+  let oId = window.sessionStorage.getItem("ownerId");
+  let data = [oName, oEmail];
   const [isOpen, setIsOpen] = useState(true);
   const [isOwnerDetailActive, setIsOwnerDetailActive] = useState(true);
   const [isOwnerHistoryActive, setIsOwnerHistoryActive] = useState(false);
   const [isWorkspaceFormActive, setWorkspaceFormActive] = useState(false);
+  const [isShowSpacesActive, setIsShowSpacesActive] = useState(false);
 
   const toggle = () => setIsOpen(!isOpen);
   const menuItem = [
@@ -351,6 +326,7 @@ export default function OwnerProfile({ children }) {
       function: () => {
         // setIsOwnerDetailActive((current) => !current);
         setIsOwnerHistoryActive(false);
+        setIsShowSpacesActive(false);
         setWorkspaceFormActive(false);
         setIsOwnerDetailActive(true);
       },
@@ -359,14 +335,24 @@ export default function OwnerProfile({ children }) {
     },
     {
       function: () => {
-        // setIsOwnerHistoryActive((current) => !current);
         setIsOwnerDetailActive(false);
         setIsOwnerHistoryActive(false);
-        setWorkspaceFormActive(true);
+        setWorkspaceFormActive(false);
+        setIsShowSpacesActive(true);
       },
       name: "My Spaces",
       icon: <FaTh fontSize={"15px"} />,
     },
+    // {
+    //   function: () => {
+    //     // setIsOwnerHistoryActive((current) => !current);
+    //     setIsOwnerDetailActive(false);
+    //     setIsOwnerHistoryActive(false);
+    //     setWorkspaceFormActive(true);
+    //   },
+    //   // name: "My Spaces",
+    //   // icon: <FaTh fontSize={"15px"} />,
+    // },
     {
       function: "",
       name: "Add Spaces",
@@ -377,6 +363,7 @@ export default function OwnerProfile({ children }) {
         // setIsOwnerHistoryActive((current) => !current);
         setIsOwnerDetailActive(false);
         setWorkspaceFormActive(false);
+        setIsShowSpacesActive(false);
         setIsOwnerHistoryActive(true);
       },
       name: "Show History",
@@ -393,7 +380,7 @@ export default function OwnerProfile({ children }) {
       icon: <TbFileReport />,
     },
     {
-      function: "",
+      function: "/Home",
       name: "Log out",
       icon: <RiLogoutCircleLine />,
     },
@@ -461,8 +448,10 @@ export default function OwnerProfile({ children }) {
           </div>
         </div>
       </div> */}
-
-        <div className={`col-md-3 mt-3 pt-5 ${styles.leftcontainer}`}>
+        <div
+          className={`col-md-3 mt-3 pt-5 ${styles.leftcontainer}`}
+          // style={{ width: "0%" }}
+        >
           <div
             style={{ width: isOpen ? "210px" : "50px" }}
             className={`shadow ${styles.sidebar}`}
@@ -482,12 +471,14 @@ export default function OwnerProfile({ children }) {
               </div>
             </div>
             <div className="profilePicture m-auto">
-              <img
-                src={require("../../../images/owner-profile.png")}
-                alt="Your Picture"
-                className={`m-auto w-25 ${styles.guestPic}`}
-                style={{ marginLeft: isOpen ? "50px" : "0px" }}
-              />
+              <center>
+                <img
+                  src={require("../../../images/owner-profile.png")}
+                  alt="Your Picture"
+                  className={`m-auto w-25 ${styles.guestPic}`}
+                  style={{ marginLeft: isOpen ? "50px" : "0px" }}
+                />
+              </center>
             </div>
             <div className="PGInfo m-auto mt-1">
               {data.map(function (value, index) {
@@ -508,11 +499,15 @@ export default function OwnerProfile({ children }) {
                 className={`${styles.leftBtns}`}
                 activeclassName={`${styles.active}`}
               >
-                <div className={`${styles.icon}`}>{item.icon}</div>
+                <div style={{ margin: "auto" }} className={`${styles.icon}`}>
+                  {item.icon}
+                </div>
                 <button
                   style={{
                     display: isOpen ? "block" : "none",
                     textDecoration: "none",
+                    border: "0",
+                    backgroundColor: "transparent",
                   }}
                   className={`${styles.btnss}`}
                   id="button"
@@ -526,13 +521,19 @@ export default function OwnerProfile({ children }) {
           <main>{children}</main>
         </div>
 
-        <div className="col-md-4 middleContainer mt-3">
+        <div className="col-md-3 middleContainer mt-3">
           <div className="historyCards mt-3">
             <div
               className="UDetails"
               style={{ display: isOwnerDetailActive ? "block" : "none" }}
             >
               <OwnerDetails />
+            </div>
+            <div
+              className="OSpace"
+              style={{ display: isShowSpacesActive ? "block" : "none" }}
+            >
+              <Spaces id={oId}></Spaces>
             </div>
             <div
               className="OHistory"

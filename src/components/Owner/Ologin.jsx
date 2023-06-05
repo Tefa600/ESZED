@@ -54,6 +54,9 @@ export default function Ologin() {
             "ownerName",
             e.data.data.owner.userName
           );
+          console.log("data");
+          console.log(e.data.data);
+          window.sessionStorage.setItem("ownerId", e.data.data.owner._id);
           window.sessionStorage.setItem("ownerEmail", e.data.data.owner.email);
           // console.log(window.sessionStorage.getItem("ownerName"));
           //   alert(`Logging in Welcome ${e.data.data.user.userName}`);

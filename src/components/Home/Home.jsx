@@ -9,6 +9,7 @@ import Footer from "../Footer/Footer";
 import About from "../About/About";
 import "../About/About.module.css";
 import Contact from "../ContactUs/Contact";
+import PartnerComponent from "../BecomePartner/BecomePartner";
 
 export default function Home() {
   return (
@@ -52,6 +53,7 @@ export default function Home() {
         </div>
         <Services />
         <About />
+        <PartnerComponent />
         <Contact />
         <Footer></Footer>
       </div>

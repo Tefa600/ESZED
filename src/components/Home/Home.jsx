@@ -51,10 +51,19 @@ export default function Home() {
             </form>
           </div>
         </div>
-        <Services />
-        <About />
-        <PartnerComponent />
-        <Contact />
+        <div className="mt-5" id="About">
+          <About />
+        </div>
+        <div className="mt-5" id="Become-Partner">
+          <PartnerComponent />
+        </div>
+        <div className="mt-5" id="Our-Services">
+          <Services />
+        </div>
+        {/* <main ref={contactRef}>{children}</main> */}
+        <div className="mt-5" id="Contact-us">
+          <Contact />
+        </div>
         <Footer></Footer>
       </div>
     </>

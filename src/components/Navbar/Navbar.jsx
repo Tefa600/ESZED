@@ -4,6 +4,7 @@ import styles from "./Navbar.module.css";
 import Logo from "../../images/SpaceZone.svg";
 import axios from "../../api/axios";
 import Cookies from "js-cookie";
+import { HashLink } from "react-router-hash-link";
 
 export default function Navbar() {
   const [userData, setUserData] = useState([]);
@@ -20,8 +21,9 @@ export default function Navbar() {
   console.log(Cookies.expires);
 
   return (
+    // fixed-top add it to class name to make it fixed
     <nav
-      className={`navbar navbar-expand-lg fixed-top navbar-light text-white ${styles.navBg}`}
+      className={`navbar navbar-expand-lg  navbar-light text-white ${styles.navBg}`}
     >
       <div className="container-fluid">
         <div className="logoPic">
@@ -66,10 +68,47 @@ export default function Navbar() {
             {/*        Workspaces*/}
             {/*    </Link>*/}
             {/*</li>*/}
+
             <li className="nav-item">
               <Link className="nav-link text-white" to="Recommendation">
                 Surf
               </Link>
+            </li>
+            <li className="nav-item">
+              <HashLink
+                className="nav-link text-white"
+                smooth
+                to={"Home/#About"}
+              >
+                About us
+              </HashLink>
+            </li>
+            <li className="nav-item">
+              <HashLink
+                className="nav-link text-white"
+                smooth
+                to="Home/#Our-Services"
+              >
+                Services
+              </HashLink>
+            </li>
+            <li className="nav-item">
+              <HashLink
+                className="nav-link  text-white"
+                smooth
+                to="Home/#Become-Partner"
+              >
+                Become Partner
+              </HashLink>
+            </li>
+            <li className="nav-item">
+              <HashLink
+                className="nav-link  text-white"
+                smooth
+                to="Home/#Contact-us"
+              >
+                Contact Us
+              </HashLink>
             </li>
             {/*<li className="nav-item">*/}
             {/*    <Link className="nav-link  text-white" to="Contact">*/}

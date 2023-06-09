@@ -2,18 +2,14 @@
     background-color: #282c34;
     height: 100vh;
 } */
-
-/* ********************************************************************** */
-
-/* .heelo{
-    background-color: #282c34;
-    height: 100vh;
-} */
 /* Google Font Import - Poppins */
 
 /*******leftContainer*************/
 body {
   text-decoration: none !important;
+}
+.leftcontainer {
+  width: 2%;
 }
 .guestPic {
   border-radius: 50px;
@@ -40,7 +36,7 @@ main {
 .sidebar {
   color: rgb(230, 233, 240);
   height: 100vh;
-  /*width: 200px;*/
+  width: 200px;
   transition: all 0.5s;
   background-color: #63ace5;
 }
@@ -66,22 +62,22 @@ main {
 .leftBtns {
   display: flex;
   color: #fff;
-  padding: 10px 15px;
-  gap: 15px;
+  padding: 0px 15px;
+  gap: 10px;
   transition: all 0.5s;
 }
-/*.leftBtns:hover {*/
-/*  background: aliceblue;*/
-/*  color: #000;*/
-/*  transition: all 0.5s;*/
-/*}*/
+.leftBtns:hover {
+  background: rgb(7, 49, 85);
+  color: #000;
+  transition: all 0.5s;
+}
 .active {
   background: lightskyblue;
   color: #000;
 }
 .icon .leftBtns {
   font-size: 25px;
-  /*color: #f8fc2e;*/
+  color: #f8fc2e;
 }
 
 @media only screen and (max-width: 480px) {
@@ -96,6 +92,9 @@ main {
   .my-element {
     display: block;
   }
+}
+.bigContainer {
+  display: flex;
 }
 
 /**************/
@@ -138,6 +137,10 @@ main {
   height: 100%;
 }  */
 
+.middleContainer {
+  margin-top: 7%;
+  margin-left: 10%;
+}
 .signupContainer {
   margin: 0;
   display: flex;

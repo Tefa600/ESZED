@@ -38,11 +38,13 @@ function Spaces(props) {
       <div style={{ display: "flex" }}>
         <Grid
           className="row row-cols-4   mt-1"
-          style={{ width: "fit-content", display: "flex", marginLeft: "10rem" }}
+          style={{ width: "1200px", display: "flex", marginLeft: "10rem" }}
         >
           {spaceData.map((spac) => (
             <div key={spac.id}>
-              <div style={{ display: "flex", width: "auto" }}>
+              <div
+                style={{ display: "flex", width: "200rem", marginTop: "2rem" }}
+              >
                 <CardsUI
                   imgsrc={spac.placePhotos}
                   title={spac.placeName}

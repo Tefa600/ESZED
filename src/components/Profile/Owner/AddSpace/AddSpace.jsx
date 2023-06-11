@@ -3,7 +3,7 @@ import styles from "./AddSpace.module.css";
 import { Form, Button } from "react-bootstrap";
 import Week from "./Week";
 import Bio from "./Bio";
-
+import WorkspaceForm from "../WorkspaceForm/WorkspaceForm";
 function AddSpace() {
   const [placeName, setPlaceName] = useState("");
   const [address, setAddress] = useState("");
@@ -58,6 +58,10 @@ function AddSpace() {
         TrainingInputs.push(
           <div key={i}>
             <h3>Training Room {i}</h3>
+            <Form.Group controlId={`trainingRoomName_${i}`}>
+              <Form.Label>Room Name</Form.Label>
+              <Form.Control type="text" placeholder="Enter room name" />
+            </Form.Group>
             <Form.Group controlId={`trainingRoomPhotos_${i}`}>
               <Form.Label>Room Photos</Form.Label>
               <Form.Control type="text" placeholder="Enter room photos" />
@@ -110,6 +114,11 @@ function AddSpace() {
         meetingInputs.push(
           <div key={i}>
             <h3>Meeting Room {i}</h3>
+            <Form.Group controlId={`meetingRoomName_${i}`}>
+              <Form.Label>Room Name</Form.Label>
+              <Form.Control type="text" placeholder="Enter room name" />
+            </Form.Group>
+
             <Form.Group controlId={`meetingRoomPhotos_${i}`}>
               <Form.Label>Room Photos</Form.Label>
               <Form.Control type="text" placeholder="Enter room photos" />
@@ -350,6 +359,8 @@ function AddSpace() {
           )}
 
           {trainingRoomInputs}
+
+          {/* <WrokSpaceForm></WrokSpaceForm> */}
 
           <Button variant="primary" type="submit">
             Submit

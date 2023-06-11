@@ -61,129 +61,130 @@ function AddSpace() {
   };
 
   const renderMeetingRoomInputs = () => {
-    const meetingInputs = [];
+    // const meetingInputs = [];
+    // for (let i = 1; i <= numberOfMeetingRooms; i++) {
+    //   meetingInputs.push(
+    //     <div key={i}>
+    //       <h3>Meeting Room {i}</h3>
+    //       <Form.Group controlId={`meetingRoomPhotos_${i}`}>
+    //         <Form.Label>Room Photos</Form.Label>
+    //         <Form.Control type="text" placeholder="Enter room photos" />
+    //       </Form.Group>
+
+    //       <Form.Group controlId={`meetingRoomCapacity_${i}`}>
+    //         <Form.Label>Capacity</Form.Label>
+    //         <Form.Control type="number" placeholder="Enter room capacity" />
+    //       </Form.Group>
+
+    //       <Form.Group controlId={`meetingRoomAmenities_${i}`}>
+    //         <Form.Label>Amenities</Form.Label>
+    //         <Form.Control type="text" placeholder="Enter room amenities" />
+    //       </Form.Group>
+
+    //       <Form.Group controlId={`meetingRoomDescription_${i}`}>
+    //         <Form.Label>Description</Form.Label>
+    //         <Form.Control as="textarea" placeholder="Enter room description" />
+    //       </Form.Group>
+
+    //       <Form.Group controlId={`meetingRoomPrice_${i}`}>
+    //         <Form.Label>Price per Hour</Form.Label>
+    //         <Form.Control
+    //           type="number"
+    //           placeholder="Enter room price per hour"
+    //         />
+    //       </Form.Group>
+    //     </div>
+    //   );
+    // }
+    // return meetingInputs;
+
     for (let index = 0; index < numberOfMeetingRooms; index++) {
       console.log(`This is the meeting room ${index}`);
     }
-    for (let i = 1; i <= numberOfMeetingRooms; i++) {
-      meetingInputs.push(
-        <div key={i}>
-          <h3>Meeting Room {i}</h3>
-          <Form.Group controlId={`meetingRoomPhotos_${i}`}>
-            <Form.Label>Room Photos</Form.Label>
-            <Form.Control type="text" placeholder="Enter room photos" />
-          </Form.Group>
-
-          <Form.Group controlId={`meetingRoomCapacity_${i}`}>
-            <Form.Label>Capacity</Form.Label>
-            <Form.Control type="number" placeholder="Enter room capacity" />
-          </Form.Group>
-
-          <Form.Group controlId={`meetingRoomAmenities_${i}`}>
-            <Form.Label>Amenities</Form.Label>
-            <Form.Control type="text" placeholder="Enter room amenities" />
-          </Form.Group>
-
-          <Form.Group controlId={`meetingRoomDescription_${i}`}>
-            <Form.Label>Description</Form.Label>
-            <Form.Control as="textarea" placeholder="Enter room description" />
-          </Form.Group>
-
-          <Form.Group controlId={`meetingRoomPrice_${i}`}>
-            <Form.Label>Price per Hour</Form.Label>
-            <Form.Control
-              type="number"
-              placeholder="Enter room price per hour"
-            />
-          </Form.Group>
-        </div>
-      );
-    }
-    return meetingInputs;
   };
 
   const renderSilentRoomInputs = () => {
+    // const silentInputs = [];
+    // for (let i = 1; i <= numberOfSilentSeats; i++) {
+    //   silentInputs.push(
+    //     <div key={i}>
+    //       <h3>Silent Room {i}</h3>
+    //       <Form.Group controlId={`silentRoomPhotos_${i}`}>
+    //         <Form.Label>Room Photos</Form.Label>
+    //         <Form.Control type="text" placeholder="Enter room photos" />
+    //       </Form.Group>
+
+    //       <Form.Group controlId={`silentRoomCapacity_${i}`}>
+    //         <Form.Label>Capacity</Form.Label>
+    //         <Form.Control type="number" placeholder="Enter room capacity" />
+    //       </Form.Group>
+
+    //       <Form.Group controlId={`silentRoomAmenities_${i}`}>
+    //         <Form.Label>Amenities</Form.Label>
+    //         <Form.Control type="text" placeholder="Enter room amenities" />
+    //       </Form.Group>
+
+    //       <Form.Group controlId={`silentRoomDescription_${i}`}>
+    //         <Form.Label>Description</Form.Label>
+    //         <Form.Control as="textarea" placeholder="Enter room description" />
+    //       </Form.Group>
+
+    //       <Form.Group controlId={`silentRoomPrice_${i}`}>
+    //         <Form.Label>Price per Hour</Form.Label>
+    //         <Form.Control
+    //           type="number"
+    //           placeholder="Enter room price per hour"
+    //         />
+    //       </Form.Group>
+    //     </div>
+    //   );
+    // }
+    // return silentInputs;
     for (let index = 0; index < numberOfMeetingRooms; index++) {
       console.log(`This is the silent room ${index}`);
     }
-    const silentInputs = [];
-    for (let i = 1; i <= numberOfSilentSeats; i++) {
-      silentInputs.push(
-        <div key={i}>
-          <h3>Silent Room {i}</h3>
-          <Form.Group controlId={`silentRoomPhotos_${i}`}>
-            <Form.Label>Room Photos</Form.Label>
-            <Form.Control type="text" placeholder="Enter room photos" />
-          </Form.Group>
-
-          <Form.Group controlId={`silentRoomCapacity_${i}`}>
-            <Form.Label>Capacity</Form.Label>
-            <Form.Control type="number" placeholder="Enter room capacity" />
-          </Form.Group>
-
-          <Form.Group controlId={`silentRoomAmenities_${i}`}>
-            <Form.Label>Amenities</Form.Label>
-            <Form.Control type="text" placeholder="Enter room amenities" />
-          </Form.Group>
-
-          <Form.Group controlId={`silentRoomDescription_${i}`}>
-            <Form.Label>Description</Form.Label>
-            <Form.Control as="textarea" placeholder="Enter room description" />
-          </Form.Group>
-
-          <Form.Group controlId={`silentRoomPrice_${i}`}>
-            <Form.Label>Price per Hour</Form.Label>
-            <Form.Control
-              type="number"
-              placeholder="Enter room price per hour"
-            />
-          </Form.Group>
-        </div>
-      );
-    }
-    return silentInputs;
   };
 
   const renderTrainingRoomInputs = () => {
+    // const TrainingInputs = [];
+    // for (let i = 1; i <= numberOfTrainingRooms; i++) {
+    //   TrainingInputs.push(
+    //     <div key={i}>
+    //       <h3>Training Room {i}</h3>
+    //       <Form.Group controlId={`trainingRoomPhotos_${i}`}>
+    //         <Form.Label>Room Photos</Form.Label>
+    //         <Form.Control type="text" placeholder="Enter room photos" />
+    //       </Form.Group>
+
+    //       <Form.Group controlId={`trainingRoomCapacity_${i}`}>
+    //         <Form.Label>Capacity</Form.Label>
+    //         <Form.Control type="number" placeholder="Enter room capacity" />
+    //       </Form.Group>
+
+    //       <Form.Group controlId={`trainingRoomAmenities_${i}`}>
+    //         <Form.Label>Amenities</Form.Label>
+    //         <Form.Control type="text" placeholder="Enter room amenities" />
+    //       </Form.Group>
+
+    //       <Form.Group controlId={`trainingRoomDescription_${i}`}>
+    //         <Form.Label>Description</Form.Label>
+    //         <Form.Control as="textarea" placeholder="Enter room description" />
+    //       </Form.Group>
+
+    //       <Form.Group controlId={`trainingRoomPrice_${i}`}>
+    //         <Form.Label>Price per Hour</Form.Label>
+    //         <Form.Control
+    //           type="number"
+    //           placeholder="Enter room price per hour"
+    //         />
+    //       </Form.Group>
+    //     </div>
+    //   );
+    // }
+    // return TrainingInputs;
     for (let index = 0; index < numberOfMeetingRooms; index++) {
       console.log(`This is the training room ${index}`);
     }
-    const TrainingInputs = [];
-    for (let i = 1; i <= numberOfTrainingRooms; i++) {
-      TrainingInputs.push(
-        <div key={i}>
-          <h3>Training Room {i}</h3>
-          <Form.Group controlId={`trainingRoomPhotos_${i}`}>
-            <Form.Label>Room Photos</Form.Label>
-            <Form.Control type="text" placeholder="Enter room photos" />
-          </Form.Group>
-
-          <Form.Group controlId={`trainingRoomCapacity_${i}`}>
-            <Form.Label>Capacity</Form.Label>
-            <Form.Control type="number" placeholder="Enter room capacity" />
-          </Form.Group>
-
-          <Form.Group controlId={`trainingRoomAmenities_${i}`}>
-            <Form.Label>Amenities</Form.Label>
-            <Form.Control type="text" placeholder="Enter room amenities" />
-          </Form.Group>
-
-          <Form.Group controlId={`trainingRoomDescription_${i}`}>
-            <Form.Label>Description</Form.Label>
-            <Form.Control as="textarea" placeholder="Enter room description" />
-          </Form.Group>
-
-          <Form.Group controlId={`trainingRoomPrice_${i}`}>
-            <Form.Label>Price per Hour</Form.Label>
-            <Form.Control
-              type="number"
-              placeholder="Enter room price per hour"
-            />
-          </Form.Group>
-        </div>
-      );
-    }
-    return TrainingInputs;
   };
 
   return (
@@ -351,7 +352,7 @@ function AddSpace() {
             </Form.Group>
           )}
 
-          {/* {renderMeetingRoomInputs()} */}
+          {renderMeetingRoomInputs()}
 
           {isTrainingRoom && (
             <Form.Group controlId="numberOfTrainingRooms">

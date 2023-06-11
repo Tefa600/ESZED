@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./AddSpace.module.css";
 import { Form, Button } from "react-bootstrap";
 import Week from "./Week";
@@ -23,7 +23,8 @@ function AddSpace() {
   const [bio, setBio] = useState("");
   const [amenities, setAmenities] = useState([]);
   const [rules, setRules] = useState([]);
-  const [meetingRoomAbout, setMeetingRoomAbout] = useState("");
+  const [meetingRoomInputs, setMeetingRoomInputs] = useState([]);
+  const [trainingRoomInputs, setTrainingRoomInputs] = useState([]);
 
   const minRoomNum = 1;
   const maxRoomNum = 50;
@@ -47,6 +48,112 @@ function AddSpace() {
     console.log();
   };
 
+  useEffect(() => {
+    const renderTrainingRoomInputs = () => {
+      for (let index = 0; index < numberOfTrainingRooms; index++) {
+        console.log(`This is the training room ${index}`);
+      }
+      const TrainingInputs = [];
+      for (let i = 1; i <= numberOfTrainingRooms; i++) {
+        TrainingInputs.push(
+          <div key={i}>
+            <h3>Training Room {i}</h3>
+            <Form.Group controlId={`trainingRoomPhotos_${i}`}>
+              <Form.Label>Room Photos</Form.Label>
+              <Form.Control type="text" placeholder="Enter room photos" />
+            </Form.Group>
+
+            <Form.Group controlId={`trainingRoomCapacity_${i}`}>
+              <Form.Label>Capacity</Form.Label>
+              <Form.Control type="number" placeholder="Enter room capacity" />
+            </Form.Group>
+
+            <Form.Group controlId={`trainingRoomAmenities_${i}`}>
+              <Form.Label>Amenities</Form.Label>
+              <Form.Control type="text" placeholder="Enter room amenities" />
+            </Form.Group>
+
+            <Form.Group controlId={`trainingRoomDescription_${i}`}>
+              <Form.Label>Description</Form.Label>
+              <Form.Control
+                as="textarea"
+                placeholder="Enter room description"
+              />
+            </Form.Group>
+
+            <Form.Group controlId={`trainingRoomPrice_${i}`}>
+              <Form.Label>Price per Hour</Form.Label>
+              <Form.Control
+                type="number"
+                placeholder="Enter room price per hour"
+              />
+            </Form.Group>
+          </div>
+        );
+      }
+      return TrainingInputs;
+    };
+    if (isTrainingRoom && numberOfTrainingRooms > 0) {
+      const effTrainingInputs = renderTrainingRoomInputs();
+      setTrainingRoomInputs(effTrainingInputs);
+    } else {
+      setTrainingRoomInputs([]);
+    }
+  }, [isTrainingRoom, numberOfTrainingRooms]);
+  useEffect(() => {
+    const renderMeetingRoomInputs = () => {
+      const meetingInputs = [];
+      for (let index = 0; index < numberOfMeetingRooms; index++) {
+        console.log(`This is the meeting room ${index}`);
+      }
+      for (let i = 1; i <= numberOfMeetingRooms; i++) {
+        meetingInputs.push(
+          <div key={i}>
+            <h3>Meeting Room {i}</h3>
+            <Form.Group controlId={`meetingRoomPhotos_${i}`}>
+              <Form.Label>Room Photos</Form.Label>
+              <Form.Control type="text" placeholder="Enter room photos" />
+            </Form.Group>
+
+            <Form.Group controlId={`meetingRoomCapacity_${i}`}>
+              <Form.Label>Capacity</Form.Label>
+              <Form.Control type="number" placeholder="Enter room capacity" />
+            </Form.Group>
+
+            <Form.Group controlId={`meetingRoomAmenities_${i}`}>
+              <Form.Label>Amenities</Form.Label>
+              <Form.Control type="text" placeholder="Enter room amenities" />
+            </Form.Group>
+
+            <Form.Group controlId={`meetingRoomDescription_${i}`}>
+              <Form.Label>Description</Form.Label>
+              <Form.Control
+                as="textarea"
+                placeholder="Enter room description"
+              />
+            </Form.Group>
+
+            <Form.Group controlId={`meetingRoomPrice_${i}`}>
+              <Form.Label>Price per Hour</Form.Label>
+              <Form.Control
+                type="number"
+                placeholder="Enter room price per hour"
+              />
+            </Form.Group>
+          </div>
+        );
+      }
+      return meetingInputs;
+    };
+
+    if (isMeetingRoom && numberOfMeetingRooms > 0) {
+      const effMeetingInputs = renderMeetingRoomInputs();
+      setMeetingRoomInputs(effMeetingInputs);
+    } else {
+      setMeetingRoomInputs([]);
+    }
+  }, [isMeetingRoom, numberOfMeetingRooms]);
+
   const handleMeetingRoomsChange = (e) => {
     const countMeet = Number(e.target.value);
     setNumberOfMeetingRooms(countMeet);
@@ -57,133 +164,7 @@ function AddSpace() {
   };
   const handleTrainingRoomsChange = (e) => {
     const countTrain = Number(e.target.value);
-    setNumberOfMeetingRooms(countTrain);
-  };
-
-  const renderMeetingRoomInputs = () => {
-    const meetingInputs = [];
-    for (let index = 0; index < numberOfMeetingRooms; index++) {
-      console.log(`This is the meeting room ${index}`);
-    }
-    for (let i = 1; i <= numberOfMeetingRooms; i++) {
-      meetingInputs.push(
-        <div key={i}>
-          <h3>Meeting Room {i}</h3>
-          <Form.Group controlId={`meetingRoomPhotos_${i}`}>
-            <Form.Label>Room Photos</Form.Label>
-            <Form.Control type="text" placeholder="Enter room photos" />
-          </Form.Group>
-
-          <Form.Group controlId={`meetingRoomCapacity_${i}`}>
-            <Form.Label>Capacity</Form.Label>
-            <Form.Control type="number" placeholder="Enter room capacity" />
-          </Form.Group>
-
-          <Form.Group controlId={`meetingRoomAmenities_${i}`}>
-            <Form.Label>Amenities</Form.Label>
-            <Form.Control type="text" placeholder="Enter room amenities" />
-          </Form.Group>
-
-          <Form.Group controlId={`meetingRoomDescription_${i}`}>
-            <Form.Label>Description</Form.Label>
-            <Form.Control as="textarea" placeholder="Enter room description" />
-          </Form.Group>
-
-          <Form.Group controlId={`meetingRoomPrice_${i}`}>
-            <Form.Label>Price per Hour</Form.Label>
-            <Form.Control
-              type="number"
-              placeholder="Enter room price per hour"
-            />
-          </Form.Group>
-        </div>
-      );
-    }
-    return meetingInputs;
-  };
-
-  const renderSilentRoomInputs = () => {
-    for (let index = 0; index < numberOfMeetingRooms; index++) {
-      console.log(`This is the silent room ${index}`);
-    }
-    const silentInputs = [];
-    for (let i = 1; i <= numberOfSilentSeats; i++) {
-      silentInputs.push(
-        <div key={i}>
-          <h3>Silent Room {i}</h3>
-          <Form.Group controlId={`silentRoomPhotos_${i}`}>
-            <Form.Label>Room Photos</Form.Label>
-            <Form.Control type="text" placeholder="Enter room photos" />
-          </Form.Group>
-
-          <Form.Group controlId={`silentRoomCapacity_${i}`}>
-            <Form.Label>Capacity</Form.Label>
-            <Form.Control type="number" placeholder="Enter room capacity" />
-          </Form.Group>
-
-          <Form.Group controlId={`silentRoomAmenities_${i}`}>
-            <Form.Label>Amenities</Form.Label>
-            <Form.Control type="text" placeholder="Enter room amenities" />
-          </Form.Group>
-
-          <Form.Group controlId={`silentRoomDescription_${i}`}>
-            <Form.Label>Description</Form.Label>
-            <Form.Control as="textarea" placeholder="Enter room description" />
-          </Form.Group>
-
-          <Form.Group controlId={`silentRoomPrice_${i}`}>
-            <Form.Label>Price per Hour</Form.Label>
-            <Form.Control
-              type="number"
-              placeholder="Enter room price per hour"
-            />
-          </Form.Group>
-        </div>
-      );
-    }
-    return silentInputs;
-  };
-
-  const renderTrainingRoomInputs = () => {
-    for (let index = 0; index < numberOfMeetingRooms; index++) {
-      console.log(`This is the training room ${index}`);
-    }
-    const TrainingInputs = [];
-    for (let i = 1; i <= numberOfTrainingRooms; i++) {
-      TrainingInputs.push(
-        <div key={i}>
-          <h3>Training Room {i}</h3>
-          <Form.Group controlId={`trainingRoomPhotos_${i}`}>
-            <Form.Label>Room Photos</Form.Label>
-            <Form.Control type="text" placeholder="Enter room photos" />
-          </Form.Group>
-
-          <Form.Group controlId={`trainingRoomCapacity_${i}`}>
-            <Form.Label>Capacity</Form.Label>
-            <Form.Control type="number" placeholder="Enter room capacity" />
-          </Form.Group>
-
-          <Form.Group controlId={`trainingRoomAmenities_${i}`}>
-            <Form.Label>Amenities</Form.Label>
-            <Form.Control type="text" placeholder="Enter room amenities" />
-          </Form.Group>
-
-          <Form.Group controlId={`trainingRoomDescription_${i}`}>
-            <Form.Label>Description</Form.Label>
-            <Form.Control as="textarea" placeholder="Enter room description" />
-          </Form.Group>
-
-          <Form.Group controlId={`trainingRoomPrice_${i}`}>
-            <Form.Label>Price per Hour</Form.Label>
-            <Form.Control
-              type="number"
-              placeholder="Enter room price per hour"
-            />
-          </Form.Group>
-        </div>
-      );
-    }
-    return TrainingInputs;
+    setNumberOfTrainingRooms(countTrain);
   };
 
   return (
@@ -264,15 +245,7 @@ function AddSpace() {
               onChange={(e) => setHourlyPrice(e.target.value)}
             />
           </Form.Group>
-          <Form.Group controlId="vipHourlyPrice">
-            <Form.Label>Silent seats hourly Price</Form.Label>
-            <Form.Control
-              type="number"
-              placeholder="Enter hourly price EGP"
-              value={vipHourlyPrice}
-              onChange={(e) => setVipHourlyPrice(e.target.value)}
-            />
-          </Form.Group>
+
           <Form.Group controlId="isSilentSeats">
             <Form.Check
               type="checkbox"
@@ -286,33 +259,17 @@ function AddSpace() {
               }}
             />
           </Form.Group>
-          <Form.Group controlId="isMeetingRoom">
-            <Form.Check
-              type="checkbox"
-              label="Meeting Room"
-              checked={isMeetingRoom}
-              onChange={(e) => {
-                setIsMeetingRoom(e.target.checked);
-                if (!e.target.checked) {
-                  setNumberOfMeetingRooms(0);
-                }
-              }}
-            />
-          </Form.Group>
-          <Form.Group controlId="isTrainingRoom">
-            <Form.Check
-              type="checkbox"
-              label="Training Room"
-              checked={isTrainingRoom}
-              onChange={(e) => {
-                setIsTrainingRoom(e.target.checked);
-                if (!e.target.checked) {
-                  setNumberOfTrainingRooms(0);
-                }
-              }}
-            />
-          </Form.Group>
-
+          {isSilentSeats && (
+            <Form.Group controlId="vipHourlyPrice">
+              <Form.Label>Silent seats hourly Price</Form.Label>
+              <Form.Control
+                type="number"
+                placeholder="Enter hourly price EGP"
+                value={vipHourlyPrice}
+                onChange={(e) => setVipHourlyPrice(e.target.value)}
+              />
+            </Form.Group>
+          )}
           {isSilentSeats && (
             <Form.Group controlId="numberOfSilentSeats">
               <Form.Label>Number of Silent Seats</Form.Label>
@@ -330,9 +287,19 @@ function AddSpace() {
               )}
             </Form.Group>
           )}
-
-          {renderSilentRoomInputs()}
-
+          <Form.Group controlId="isMeetingRoom">
+            <Form.Check
+              type="checkbox"
+              label="Meeting Room"
+              checked={isMeetingRoom}
+              onChange={(e) => {
+                setIsMeetingRoom(e.target.checked);
+                if (!e.target.checked) {
+                  setNumberOfMeetingRooms(0);
+                }
+              }}
+            />
+          </Form.Group>
           {isMeetingRoom && (
             <Form.Group controlId="numberOfMeetingRooms">
               <Form.Label>Number of Meeting Rooms</Form.Label>
@@ -350,8 +317,20 @@ function AddSpace() {
               )}
             </Form.Group>
           )}
-
-          {/* {renderMeetingRoomInputs()} */}
+          {meetingRoomInputs}
+          <Form.Group controlId="isTrainingRoom">
+            <Form.Check
+              type="checkbox"
+              label="Training Room"
+              checked={isTrainingRoom}
+              onChange={(e) => {
+                setIsTrainingRoom(e.target.checked);
+                if (!e.target.checked) {
+                  setNumberOfTrainingRooms(0);
+                }
+              }}
+            />
+          </Form.Group>
 
           {isTrainingRoom && (
             <Form.Group controlId="numberOfTrainingRooms">
@@ -370,7 +349,7 @@ function AddSpace() {
             </Form.Group>
           )}
 
-          {renderTrainingRoomInputs()}
+          {trainingRoomInputs}
 
           <Button variant="primary" type="submit">
             Submit

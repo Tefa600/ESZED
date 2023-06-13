@@ -11,10 +11,13 @@
   font-weight: 900;
   color: #4b86b4;
 }
-
+.cardContainer{
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
 .cardofws {
   position: relative;
-  width: 280px;
+  width: 260px;
   height: 380px;
   color: #2e2d31;
   /* background: #131313; */
@@ -22,6 +25,8 @@
   border-radius: 20px;
   flex-direction: row;
   overflow: hidden;
+  flex: 0 0 calc(33.33% - 20px); /* Adjust the percentage as per your needs */
+  margin-bottom: 20px; 
 }
 .cardImgg {
   overflow: hidden;
@@ -65,6 +70,7 @@
 .contentofCard {
   background-color: #ffffff;
   padding: 20px;
+  
 }
 
 .priceWs {
@@ -82,8 +88,7 @@
   background: #fff;
   border-top-left-radius: 20px;
   /* edit here to change the height of the content box */
-  transform: translateY(100px);
-  transition: transform 0.25s;
+  
 }
 
 /* .cardContent::before {
@@ -183,4 +188,31 @@
 .btnnWs:hover .icon {
   top: 0;
   opacity: 1;
+}
+@media (max-width: 768px) {
+  .cardContainer {
+    flex-direction: column;
+  }
+
+  .cardofws {
+    margin: 10px;
+  }
+  .cardImgg {
+    text-align: center;
+  }
+  
+  .imgWs {
+    width: 80%;
+  }
+  .cardTitle {
+    font-size: 18px;
+  }
+
+  .cardSubtitle {
+    font-size: 14px;
+  }
+  
+  .btnnWs {
+    font-size: 12px;
+  }
 }

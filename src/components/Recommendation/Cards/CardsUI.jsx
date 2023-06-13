@@ -1,5 +1,4 @@
 import React from "react";
-// import styles from "./Cards.module.css";
 import { Link } from "react-router-dom";
 import styles from "./CardsUI.module.css";
 import { MdOutlineChair } from "react-icons/md";
@@ -8,44 +7,7 @@ import { BsTelephone } from "react-icons/bs";
 function CardsUI(props) {
   console.log(props);
   return (
-    // <div className={`card text-center shadow ${styles.card}`}>
-    //     <div className={`${styles.overflow}`}>
-    //         <img src={props.imgsrc} alt="image1" className={`card-img-top ${styles.cardImg}`}/>
-    //     </div>
-    //     <div className={`card-body text-dark ${styles.cardBody}`}>
-    //         <h4 className={`${styles.cardText}`}>{props.title}</h4>
-    //         <p className='cardText text-secondry'>
-    //             {props.text}
-    //         </p>
-    //         <p className='card-text text-secondry'>
-    //             {props.price} EGP
-    //         </p>
-    //         <p className='card-text text-secondry'>
-    //             {props.vip} EGP
-    //         </p>
-    //         <p className='card-text text-secondry'>
-    //             {props.capacity} seat/s
-    //         </p>
-    //         <p className='card-text text-secondry'>
-    //             {props.phone}
-    //         </p>
-    //         {/*<p className='card-text text-secondry'>*/}
-    //         {/*    {props.id}*/}
-    //         {/*</p>*/}
-
-    //         <Link href='#' to={`/WorkSpace/${props.id}`} className={`btn mt-2 ${styles.btnWs}`}
-    //               style={{
-    //                   borderRadius: "20px",
-    //                   textDecoration: "none",
-    //                   backgroundColor: "#4b86b4",
-    //                   color: 'white',
-    //                   padding: "10px 15px 10px 15px"
-    //               }}>go to your workspace</Link>
-
-    //     </div>
-    // </div>
-
-    <div className="col-lg-4">
+    <div className={`${styles.cardContainer} col-lg-4 `}>
       <div key={props._id} className={`my-3 mx-4 shadow ${styles.cardofws}`}>
         <div className={`${styles.cardImgg}`}>
           <img
@@ -69,7 +31,6 @@ function CardsUI(props) {
                 EGP/HOUR
               </span>
             </span>
-
             <hr></hr>
           </div>
           <div className="seatnum ">

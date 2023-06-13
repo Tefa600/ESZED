@@ -64,6 +64,7 @@ export default function Home() {
         <div className="mt-5" id="Contact-us">
           <Contact />
         </div>
+        
         <Footer></Footer>
       </div>
     </>

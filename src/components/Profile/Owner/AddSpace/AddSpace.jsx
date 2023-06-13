@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import styles from "./AddSpace.module.css";
+import styless from "./Week.module.css";
 import { Form, Button } from "react-bootstrap";
 import Week from "./Week";
 import Bio from "./Bio";
 import WorkspaceForm from "../WorkspaceForm/WorkspaceForm";
+import Amenities from "../Amenities/Amenities";
 function AddSpace() {
   const [placeName, setPlaceName] = useState("");
   const [address, setAddress] = useState("");
@@ -25,9 +27,67 @@ function AddSpace() {
   const [rules, setRules] = useState([]);
   const [meetingRoomInputs, setMeetingRoomInputs] = useState([]);
   const [trainingRoomInputs, setTrainingRoomInputs] = useState([]);
+  const [isSundayChecked, setIsSundayChecked] = useState(false);
 
-  const minRoomNum = 1;
-  const maxRoomNum = 50;
+  const [checkboxes, setCheckboxes] = useState([
+    { id: "checkbox1", Day: "Sunday", checked: false, start: "", end: "" },
+    { id: "checkbox2", Day: "Monday", checked: false, start: "", end: "" },
+    { id: "checkbox3", Day: "Tuseday", checked: false, start: "", end: "" },
+    { id: "checkbox4", Day: "Wednesday", checked: false, start: "", end: "" },
+    { id: "checkbox5", Day: "Thursday", checked: false, start: "", end: "" },
+    { id: "checkbox6", Day: "Friday", checked: false, start: "", end: "" },
+    { id: "checkbox7", Day: "Saturday", checked: false, start: "", end: "" },
+  ]);
+
+  const handleCheckboxChange = (checkboxId) => {
+    const updatedCheckboxes = checkboxes.map((checkbox) => {
+      if (checkbox.id === checkboxId) {
+        return {
+          ...checkbox,
+          checked: !checkbox.checked,
+        };
+      }
+      return checkbox;
+    });
+    setCheckboxes(updatedCheckboxes);
+  };
+
+  const handleStartChange = (id, value) => {
+    const updatedCheckboxes = checkboxes.map((checkbox) => {
+      if (checkbox.id === id) {
+        return { ...checkbox, start: value };
+      }
+      return checkbox;
+    });
+    setCheckboxes(updatedCheckboxes);
+  };
+
+  const handleEndChange = (id, value) => {
+    const updatedCheckboxes = checkboxes.map((checkbox) => {
+      if (checkbox.id === id) {
+        return { ...checkbox, end: value };
+      }
+      return checkbox;
+    });
+    setCheckboxes(updatedCheckboxes);
+  };
+
+  const handleGenerateSchedule = () => {
+    const schedule = checkboxes.map((checkbox) => {
+      if (checkbox.checked) {
+        return {
+          day: checkbox.Day,
+          openTime: checkbox.start,
+          closeTime: checkbox.end,
+        };
+      } else {
+        return { day: checkbox.Day, closed: true };
+      }
+    });
+    return schedule;
+  };
+
+  const WD = handleGenerateSchedule();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -42,9 +102,10 @@ function AddSpace() {
     console.log("Meeting Rooms Number", numberOfMeetingRooms);
     console.log("Silent Seats Number", numberOfSilentSeats);
     console.log("Training Rooms Number", numberOfTrainingRooms);
+    console.log("Working days", checkboxes);
+    console.log("schedule", WD);
     console.log();
-    console.log();
-    console.log();
+    handleGenerateSchedule();
     console.log();
   };
 
@@ -59,7 +120,7 @@ function AddSpace() {
           <div key={i}>
             <h3>Training Room {i}</h3>
             <Form.Group controlId={`trainingRoomName_${i}`}>
-              <Form.Label>Room Name</Form.Label>
+              <Form.Label srOnly>Room Name</Form.Label>
               <Form.Control type="text" placeholder="Enter room name" />
             </Form.Group>
             <Form.Group controlId={`trainingRoomPhotos_${i}`}>
@@ -71,12 +132,10 @@ function AddSpace() {
               <Form.Label>Capacity</Form.Label>
               <Form.Control type="number" placeholder="Enter room capacity" />
             </Form.Group>
-
             <Form.Group controlId={`trainingRoomAmenities_${i}`}>
               <Form.Label>Amenities</Form.Label>
               <Form.Control type="text" placeholder="Enter room amenities" />
             </Form.Group>
-
             <Form.Group controlId={`trainingRoomDescription_${i}`}>
               <Form.Label>Description</Form.Label>
               <Form.Control
@@ -84,7 +143,6 @@ function AddSpace() {
                 placeholder="Enter room description"
               />
             </Form.Group>
-
             <Form.Group controlId={`trainingRoomPrice_${i}`}>
               <Form.Label>Price per Hour</Form.Label>
               <Form.Control
@@ -245,7 +303,89 @@ function AddSpace() {
             />
           </Form.Group>
           {/* <Bio></Bio> */}
-          <Week></Week>
+          <Form.Group controlId="workingDays">
+            <Form.Label>Working Days</Form.Label>
+            <Form.Check
+              type="checkbox"
+              label="Sunday"
+              checked={isSundayChecked}
+              onChange={(e) => {
+                setIsSundayChecked(e.target.checked);
+              }}
+            ></Form.Check>
+          </Form.Group>
+          {/* ******************************************************************** */}
+          {/* ************************************************* */}
+          <div
+            className={`container py-4 px-4 bg-white shadow w-50 ${styless.week}`}
+          >
+            <div className={`row my-3 py-3 m-auto shadow ${styless.Weekly}`}>
+              {checkboxes.map((checkbox) => (
+                <div key={checkbox.id} className="d-flex">
+                  <div className="col-lg-4 my-2 ">
+                    <div className="week mt-2">
+                      <label className={`mx-2 ${styless.switch}`}>
+                        <input
+                          type="checkbox"
+                          className={` ${styless.checkbox}`}
+                          onChange={() => handleCheckboxChange(checkbox.id)}
+                        />
+                        <div className={`${styless.slider}`} />
+                      </label>
+                      {checkbox.Day}
+                    </div>
+                  </div>
+
+                  {checkbox.checked && (
+                    <div className="col-lg-2 my-2">
+                      <select
+                        disabled={checkbox.checkedAll}
+                        className={`w-175 ${styless.checkControl}`}
+                        required
+                        onChange={(e) =>
+                          handleStartChange(checkbox.id, e.target.value)
+                        }
+                      >
+                        <span className={`${styless.selectArr}`} />
+                        <option value selected hidden>
+                          start:
+                        </option>
+                        {Array.from({ length: 24 }, (_, index) => (
+                          <option key={index}>{index}</option>
+                        ))}
+                      </select>
+                    </div>
+                  )}
+                  {checkbox.checked && checkbox.start && (
+                    <div className="col-lg-2 my-2">
+                      <select
+                        disabled={checkbox.checkedAll}
+                        className={`w-175 ${styless.checkControl}`}
+                        required
+                        onChange={(e) =>
+                          handleEndChange(checkbox.id, e.target.value)
+                        }
+                      >
+                        <span className={`${styless.selectArr}`} />
+                        <option value selected hidden>
+                          end:
+                        </option>
+                        {Array.from(
+                          { length: 24 - Number(checkbox.start) },
+                          (_, index) => (
+                            <option key={index}>
+                              {Number(checkbox.start) + index + 1}
+                            </option>
+                          )
+                        )}
+                      </select>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+          {/* ******************************* */}
           <Form.Group controlId="hourlyPrice">
             <Form.Label>Hourly Price</Form.Label>
             <Form.Control
@@ -260,6 +400,7 @@ function AddSpace() {
               type="checkbox"
               label="Silent Seats"
               checked={isSilentSeats}
+              className={`${styless.switch}`}
               onChange={(e) => {
                 setIsSilentSeats(e.target.checked);
                 if (!e.target.checked) {

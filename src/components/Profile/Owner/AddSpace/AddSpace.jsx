@@ -8,6 +8,7 @@ import WorkspaceForm from "../WorkspaceForm/WorkspaceForm";
 import Amenities from "../Amenities/Amenities";
 function AddSpace() {
   const [placeName, setPlaceName] = useState("");
+  const [spaceNumber, setSpaceNumber] = useState("");
   const [address, setAddress] = useState("");
   const [zone, setZone] = useState("");
   const [googleMapsLink, setGoogleMapsLink] = useState("");
@@ -28,6 +29,7 @@ function AddSpace() {
   const [meetingRoomInputs, setMeetingRoomInputs] = useState([]);
   const [trainingRoomInputs, setTrainingRoomInputs] = useState([]);
   const [isSundayChecked, setIsSundayChecked] = useState(false);
+  const photoArray = [""];
 
   const [checkboxes, setCheckboxes] = useState([
     { id: "checkbox1", Day: "Sunday", checked: false, start: "", end: "" },
@@ -86,8 +88,24 @@ function AddSpace() {
     });
     return schedule;
   };
-
   const WD = handleGenerateSchedule();
+  const inSpace = {
+    placeName: placeName,
+    placePhotos: photoArray,
+    address: address,
+    zone: zone,
+    number: spaceNumber,
+    selfService: isSelfService,
+    googleAddress: googleMapsLink,
+    hourPrice: hourlyPrice,
+    numberOfSeats: numberOfSeats,
+    numberOfSilentSeats: numberOfSilentSeats,
+    silentSeatPrice: vipHourlyPrice,
+    openingHours: WD,
+    TrainingRooms: [],
+    silentRoomPhotos: [],
+    sharedAreaPhotos: [],
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -104,7 +122,7 @@ function AddSpace() {
     console.log("Training Rooms Number", numberOfTrainingRooms);
     console.log("Working days", checkboxes);
     console.log("schedule", WD);
-    console.log();
+    console.log("JSON PROP", inSpace);
     handleGenerateSchedule();
     console.log();
   };
@@ -123,6 +141,7 @@ function AddSpace() {
               <Form.Label srOnly>Room Name</Form.Label>
               <Form.Control type="text" placeholder="Enter room name" />
             </Form.Group>
+
             <Form.Group controlId={`trainingRoomPhotos_${i}`}>
               <Form.Label>Room Photos</Form.Label>
               <Form.Control type="text" placeholder="Enter room photos" />
@@ -227,7 +246,7 @@ function AddSpace() {
   };
   const handleSilentSeatsChange = (e) => {
     const countSilent = Number(e.target.value);
-    setNumberOfMeetingRooms(countSilent);
+    setNumberOfSilentSeats(countSilent);
   };
   const handleTrainingRoomsChange = (e) => {
     const countTrain = Number(e.target.value);
@@ -248,6 +267,7 @@ function AddSpace() {
               onChange={(e) => setPlaceName(e.target.value)}
             />
           </Form.Group>
+
           <Form.Group controlId="address">
             <Form.Label>Address</Form.Label>
             <Form.Control
@@ -255,6 +275,16 @@ function AddSpace() {
               placeholder="Enter address"
               value={address}
               onChange={(e) => setAddress(e.target.value)}
+            />
+          </Form.Group>
+
+          <Form.Group controlId="spaceNumber">
+            <Form.Label>Number</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Enter Space Number"
+              value={spaceNumber}
+              onChange={(e) => setSpaceNumber(e.target.value)}
             />
           </Form.Group>
 
@@ -303,17 +333,7 @@ function AddSpace() {
             />
           </Form.Group>
           {/* <Bio></Bio> */}
-          <Form.Group controlId="workingDays">
-            <Form.Label>Working Days</Form.Label>
-            <Form.Check
-              type="checkbox"
-              label="Sunday"
-              checked={isSundayChecked}
-              onChange={(e) => {
-                setIsSundayChecked(e.target.checked);
-              }}
-            ></Form.Check>
-          </Form.Group>
+
           {/* ******************************************************************** */}
           {/* ************************************************* */}
           <div

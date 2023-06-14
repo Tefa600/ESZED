@@ -296,8 +296,12 @@ function AddSpace() {
   return (
     <>
       <div className="form-container">
+      <div className={`row ` }>
+      <div className={` col-md-3 `} >
         <h2>Place Details</h2>
         <Form onSubmit={handleSubmit}>
+        
+          
           <Form.Group controlId="placeName">
             <Form.Label>Place Name</Form.Label>
             <Form.Control
@@ -372,6 +376,7 @@ function AddSpace() {
               onChange={(e) => setBio(e.target.value)}
             />
           </Form.Group>
+          
           {/* <Bio></Bio> */}
 
           {/* ******************************************************************** */}
@@ -446,6 +451,7 @@ function AddSpace() {
             </div>
           </div>
           {/* ******************************* */}
+
           <Form.Group controlId="hourlyPrice">
             <Form.Label>Hourly Price</Form.Label>
             <Form.Control
@@ -567,7 +573,8 @@ function AddSpace() {
             Submit
           </Button>
         </Form>
-      </div>
+        </div>
+      
     </>
   );
 }

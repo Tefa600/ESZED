@@ -3,6 +3,7 @@ import Footer from '../Footer/Footer'
 import styles from '../Booking/Booking.module.css'
 import Pic from '../../images/10.jpg'
 import axios from "../../api/axios";
+import Calender from "./Calender/Calender"
 
 export default function Booking() {
 
@@ -95,7 +96,7 @@ let zoneId;
             <section className={`spad ${styles.roomDetailsSection}`}>
                 <div className="container">
                     <div className="row">
-                        <div className="col-lg-8">
+                        <div className="col-lg-4">
                             <div className={`${styles.roomDetailsItem}`}>
                                 <img className={`${styles.roomDetailsImg}`} src={Pic} alt/>
                                 <div className={`${styles.rdText}`}>
@@ -137,7 +138,7 @@ let zoneId;
                                 </div>
                             </div>
                         </div>
-                        <div className="col-lg-4">
+                        <div className="col-lg-8">
                             <div className={`shadow ${styles.roomBooking}`}>
                                 <h3>Your Reservation</h3>
                                 <form  action="#">
@@ -151,18 +152,25 @@ let zoneId;
                                         <input type="time" className="date-input" id="date-out"/>
                                         <i className="icon_calendar"/>
                                     </div>
-                                    <div className={`${styles.selectOption}`}>
-                                        <label htmlFor="guest">Guests:</label>
-                                        <select id="guest">
-                                            <option value>3</option>
-                                        </select>
-                                    </div>
-                                    <div className={`${styles.selectOption}`}>
-                                        <label htmlFor="room">Room:</label>
-                                        <select id="room">
-                                            <option value>1 Room</option>
-                                        </select>
-                                    </div>
+              <Calender/>
+
+              <div className="row">
+                <div className="col-lg-4"><div className={`${styles.selectOption}`}>
+                <label htmlFor="guest">Guests:</label>
+                <select id="guest">
+                  <option value>3</option>
+                </select>
+              </div>
+              </div>
+                <div className="col-lg-4"> <div className={`${styles.selectOption}`}>
+                <label htmlFor="room">Room:</label>
+                <select id="room">
+                  <option value>1 Room</option>
+                </select>
+              </div>
+              </div>
+              
+              </div>
                                     <button type="submit"><span className='label'>Check Availability</span>
 
                                         <span class="icon">

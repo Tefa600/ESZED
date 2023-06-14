@@ -100,10 +100,16 @@ export default function OwnerProfile({ children }) {
       icon: <TbFileReport />,
     },
     {
+      function: "",
+      name: "",
+      icon: "",
+    },
+    {
       function: "/Home",
       name: "Log out",
       icon: <RiLogoutCircleLine />,
     },
+    
     {
       function: "showDeleteBox",
       name: "Delete Account",
@@ -143,7 +149,7 @@ export default function OwnerProfile({ children }) {
         </div>
       </div> */}
         <div
-          className={`col-md-1 d-flex mt-3 pt-5 ${styles.leftcontainer}`}
+          className={`col-md-1 d-flex   ${styles.leftcontainer}`}
           // style={{ width: "0%" }}
         >
           <div
@@ -218,16 +224,16 @@ export default function OwnerProfile({ children }) {
         </div>
 
         <div
-          className="col-md-9 middleContainer mt-5"
-          style={{ marginTop: "250px", marginLeft: "50px" }}
+          className={`${styles.middleContainer} col-md-9 m-auto`}
+          // style={{ marginTop: "50px", marginLeft: "50px" }}
         >
-          <div className="historyCards mt-3">
+          <div className={`${styles.middleContainer} row`} style={{ flex: 1 }}>
             <div
-              className="UDetails"
+              className={`col-md-5 `}
               style={{
                 display: isOwnerDetailActive ? "block" : "none",
-                width: "35rem",
-                marginLeft: "15rem",
+                // width: "35rem",
+                // marginLeft: "1px",
               }}
             >
               <OwnerDetails />

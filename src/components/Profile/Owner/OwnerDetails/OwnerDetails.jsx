@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import ProfilePic from "../../../../images/client-4.png";
 import { Form, Button, Image } from "react-bootstrap";
-import  "./OwnerDetails.module.css";
+// import styles from "./OwnerDetails.module.css";
 import axios from 'axios';
 import Joi from 'joi';
 
@@ -53,11 +53,11 @@ const [profileData, setProfileData] = useState({
   
   <div className="detailsContainer" style={{"background-color": "aliceblue", "borderRadius":"5%", "padding":"1rem"}}>
       <h1 className="my-4">Profile Settings</h1>
-      <div className="row">
-        <div className="col-lg-4">
+      <div className={`row`}>
+        <div className={`col-lg-5`}>
           <Image src={profileData.profilePictureUrl} alt="Profile" thumbnail />
         </div>
-        <div className="col-lg-8">
+        <div className="col-lg-5">
           <h2>{profileData.name}</h2>
           <p>{profileData.email}</p>
           <p>{profileData.phone}</p>

@@ -14,7 +14,7 @@
 }
 
 .partner-photo img {
-  width: 200px;
+  width: 380px;
   border-radius: 50%;
   border: 5px solid #fff;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
@@ -25,10 +25,11 @@
   text-align: center;
 }
 
-.partner-info h2 {
-  font-size: 28px;
+.partner-info h5 {
   margin-bottom: 20px;
-}
+  font-size: 40px;
+  font-weight: 900;
+  color: #4b86b4;}
 
 .partner-info p {
   font-size: 16px;
@@ -38,13 +39,14 @@
 .partner-info .btn {
   font-size: 18px;
   padding: 10px 30px;
-  border-radius: 5px;
-  background-color: #4285f4;
+  border-radius: 50px!important;
+  background-color: #4b86b4!important;
   color: #fff;
   border: none;
   transition: background-color 0.3s ease;
 }
 
 .partner-info .btn:hover {
-  background-color: #3367d6;
-}
+  background-color: #63ace5!important;
+  width: 220px;}
+

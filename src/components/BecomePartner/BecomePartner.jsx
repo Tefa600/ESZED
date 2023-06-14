@@ -6,11 +6,11 @@ import { Link } from "react-router-dom"; // Import partner photo
 const BecomePartner = () => {
   return (
     <div className="become-partner">
-      <div className="partner-photo">
+      <div className="partner-photo ">
         <img src={partnerPhoto} alt="Partner" />
-      </div>
-      <div className="partner-info">
-        <h2>Become Our Partner</h2>
+        <div >
+        <div className="partner-info">
+        <h5>Become Our Partner</h5>
         <p>Join us and be a part of our success story.</p>
         {/*<Link to={"Osignup"}>*/}
         <button
@@ -22,7 +22,10 @@ const BecomePartner = () => {
           Get Started
         </button>
         {/*</Link>*/}
+        </div>
+        </div>
       </div>
+      
     </div>
   );
 };

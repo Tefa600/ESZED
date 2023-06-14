@@ -18,12 +18,13 @@ function Calender() {
     <div>
     <div  className={`${styles.layout}`}>      
       <div  className={`${styles.indexRoute}`}>      
-        <FullCalendar
+        <FullCalendar 
           plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin, listPlugin]}
           headerToolbar={{
             left: 'prev,next today',
             center: 'title',
             right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+            
           }}
           
           dateClick={handleDateClick}

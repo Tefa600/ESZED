@@ -89,9 +89,7 @@ export default function Services() {
                   Possimus, obcaecati.
                 </p>
                 <div
-                  className= "members-layer position-absolute w-100 h-100 d-flex justify-content-center align-items-center
-                  text-center text-white rounded"
-                >
+                  className= "members-layer position-absolute w-100 h-100 d-flex justify-content-center align-items-center text-center text-white rounded">
                   <div>
                     <div className="member-cap">
                       <div className="member-name">

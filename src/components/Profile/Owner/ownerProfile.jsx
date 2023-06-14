@@ -255,7 +255,7 @@ export default function OwnerProfile({ children }) {
               className="OHistory"
               style={{ display: isWorkspaceFormActive ? "block" : "none" }}
             >
-              {/* <WorkspaceForm onWorkspaceCreate={handleWorkspaceCreate} /> */}
+              <WorkspaceForm onWorkspaceCreate={handleWorkspaceCreate} />
               <AddSpace />
             </div>
           </div>

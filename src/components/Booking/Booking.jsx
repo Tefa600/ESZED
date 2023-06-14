@@ -91,14 +91,19 @@ let zoneId;
                     </div>
                 </div>
             </div>
+            <div>
+                
+            </div>
             {/* Breadcrumb Section End */}
             {/* Room Details Section Begin */}
             <section className={`spad ${styles.roomDetailsSection}`}>
                 <div className="container">
                     <div className="row">
-                        <div className="col-lg-4">
+                        <div className="col-lg-6">
                             <div className={`${styles.roomDetailsItem}`}>
-                                <img className={`${styles.roomDetailsImg}`} src={Pic} alt/>
+                                {/* <img className={`${styles.roomDetailsImg}`} src={Pic} alt/> */}
+                                   <Calender/>
+
                                 <div className={`${styles.rdText}`}>
                                     <div className={`${styles.rdTitle}`}>
                                         {roomIndex ? data.rooms[roomIndex].roomType: title }
@@ -138,7 +143,7 @@ let zoneId;
                                 </div>
                             </div>
                         </div>
-                        <div className="col-lg-8">
+                        <div className="col-lg-6">
                             <div className={`shadow ${styles.roomBooking}`}>
                                 <h3>Your Reservation</h3>
                                 <form  action="#">
@@ -152,8 +157,6 @@ let zoneId;
                                         <input type="time" className="date-input" id="date-out"/>
                                         <i className="icon_calendar"/>
                                     </div>
-              <Calender/>
-
               <div className="row">
                 <div className="col-lg-4"><div className={`${styles.selectOption}`}>
                 <label htmlFor="guest">Guests:</label>

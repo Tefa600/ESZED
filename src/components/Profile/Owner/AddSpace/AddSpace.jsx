@@ -41,6 +41,44 @@ function AddSpace() {
     { id: "checkbox7", Day: "Saturday", checked: false, start: "", end: "" },
   ]);
 
+  const length = numberOfTrainingRooms; // Number of training rooms determined elsewhere
+
+  const fillTrainingRoomsArray = () => {
+    const trainingRoomsArray = Array.from({ length }, (_, index) => {
+      const roomName = document.getElementById(
+        `trainingRoomName_${index + 1}`
+      ).value;
+      const roomPhotos = document
+        .getElementById(`trainingRoomPhotos_${index + 1}`)
+        .value.split(",");
+      const capacity = parseInt(
+        document.getElementById(`trainingRoomCapacity_${index + 1}`).value
+      );
+      const amenities = document.getElementById(
+        `trainingRoomAmenities_${index + 1}`
+      ).value;
+      const description = document.getElementById(
+        `trainingRoomDescription_${index + 1}`
+      ).value;
+      const price = parseFloat(
+        document.getElementById(`trainingRoomPrice_${index + 1}`).value
+      );
+
+      return {
+        roomName,
+        roomPhotos,
+        capacity,
+        amenities,
+        description,
+        price,
+      };
+    });
+
+    console.log(trainingRoomsArray);
+  };
+
+  // Example usage
+
   const handleCheckboxChange = (checkboxId) => {
     const updatedCheckboxes = checkboxes.map((checkbox) => {
       if (checkbox.id === checkboxId) {
@@ -124,6 +162,8 @@ function AddSpace() {
     console.log("schedule", WD);
     console.log("JSON PROP", inSpace);
     handleGenerateSchedule();
+    fillTrainingRoomsArray();
+
     console.log();
   };
 

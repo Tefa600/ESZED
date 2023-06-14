@@ -1,0 +1,64 @@
+{
+    "placeName": "Kareem's Awesome World",
+    "placePhotos":["https://images.popularplaces-all.com/hotelimage.php?p_id=1000&code=778bfcbaeb7470b01b9a3474f09d9676&webpage=coworkingspaces.me&link=https%3A%2F%2Fsubdomain.cloudimg.io%2Fcrop%2F1024x768%2Fq70.fcontrast10.fbright0.fsharp5%2Fhttps%3A%2F%2Fmaps.googleapis.com%2Fmaps%2Fapi%2Fplace%2Fphoto%3Fmaxwidth%3D1024%26photoreference%3DATtYBwI0RWCLMYBbZ8obozIloWmZCWdVb5-ovdrtvs_6Gk8gGBJ1kdG4Lg8GQiWoOTi8Ir6M6FFfoWeQt58wpWKR2MucAEOKZ_ZDg7vmy_KImSBKfBfDhuHNAq58P9PlAIX_Ha939L76xyHFYqiCgxNSAY6VbOTWtcR4Vkr37cCzWugO2OZj%26key%3Dgoogle_api_key",
+    "https://925egypt.com/wp-content/uploads/2022/10/41DD881F-1B3F-4471-AE36-B8A4DE7C29E0.jpeg"
+    ],
+    "address":"5 Mohammed Saleh Ln, Ad Doqi, Agouza, Giza Governorate 3751222",
+    "zone":"Dokii",
+    "number":"01013291205",
+    "selfService":"true",
+    "googleAddress":"https://goo.gl/maps/J7fRDjqLKXz3GCaN9?coh=178572&entry=tt",
+    "hourPrice": 7,
+    "numberOfSeats": 15,
+    "numberOfSilentSeats" : 10,
+    "silentSeatPrice" : 20,
+    "openingHours" : [
+        {"day" : "Sunday" , "openTime" : 12 , "closeTime" : 19},
+        {"day" : "Monday" , "openTime" : 13 , "closeTime" : 20},
+        {"day" : "Tuesday" , "openTime" : 10 , "closeTime" : 13},
+        {"day" : "Wednesday" , "closed" : true},
+        {"day" : "Thursday" , "closed" :true },
+        {"day" : "Friday" , "openTime": 7 , "closeTime": 19},
+        {"day" : "Saturday" , "openTime" : 12 , "closeTime" : 19} 
+    ],
+    "MeetingRooms":[
+        {"seats": 25 , "price":150 ,"roomPhotos":["https://ctfassets.imgix.net/vh7r69kgcki3/46VeGE2tnqmkRLYI6VEJeh/9e35ea0ec8c67569128be3f0bccff6eb/Web_150DPI-20221216_WeWork_Product_Shoot_Q4_3.jpg?auto=format%20compress&fit=crop&q=50&w=500px","https://www.mindspace.me/wp-content/uploads/2020/03/mg@2x-6.png"] },
+        {"seats":20 , "price":120,"roomPhotos":["https://www.workspace.co.uk/media/properties/the%20print%20rooms/the-print-rooms-meeting-room-image-greet.jpg?width=1200&height=630&mode=crop&format=jpeg&quality=60&v=202105191500","https://www.workspace.co.uk/media/properties/the%20leather%20market/workspace-15.jpg?width=1200&height=630&mode=crop&format=jpeg&quality=60&v=202207051736"]}
+    ],
+    "TrainingRooms":[
+        {"seats":30 , "price":200 , "roomPhotos":["https://www.levelofficelandscape.com/wp-content/uploads/2020/01/Pareti-impacchettabili-Leo-Pharma-Training-Room-Level-Office-Landscape.jpg","https://msof.com/wp-content/uploads/utah-office-furniture-for-training-rooms.jpg"]},
+        {"seats":20 , "price":175 , "roomPhotos":["https://www.wybostonlakes.co.uk/media/11006/training-venue-cambridge-3.jpg?anchor=center&mode=crop&width=960&height=576&format=jpg&quality=90&rnd=132424772820000000","https://www.avanta.co.in/wp-content/uploads/2020/03/Training-Rooms.jpg"]}
+    ],
+     "silentRoomPhotos" : [
+      "",""
+     ],
+     "sharedAreaPhotos":[
+      "",""
+     ]
+}
+
+const req = {
+placeName : - ,
+address : - ,
+zone: -,
+.
+.
+.
+openingHours: OpenHours
+}
+
+const OpenHours ={
+[
+day1, day2 , day3 , day 4 ....
+]
+}
+
+const day1 = {
+day: 
+openTime : -,
+close:-
+
+}
+
+
+MeetingRoomsss = { 

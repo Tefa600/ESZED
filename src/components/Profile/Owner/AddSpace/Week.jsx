@@ -1,16 +1,15 @@
-import React, { useState } from 'react'
-import styles from "./Week.module.css"
+import React, { useState } from "react";
+import styless from "./Week.module.css";
 // import moment from 'moment/moment';
 export default function Week() {
   const [checkboxes, setCheckboxes] = useState([
-    { id: 'checkbox1',Day:"Sunday" , checked: false },
-    { id: 'checkbox2',Day:"Monday" , checked: false },
-    { id: 'checkbox3',Day:"Tuseday" , checked: false },
-    { id: 'checkbox4',Day:"Wednesday" , checked: false },
-    { id: 'checkbox5',Day:"Thursday" , checked: false },
-    { id: 'checkbox6',Day:"Friday" , checked: false },
-    { id: 'checkbox7',Day:"Saturday" , checked: false },
-    
+    { id: "checkbox1", Day: "Sunday", checked: false },
+    { id: "checkbox2", Day: "Monday", checked: false },
+    { id: "checkbox3", Day: "Tuseday", checked: false },
+    { id: "checkbox4", Day: "Wednesday", checked: false },
+    { id: "checkbox5", Day: "Thursday", checked: false },
+    { id: "checkbox6", Day: "Friday", checked: false },
+    { id: "checkbox7", Day: "Saturday", checked: false },
   ]);
 
   const handleCheckboxChange = (checkboxId) => {
@@ -18,7 +17,7 @@ export default function Week() {
       if (checkbox.id === checkboxId) {
         return {
           ...checkbox,
-          checked: !checkbox.checked
+          checked: !checkbox.checked,
         };
       }
       return checkbox;
@@ -27,6 +26,7 @@ export default function Week() {
   };
 
   return (
+
    <>
    
    <div className={`container py-4 px-4 bg-white shadow w-50 ${styles.week}`}>
@@ -83,8 +83,54 @@ export default function Week() {
    </div>
    
 
-   </>
-  )
-}
 
-    
+              <div className="col-lg-2 my-2">
+                <select
+                  disabled={checkbox.checked}
+                  className={`w-175 ${styless.checkControl}`}
+                  required
+                >
+                  <span className={`${styless.selectArr}`} />
+                  <option value selected hidden>
+                    start:
+                  </option>
+                  <option>9</option>
+                  <option>10</option>
+                  <option>11 </option>
+                  <option>12</option>
+                </select>
+              </div>
+
+              <div className="col-lg-2 my-2">
+                <select
+                  disabled={checkbox.checked}
+                  className={`w-175 ${styless.checkControl}`}
+                  required
+                >
+                  <span className={`${styless.selectArr}`} />
+                  <option value selected hidden>
+                    end:
+                  </option>
+                  <option>20</option>
+                  <option>21</option>
+                  <option>22 </option>
+                  <option>23</option>
+                </select>
+              </div>
+              <div className="col-lg-3 my-3 ms-5 ">
+                <label className={`${styless.switchday}`}>
+                  <input
+                    type="checkbox"
+                    checked={checkbox.checked}
+                    onChange={() => handleCheckboxChange(checkbox.id)}
+                  />
+                  <span className={`${styless.sliderday}`}></span>
+                </label>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </>
+  );
+}

@@ -33,9 +33,9 @@ export default function WorkSpace() {
       setPicture(response.data.data.placePhotos);
       // console.log(rr);
       console.log(response.data.data);
-      console.log(response.data.data);
+      // console.log(response.data.data);
     });
-  });
+  }, [rooms, rules, address, dailyRoutine, spaceName, bio, sArea]);
   const R2 = picture[1];
 
   function visitGoogleMaps() {}

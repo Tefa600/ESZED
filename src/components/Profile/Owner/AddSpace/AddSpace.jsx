@@ -534,7 +534,8 @@ function AddSpace() {
           </Button>
         </Form>
         </div>
-      
+        </div>
+        </div>
     </>
   );
 }

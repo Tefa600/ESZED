@@ -4,6 +4,9 @@ import styles from '../Booking/Booking.module.css'
 import Pic from '../../images/10.jpg'
 import axios from "../../api/axios";
 import Calender from "./Calender/Calender"
+import R2 from "../../images/10.jpg";
+import R3 from "../../images/3.jpg";
+import R4 from "../../images/4.webp";
 
 export default function Booking() {
 
@@ -72,6 +75,30 @@ let zoneId;
     //
     //         })
     // }
+    const [currentSlide, setCurrentSlide] = useState(0);
+    const slides = [
+        {
+            image: R2,
+            caption: 'Slide 1'
+        },
+        {
+            image: R3,
+            caption: 'Slide 2'
+        },
+        {
+            image: R4,
+            caption: 'Slide 3'
+        }
+    ];
+
+    const prevSlide = () => {
+        setCurrentSlide(currentSlide === 0 ? slides.length - 1 : currentSlide - 1);
+    };
+
+    const nextSlide = () => {
+        setCurrentSlide(currentSlide === slides.length - 1 ? 0 : currentSlide + 1);
+    };
+
 
     return (<>
         <div>
@@ -92,7 +119,44 @@ let zoneId;
                 </div>
             </div>
             <div>
-                
+            {/* <div className={` ${styles.slider}`}> */}
+            <div id="slider" className={`carousel slide ${styles.slider}`} data-bs-ride="carousel">
+            <div className="carousel-indicators gliders">
+                {slides.map((slide, index) => (
+                    <button
+                        key={index}
+                        type="button"
+                        data-bs-target="#slider"
+                        data-bs-slide-to={index}
+                        className={index === currentSlide ? 'active' : ''}
+                        aria-current={index === currentSlide ? 'true' : 'false'}
+                        aria-label={`Slide ${index + 1}`}
+                    ></button>
+                ))}
+            </div>
+            <div className="coco">
+                <button className="carousel-control-prev bb" type="button" onClick={prevSlide}>
+                    <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span className="visually-hidden">Previous</span>
+                </button>
+
+                <div className="carousel-inner">
+                    {slides.map((slide, index) => (
+                        <div key={index} className={`carousel-item ${index === currentSlide ? 'active' : ''}`}>
+                            <img src={slide.image} className="d-block w-100" alt={`Slide ${index + 1}`}/>
+                            <div className="carousel-caption d-none d-md-block">
+                                <h5>{slide.caption}</h5>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+
+                <button className="carousel-control-next bb" type="button" onClick={nextSlide}>
+                    <span className="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span className="visually-hidden">Next</span>
+                </button>
+            </div>
+            </div>
             </div>
             {/* Breadcrumb Section End */}
             {/* Room Details Section Begin */}

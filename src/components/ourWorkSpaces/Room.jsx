@@ -37,7 +37,8 @@ export default function Room() {
         </div> */}
         <div className="row py-3">
         <div className="col-lg-3">
-            <img src={Room1} alt="Room1" />
+            <img src={Room1} alt="Room1" 
+            className={`${styles.imgRoom}`} />
         </div>
        
             {/* <div className="col-lg-3">

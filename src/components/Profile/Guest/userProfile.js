@@ -71,7 +71,7 @@ const toggle = () => {setIsOpen (!isOpen)};
    { function: () => {setIsUserHistoryActive((current) => true);
     setIsUserDetailActive(false);
 },
-    name: "Show History",
+    name: "Bookings",
       icon: <MdHistory />,
     },
    {
@@ -162,7 +162,7 @@ return (
 
          
     
-      <div className="col-md-4 middleContainer ">
+      <div className="col-md-9  middleContainer ">
         <div className="historyCards mt-3">
           <div
             className="UDetails"

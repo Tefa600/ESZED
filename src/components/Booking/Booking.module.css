@@ -212,6 +212,13 @@ body{
 .raForm button:hover{
     background-color: #63ace5;
 }
+.slider{
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+}
 /* .section {
 	position: relative;
 	height: 100vh;

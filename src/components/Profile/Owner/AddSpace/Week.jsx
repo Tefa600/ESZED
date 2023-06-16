@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import styless from "./Week.module.css";
+import styles from "./Week.module.css";
+
 // import moment from 'moment/moment';
 export default function Week() {
   const [checkboxes, setCheckboxes] = useState([
@@ -84,7 +85,7 @@ export default function Week() {
    
 
 
-              <div className="col-lg-2 my-2">
+              {/* <div className="col-lg-2 my-2">
                 <select
                   disabled={checkbox.checked}
                   className={`w-175 ${styless.checkControl}`}
@@ -126,11 +127,10 @@ export default function Week() {
                   />
                   <span className={`${styless.sliderday}`}></span>
                 </label>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
+              </div> */}
+              
+         
+        
     </>
   );
 }

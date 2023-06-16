@@ -18,12 +18,7 @@ body{
     font-size: 12px;
 }
 
-*{
-    margin:0;
-    padding:0;
-    text-decoration: none;
-    
-}
+
 /* .leftcontainer{
     display:flex;
 } */
@@ -268,19 +263,12 @@ body {
  
 
 } */
-/* 
+
 .middleContainer{
-    background-color: rgba(255,255,255, 0.5);
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    border-radius: 10px;
-    height: 30%;
     display: flex;
     justify-content: center;
     align-items: center;
-    transform: translate(50%, -15%);
-    margin-top: 70px;
-    
-} */
+}
 
 /* .PGbuttons{ */
     /*display: block;*/

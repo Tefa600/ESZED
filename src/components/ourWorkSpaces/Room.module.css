@@ -9,3 +9,11 @@
     border-radius: 25px;
     margin: auto;
 }
+.imgRoom{
+    width: auto;  /* set to anything and aspect ratio is maintained - also corrects glitch in Internet Explorer */
+    height: 90vh;  /* set to anything and aspect ratio is maintained */
+    max-width: 100%;
+    border: 0;
+   object-fit: cover;
+
+}

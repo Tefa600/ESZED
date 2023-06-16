@@ -1,14 +1,30 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "../Booking/BB.module.css";
 import Payment from "./Payment";
 import { Link } from "react-router-dom";
 import { differenceInHours, getTime } from "date-fns";
+import styless from "../Profile/Owner/AddSpace/Week.module.css";
+import axios from "../../api/axios";
 
 export default function BB() {
   const [checkIn, setCheckIn] = useState("");
+  const [selectedDate, setSelectedDate] = useState();
+  const [rType, setRType] = useState("");
+  const [pName, setPName] = useState("");
   const [checkOut, setCheckOut] = useState("");
   const [numOfSeats, setNumOfSeats] = useState(1);
   const [phone, setphone] = useState("");
+  const [data, setData] = useState();
+  const pathSegments = window.location.pathname.split("/");
+  const roomID = pathSegments[pathSegments.length - 1];
+  useEffect(() => {
+    axios.get(`api/places/${roomID}`).then((response) => {
+      setData(response.data.data);
+      console.log(response.data.data);
+      setPName(data.placeName);
+      // setRType(data.roomType);
+    });
+  }, []);
 
   let numberOfHours = 0;
   if (checkIn && checkOut) {
@@ -23,11 +39,34 @@ export default function BB() {
       checkIn,
       checkOut,
       numOfSeats,
+
       phone,
     };
   }
   //and here will put the api
 
+  function handleStartChange(value) {
+    setCheckIn(value);
+  }
+
+  function handleEndChange(value) {
+    setCheckOut(value);
+  }
+
+  const getNextSevenDays = () => {
+    const dates = [];
+    const today = new Date();
+    for (let i = 0; i < 7; i++) {
+      const date = new Date();
+      date.setDate(today.getDate() + i);
+      dates.push(date);
+    }
+    return dates;
+  };
+
+  const handleDateChange = (e) => {
+    setSelectedDate(e.target.value);
+  };
   return (
     <>
       <div id="booking" className={`mt-3 ${styles.section}`}>
@@ -37,11 +76,8 @@ export default function BB() {
               <div className={`${styles.bookingForm}`}>
                 <div className={`${styles.bookingBg}`}>
                   <div className={`${styles.formHeader}`}>
-                    <h2>Make your reservation</h2>
-                    <p>
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Cupiditate laboriosam numquam at
-                    </p>
+                    {pName ? <h2> {pName}</h2> : <h2>Make Reservation</h2>}
+                    <p>Shared Area</p>
                   </div>
                 </div>
                 <form>
@@ -50,52 +86,95 @@ export default function BB() {
                   <input className={`w-75 ${styles.formControl}`} type="number" min="0" max="11" required />
                 </div> */}
                   <div className="row">
-                    <div className="col-md-6">
-                      <div className={`${styles.formGroup}`}>
-                        <span className={`${styles.formLabel}`}>
-                          Start From
-                        </span>
-                        <input
-                          className={`${styles.formControl}`}
-                          type="time"
+                    {/*<div className="col-md-4">*/}
+                    {/*  <span className={`${styles.formLabel}`}>Date</span>*/}
+                    {/*  <div className="col-lg-2 my-2">*/}
+                    {/*    <select*/}
+                    {/*      className={`w-175 ${styless.checkControl}`}*/}
+                    {/*// required // onChange=*/}
+                    {(e) => handleStartChange(e.target.value)}
+                    {/*// >/!*      <span className={`${styless.selectArr}`} />*!/*/}
+                    {/*      <option value selected hidden>*/}
+                    {/*        start:*/}
+                    {/*      </option>*/}
+                    {/*      {Array.from({ length: 24 }, (_, index) => (*/}
+                    {/*        <option key={index}>{index}</option>*/}
+                    {/*      ))}*/}
+                    {/*    </select>*/}
+                    {/*  </div>*/}
+                    {/*</div>*/}
+                    <div>
+                      <h1>Date</h1>
+                      <select onChange={handleDateChange}>
+                        <option> Select a date</option>
+                        {getNextSevenDays().map((date, index) => (
+                          <option key={index} value={date.toISOString()}>
+                            {date.toLocaleString().split(",")[0]}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                    <div className="col-md-4">
+                      <span className={`${styles.formLabel}`}>Start</span>
+                      <div className="col-lg-2 my-2">
+                        <select
+                          className={`w-175 ${styless.checkControl}`}
                           required
-                          value={checkIn}
-                          onChange={(ev) => setCheckIn(ev.target.value)}
-                        />
+                          onChange={(e) => handleStartChange(e.target.value)}
+                        >
+                          <span className={`${styless.selectArr}`} />
+                          <option value selected hidden>
+                            start:
+                          </option>
+                          {Array.from({ length: 24 }, (_, index) => (
+                            <option key={index}>{index}</option>
+                          ))}
+                        </select>
                       </div>
                     </div>
-                    <div className="col-md-6">
-                      <div className={`${styles.formGroup}`}>
-                        <span className={`${styles.formLabel}`}>End in</span>
-                        <input
-                          className={`${styles.formControl}`}
-                          type="time"
+                    <div className="col-md-4">
+                      <span className={`${styles.formLabel}`}>End</span>
+                      <div className="col-lg-2 my-2">
+                        <select
+                          className={`w-175 ${styless.checkControl}`}
                           required
-                          value={checkOut}
-                          onChange={(ev) => setCheckOut(ev.target.value)}
-                        />
+                          onChange={(e) => handleEndChange(e.target.value)}
+                        >
+                          <span className={`${styless.selectArr}`} />
+                          <option value selected hidden>
+                            end:
+                          </option>
+                          {Array.from(
+                            { length: 24 - Number(checkIn) },
+                            (_, index) => (
+                              <option key={index}>
+                                {Number(checkIn) + index + 1}
+                              </option>
+                            )
+                          )}
+                        </select>
                       </div>
                     </div>
                   </div>
 
                   <div className="row">
                     <div className="col-md-9">
-                      <div className={` ${styles.formGroup}`}>
-                        <span className={`${styles.formLabel}`}>Room Type</span>
-                        <select
-                          className={`w-100 ${styles.formControl}`}
-                          required
-                        >
-                          <span className={`${styles.selectArrow}`} />
-                          <option value selected hidden>
-                            Select room type -
-                          </option>
-                          <option>Meeting Room </option>
-                          <option>Training/Courses Room </option>
-                          <option>Silent Room </option>
-                          <option>Shared Area</option>
-                        </select>
-                      </div>
+                      {/*// <div className={` ${styles.formGroup}`}>*/}
+                      {/*<span className={`${styles.formLabel}`}>{rType}</span>*/}
+                      {/*  <select*/}
+                      {/*    className={`w-100 ${styles.formControl}`}*/}
+                      {/*    required*/}
+                      {/*  >*/}
+                      {/*    <span className={`${styles.selectArrow}`} />*/}
+                      {/*    <option value selected hidden>*/}
+                      {/*      Select room type -*/}
+                      {/*    </option>*/}
+                      {/*    <option>Meeting Room </option>*/}
+                      {/*    <option>Training/Courses Room </option>*/}
+                      {/*    <option>Silent Room </option>*/}
+                      {/*    <option>Shared Area</option>*/}
+                      {/*  </select>*/}
+                      {/*</div>*/}
                     </div>
                     <div className="col-md-2">
                       <div className={`${styles.formGroup}`}>

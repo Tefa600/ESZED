@@ -1,189 +1,246 @@
-import React, {useEffect, useState} from 'react'
-import Footer from '../Footer/Footer'
-import styles from '../Booking/Booking.module.css'
-import Pic from '../../images/10.jpg'
+import React, { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
+import Footer from "../Footer/Footer";
+import styles from "../Booking/Booking.module.css";
+import Pic from "../../images/10.jpg";
 import axios from "../../api/axios";
-import Calender from "./Calender/Calender"
+import Calender from "./Calender/Calender";
 
 export default function Booking() {
+  var currentDateTime = new Date();
+  var year = currentDateTime.getFullYear();
+  var month = currentDateTime.getMonth() + 1;
+  var date = currentDateTime.getDate() + 1;
+  var dateTomorrow = year + "-" + month + "-" + date;
+  var checkinElem = document.querySelector("#checkin-date");
+  var checkoutElem = document.querySelector("#checkout-date");
 
-    var currentDateTime = new Date();
-    var year = currentDateTime.getFullYear();
-    var month = (currentDateTime.getMonth() + 1);
-    var date = (currentDateTime.getDate() + 1);
-    var dateTomorrow = year + "-" + month + "-" + date;
-    var checkinElem = document.querySelector("#checkin-date");
-    var checkoutElem = document.querySelector("#checkout-date");
+  const [spaceId, setSpaceId] = useState("");
+  const [data, setData] = useState([]);
+  const [title, setTitle] = useState([]);
+  let [roomID, setRoomID] = useState("");
+  let [roomIndex, setRoomIndex] = useState("");
+  // if (date < 10) {
+  //     date = '0' + date;
+  // }
+  // if (month < 10) {
+  //     month = '0' + month;
+  // }
 
-    const [spaceId, setSpaceId] = useState("");
-    const [data,setData] = useState([]);
-    const [title,setTitle] = useState([]);
-    let roomID, roomIndex;
-    // if (date < 10) {
-    //     date = '0' + date;
-    // }
-    // if (month < 10) {
-    //     month = '0' + month;
-    // }
+  // checkinElem.setAttribute("min", dateTomorrow);
+  //
+  // checkinElem.onchange = function () {
+  //     checkoutElem.setAttribute("min", this.value);
+  const [loading, setLoading] = useState(false);
+  // }
+  const pathSegments = window.location.pathname.split("/");
+  let zoneID, roomInd, roomId;
+  useEffect(() => {
+    if (pathSegments[pathSegments.length - 2] === "SharedArea") {
+      // title="SharedArea";
+      setTitle("Shared Area");
+      zoneID = pathSegments[pathSegments.length - 1];
+      console.log("room id ", roomID);
+    } else if (pathSegments[pathSegments.length - 2] === "SilentRoom") {
+      // title= "SilentArea";
+      setTitle("Silent Room");
+      zoneID = pathSegments[pathSegments.length - 1];
+      console.log("room id ", roomID);
+      console.log("title", title);
+    } else {
+      setRoomID = pathSegments[pathSegments.length - 1];
+      roomId = pathSegments[pathSegments.length - 1];
+      zoneID = pathSegments[pathSegments.length - 3];
+      setRoomIndex = pathSegments[pathSegments.length - 2];
+      roomInd = pathSegments[pathSegments.length - 2];
+      console.log("room id ", roomID);
+    }
 
-    // checkinElem.setAttribute("min", dateTomorrow);
-    //
-    // checkinElem.onchange = function () {
-    //     checkoutElem.setAttribute("min", this.value);
-    const [loading, setLoading] = useState(false);
-    // }
-    const pathSegments = window.location.pathname.split('/');
-let zoneId;
-    useEffect(() => {
+    console.log("room index", roomIndex);
+    console.log("zone id", zoneID);
+    // console.log(roomID);
+    axios.get(`api/places/${zoneID}`).then((response) => {
+      setData(response.data.data);
+      console.log(response.data.data);
+    });
+  }, []);
 
+  {
+    /*async function isAvail(e) {*/
+  }
+  {
+    /*    e.preventDefault();*/
+  }
+  //     setLoading(true);
+  //     let testData = await axios
+  //         .post(`/api/booking/${spaceId}`)
+  //         .then((response) => {
+  //
+  //         })
+  // }
 
-        if (pathSegments[pathSegments.length - 2] === "SharedArea") {
-            // title="SharedArea";
-            setTitle("SharedArea")
-            zoneId=pathSegments[pathSegments.length - 1];
-        } else if (pathSegments[pathSegments.length - 2] === "SilentArea") {
-            // title= "SilentArea";
-            setTitle("SilentArea");
-            zoneId=pathSegments[pathSegments.length - 1];
-            console.log(title)
-
-        } else {
-            roomID=pathSegments[pathSegments.length - 1];
-            zoneId=pathSegments[pathSegments.length - 1];
-
-            roomIndex=pathSegments[pathSegments.length - 2];
-        }
-
-        axios.get(`api/places/${zoneId}`)
-            .then((response) => {
-                setData(response.data.data);
-                console.log(response.data.data);
-            });
-
-    }, []);
-
-
-    {/*async function isAvail(e) {*/}
-    {/*    e.preventDefault();*/}
-    //     setLoading(true);
-    //     let testData = await axios
-    //         .post(`/api/booking/${spaceId}`)
-    //         .then((response) => {
-    //
-    //         })
-    // }
-
-    return (<>
-        <div>
-            <div className={`${styles.breadcrumbSection}`}>
-                <div className="container">
-                    <div className="row">
-                        <div className="col-lg-12">
-                            <div className={`${styles.breadcrumbText}`}>
-                                <h2>Our Rooms</h2>
-                                <div className={`${styles.btOption}`}>
-                                    <a href="./Home">Home</a>
-                                    <span>{">"}</span>
-                                    <span className='ms-2'>Rooms</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+  return (
+    <>
+      <div>
+        <div className={`${styles.breadcrumbSection}`}>
+          <div className="container">
+            <div className="row">
+              <div className="col-lg-12">
+                <div className={`${styles.breadcrumbText}`}>
+                  <h2>Our Rooms</h2>
+                  <div className={`${styles.btOption}`}>
+                    <a href="./Home">Home</a>
+                    <span>{">"}</span>
+                    <span className="ms-2">Rooms</span>
+                  </div>
                 </div>
+              </div>
             </div>
-            {/* Breadcrumb Section End */}
-            {/* Room Details Section Begin */}
-            <section className={`spad ${styles.roomDetailsSection}`}>
-                <div className="container">
-                    <div className="row">
-                        <div className="col-lg-4">
-                            <div className={`${styles.roomDetailsItem}`}>
-                                <img className={`${styles.roomDetailsImg}`} src={Pic} alt/>
-                                <div className={`${styles.rdText}`}>
-                                    <div className={`${styles.rdTitle}`}>
-                                        {roomIndex ? data.rooms[roomIndex].roomType: title }
-                                        <h3></h3>
-                                        <div className={`${styles.rdtRight}`}>
-                                            <div className="rating">
-                                                <i className="icon_star"/>
-                                                <i className="icon_star"/>
-                                                <i className="icon_star"/>
-                                                <i className="icon_star"/>
-                                                <i className="icon_star-half_alt"/>
-                                            </div>
-                                            <a href="/BB">Booking Now</a>
-                                        </div>
-                                    </div>
-                                    <h2>{data.hourPrice} EGP<span>/ hour</span></h2>
-                                    <table>
-                                        <tbody>
-                                        <tr>
-                                            <td className={`${styles.ro}`}>Seats:</td>
-                                            <td>{data.numberOfSeats}</td>
-                                        </tr>
-                                        <tr>
-                                            <td className={`${styles.ro}`}>Size:</td>
-                                            <td>30 ft</td>
-                                        </tr>
-                                        <tr>
-                                            <td className={`${styles.ro}`}>Capacity:</td>
-                                            <td>Max person 20</td>
-                                        </tr>
-                                        <tr>
-                                            <td className={`${styles.ro}`}>Services:</td>
-                                            <td>Wifi, Television,...</td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
+          </div>
+        </div>
+        {/* Breadcrumb Section End */}
+        {/* Room Details Section Begin */}
+        <section className={`spad ${styles.roomDetailsSection}`}>
+          <div className="container">
+            <div className="row">
+              <div className="col-lg-4">
+                <div className={`${styles.roomDetailsItem}`}>
+                  <img className={`${styles.roomDetailsImg}`} src={Pic} alt />
+                  <div className={`${styles.rdText}`}>
+                    <div className={`${styles.rdTitle}`}>
+                      {roomIndex ? data.roomsB[roomIndex].roomType : title}
+                      <h3></h3>
+                      <div className={`${styles.rdtRight}`}>
+                        <div className="rating">
+                          <i className="fa fa-icon_star" />
+                          <i className="icon_star" />
+                          <i className="icon_star" />
+                          <i className="icon_star" />
+                          <i className="icon_star-half_alt" />
                         </div>
-                        <div className="col-lg-8">
-                            <div className={`shadow ${styles.roomBooking}`}>
-                                <h3>Your Reservation</h3>
-                                <form  action="#">
-                                    <div className={`${styles.checkDate}`}>
-                                        <label htmlFor="date-in">Check In:</label>
-                                        <input type="time" className="date-input" id="date-in"/>
-                                        <i className="icon_calendar"/>
-                                    </div>
-                                    <div className={`${styles.checkDate}`}>
-                                        <label htmlFor="date-out">Check Out:</label>
-                                        <input type="time" className="date-input" id="date-out"/>
-                                        <i className="icon_calendar"/>
-                                    </div>
-              <Calender/>
+                        {zoneID && roomIndex && roomID && (
+                          <a href={`${zoneID}/${roomIndex}/${roomID}`}>
+                            Booking Now
+                          </a>
+                        )}
+                        {title === "Shared Area" && (
+                          <a href={`BB/SharedArea/${zoneID}`}>Booking Now</a>
+                        )}
+                        {title === "Silent Room" && (
+                          <a href={`BB/SilentRoom/${zoneID}`}>Booking Now</a>
+                        )}
+                      </div>
+                    </div>
+                    <h2>
+                      {roomIndex && (
+                        <>
+                          {data.rooms[roomIndex].price} EGP <span>/ hour</span>
+                        </>
+                      )}
+                      {title === "Shared Area" && (
+                        <>
+                          {" "}
+                          {data.hourPrice} EGP <span>/ hour</span>
+                        </>
+                      )}
+                      {title === "Silent Room" && (
+                        <>
+                          {data.silentSeatPrice} EGP / <span>hour</span>{" "}
+                        </>
+                      )}
+                    </h2>
+                    <table>
+                      <tbody>
+                        <tr>
+                          <td className={`${styles.ro}`}>Seats:</td>
+                          <td>{data.numberOfSeats}</td>
+                        </tr>
+                        <tr>
+                          <td className={`${styles.ro}`}>Size:</td>
+                          <td>30 ft</td>
+                        </tr>
+                        <tr>
+                          <td className={`${styles.ro}`}>Capacity:</td>
+                          <td>Max person 20</td>
+                        </tr>
+                        <tr>
+                          <td className={`${styles.ro}`}>Services:</td>
+                          <td>Wifi, Television,...</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+              <div className="col-lg-8">
+                <div className={`shadow ${styles.roomBooking}`}>
+                  <h3>Your Reservation</h3>
 
-              <div className="row">
-                <div className="col-lg-4"><div className={`${styles.selectOption}`}>
-                <label htmlFor="guest">Guests:</label>
-                <select id="guest">
-                  <option value>3</option>
-                </select>
-              </div>
-              </div>
-                <div className="col-lg-4"> <div className={`${styles.selectOption}`}>
-                <label htmlFor="room">Room:</label>
-                <select id="room">
-                  <option value>1 Room</option>
-                </select>
-              </div>
-              </div>
-              
-              </div>
-                                    <button type="submit"><span className='label'>Check Availability</span>
+                  <form action="#">
+                    <div className={`${styles.kaka}`}>
+                      <div className={`${styles.checkDate}`}>
+                        <label htmlFor="date-in">Check In:</label>
+                        <input
+                          type="time"
+                          className="date-input"
+                          id="date-in"
+                        />
+                        <i className="icon_calendar" />
+                      </div>
+                      <div className={`${styles.checkDate}`}>
+                        <label htmlFor="date-out">Check Out:</label>
+                        <input
+                          type="time"
+                          className="date-input"
+                          id="date-out"
+                        />
+                        <i className="icon_calendar" />
+                      </div>
+                    </div>
 
-                                        <span class="icon">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none"
-                                                                                             d="M0 0h24v24H0z"></path><path
-        fill="currentColor"
-        d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z"></path></svg>
-  </span>
-                                    </button>
-                                </form>
-                            </div>
+                    <Calender />
 
-                            {/* <form action="reservation.php" method="post">
+                    <div className="row">
+                      <div className="col-lg-4">
+                        <div className={`${styles.selectOption}`}>
+                          <label htmlFor="guest">Guests:</label>
+                          <select id="guest">
+                            <option value>3</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div className="col-lg-4">
+                        {" "}
+                        <div className={`${styles.selectOption}`}>
+                          <label htmlFor="room">Room:</label>
+                          <select id="room">
+                            <option value>1 Room</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                    <button type="submit">
+                      <span className="label">Check Availability</span>
+
+                      <span class="icon">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          width="24"
+                          height="24"
+                        >
+                          <path fill="none" d="M0 0h24v24H0z"></path>
+                          <path
+                            fill="currentColor"
+                            d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z"
+                          ></path>
+                        </svg>
+                      </span>
+                    </button>
+                  </form>
+                </div>
+
+                {/* <form action="reservation.php" method="post">
   <div className="elem-group">
     <label htmlFor="name">Your Name</label>
     <input type="text" id="name" name="visitor_name" placeholder="John Doe" pattern="[A-Z\sa-z]{3,20}" required />
@@ -229,15 +286,14 @@ let zoneId;
   </div>
   <button type="submit">Book The Rooms</button>
 </form> */}
+              </div>
+            </div>
+          </div>
+        </section>
+        {/* Room Details Section End */}
+      </div>
 
-                        </div>
-                    </div>
-                </div>
-            </section>
-            {/* Room Details Section End */}
-
-        </div>
-
-        <Footer/>
-    </>)
+      <Footer />
+    </>
+  );
 }

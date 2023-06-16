@@ -11,6 +11,7 @@ function AddSpace() {
   const [spaceNumber, setSpaceNumber] = useState("");
   const [address, setAddress] = useState("");
   const [zone, setZone] = useState("");
+  const [avail, setAvail] = useState("weekly");
   const [googleMapsLink, setGoogleMapsLink] = useState("");
   const [hourlyPrice, setHourlyPrice] = useState(0);
   const [isSilentSeats, setIsSilentSeats] = useState(false);
@@ -176,6 +177,7 @@ function AddSpace() {
       placePhotos: photoArray,
       address: address,
       zone: zone,
+
       number: spaceNumber,
       selfService: isSelfService,
       googleAddress: googleMapsLink,
@@ -419,11 +421,11 @@ function AddSpace() {
                 </Form.Control>
               </Form.Group>
 
-              <Form.Group controlId="zone">
+              <Form.Group controlId="availability">
                 <Form.Label>Booking Availability</Form.Label>
                 <Form.Control
                   as="select"
-                  value={zone}
+                  value={avail}
                   onChange={(e) => setZone(e.target.value)}
                 >
                   <option value="">Work Space Available</option>

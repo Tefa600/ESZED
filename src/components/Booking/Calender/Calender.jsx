@@ -8,12 +8,16 @@ import listPlugin from "@fullcalendar/list";
 function Calender() {
   function renderEventContent(eventInfo) {
     alert(eventInfo.event.start);
+    alert(eventInfo.event.end);
     alert("Event: " + eventInfo.event.title);
   }
   const handleDateClick = (arg) => {
     // bind with an arrow function
     arg.jsEvent.preventDefault();
-    console.log(arg);
+    console.log("arg ", arg);
+    console.log("arg date", arg.date);
+    console.log("arg all day", arg.allDay);
+    console.log("arg date string", arg.date.dateStr);
   };
   return (
     <div>

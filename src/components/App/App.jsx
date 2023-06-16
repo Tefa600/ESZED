@@ -48,7 +48,9 @@ function App() {
             path="Booking/SilentRoom/:spaceId"
             element={<Booking />}
           ></Route>
-          <Route path="BB" element={<BB />}></Route>
+          <Route path="BB/SharedArea/:id" element={<BB />}></Route>
+          <Route path="BB/SilentRoom/:id" element={<BB />}></Route>
+          <Route path="BB/:zone/:index/:id" element={<BB />}></Route>
           <Route path="Payment" element={<Payment />}></Route>
           <Route path="Recommendation" element={<Recommendation />}></Route>
           <Route path="Cards" element={<Cards />}></Route>

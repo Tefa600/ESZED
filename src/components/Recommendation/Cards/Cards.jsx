@@ -1,22 +1,26 @@
-import React, { useEffect, useState } from 'react';
-import CardsUI from './CardsUI';
-import './Cards.css';
-import img1 from '../../../images/eco.jpg';
-import img2 from '../../../images/creativo-3.jpg';
-import img3 from '../../../images/workspace2.jpg';
-import axios from '../../../api/axios';
-import { Row, Col } from 'react-bootstrap';
+import React, { useEffect, useState } from "react";
+import CardsUI from "./CardsUI";
+import "./Cards.css";
+import img1 from "../../../images/eco.jpg";
+import img2 from "../../../images/creativo-3.jpg";
+import img3 from "../../../images/workspace2.jpg";
+import axios from "../../../api/axios";
+import { Row, Col } from "react-bootstrap";
 
 function Cards() {
   const [cardData, setCardData] = useState([]);
 
   useEffect(() => {
-    axios.get('api/places/getAllPlaces').then((response) => {
+    axios.get("api/places/getAllPlaces").then((response) => {
       setCardData(response.data.data.places);
       console.log(response.data.data.places);
+
       console.log(response.data.data.places[10]._id);
     });
   }, []);
+
+  console.log("number of spaces", cardData.length);
+  window.sessionStorage.setItem("spacesNumbers", cardData.length);
 
   if (!cardData) {
     return <div className="m-lg-3">Loading...</div>;

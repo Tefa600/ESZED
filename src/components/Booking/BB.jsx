@@ -5,52 +5,47 @@ import { Link } from "react-router-dom";
 import { differenceInHours, getTime } from "date-fns";
 import styless from "../Profile/Owner/AddSpace/Week.module.css";
 import axios from "../../api/axios";
+import Cookies from "js-cookie";
 
 export default function BB() {
-  const [checkIn, setCheckIn] = useState("");
-  const [selectedDate, setSelectedDate] = useState();
+  const [startTime, setStartTime] = useState("");
+  const [date, setDate] = useState();
   const [rType, setRType] = useState("");
   const [pName, setPName] = useState("");
-  const [checkOut, setCheckOut] = useState("");
+  const [endTime, setEndTime] = useState("");
   const [numOfSeats, setNumOfSeats] = useState(1);
   const [phone, setphone] = useState("");
   const [data, setData] = useState();
+  const [paymentMethod, setPaymentMethod] = useState("");
   const pathSegments = window.location.pathname.split("/");
   const roomID = pathSegments[pathSegments.length - 1];
   useEffect(() => {
-    axios.get(`api/places/${roomID}`).then((response) => {
-      setData(response.data.data);
-      console.log(response.data.data);
-      setPName(data.placeName);
+    axios.get(`api/places/${roomID}`).then((res) => {
+      setData(res.data.data);
+      console.log(res.data.data);
+      setPName(res.data.data.placeName);
       // setRType(data.roomType);
     });
   }, []);
 
   let numberOfHours = 0;
-  if (checkIn && checkOut) {
+  if (startTime && endTime) {
     numberOfHours = differenceInHours(
-      new getTime(checkIn),
-      new getTime(checkOut)
+      new getTime(startTime),
+      new getTime(endTime)
     );
   }
 
-  function BookThisRoom() {
-    const data = {
-      checkIn,
-      checkOut,
-      numOfSeats,
-
-      phone,
-    };
-  }
   //and here will put the api
 
   function handleStartChange(value) {
-    setCheckIn(value);
+    setStartTime(value);
+    // console.log("check in ", startTime);
   }
 
   function handleEndChange(value) {
-    setCheckOut(value);
+    setEndTime(value);
+    // console.log("check out ", endTime);
   }
 
   const getNextSevenDays = () => {
@@ -65,8 +60,42 @@ export default function BB() {
   };
 
   const handleDateChange = (e) => {
-    setSelectedDate(e.target.value);
+    setDate(e.target.value);
+    // console.log("date", Date);
   };
+
+  const handlePayment = (e) => {
+    setPaymentMethod(e.target.value);
+  };
+  const token = Cookies.get("token");
+  console.log("token  ", token);
+
+  function BookThisRoom() {
+    const inputs = {
+      startTime,
+      endTime,
+      numOfSeats,
+      date,
+      paymentMethod,
+      phone,
+    };
+    console.log("data", data);
+    useEffect(() => {
+      axios
+        .post(`api/booking/bookSeat/${roomID}`, inputs, {
+          headers: { Authorization: `Bearer ${Cookies.get("token")}` },
+        })
+        .then((res) => {
+          alert("done");
+          // setRType(data.roomType);
+        })
+        .catch((err) => {
+          console.log("error", err);
+          alert("doom");
+        });
+    }, []);
+  }
+
   return (
     <>
       <div id="booking" className={`mt-3 ${styles.section}`}>
@@ -145,10 +174,10 @@ export default function BB() {
                             end:
                           </option>
                           {Array.from(
-                            { length: 24 - Number(checkIn) },
+                            { length: 24 - Number(startTime) },
                             (_, index) => (
                               <option key={index}>
-                                {Number(checkIn) + index + 1}
+                                {Number(startTime) + index + 1}
                               </option>
                             )
                           )}
@@ -159,22 +188,22 @@ export default function BB() {
 
                   <div className="row">
                     <div className="col-md-9">
-                      {/*// <div className={` ${styles.formGroup}`}>*/}
-                      {/*<span className={`${styles.formLabel}`}>{rType}</span>*/}
-                      {/*  <select*/}
-                      {/*    className={`w-100 ${styles.formControl}`}*/}
-                      {/*    required*/}
-                      {/*  >*/}
-                      {/*    <span className={`${styles.selectArrow}`} />*/}
-                      {/*    <option value selected hidden>*/}
-                      {/*      Select room type -*/}
-                      {/*    </option>*/}
-                      {/*    <option>Meeting Room </option>*/}
-                      {/*    <option>Training/Courses Room </option>*/}
-                      {/*    <option>Silent Room </option>*/}
-                      {/*    <option>Shared Area</option>*/}
-                      {/*  </select>*/}
-                      {/*</div>*/}
+                      <div className={` ${styles.formGroup}`}>
+                        <span className={`${styles.formLabel}`}>{rType}</span>
+                        <select
+                          className={`w-100 ${styles.formControl}`}
+                          required
+                          onChange={handlePayment}
+                        >
+                          <span className={`${styles.selectArrow}`} />
+                          <option value selected hidden>
+                            Select Payment Method
+                          </option>
+                          <option>Cash </option>
+                          <option>Walled </option>
+                          <option>Credit Card</option>
+                        </select>
+                      </div>
                     </div>
                     <div className="col-md-2">
                       <div className={`${styles.formGroup}`}>
@@ -194,23 +223,26 @@ export default function BB() {
                     <div className="col-md-6">
                       <div className={`${styles.formGroup}`}>
                         <span className={`${styles.formLabel}`}>Price</span>
+                        {startTime && endTime && (
+                          <div>{(endTime - startTime) * data.hourPrice}</div>
+                        )}
                       </div>
                     </div>
                   </div>
 
-                  <div className={`${styles.formGroup}`}>
-                    <label className={`${styles.formLabel} pe-2`}>
-                      Enter your phone
-                    </label>
-                    <input
-                      className={`w-75 ${styles.formControl}`}
-                      type="tel"
-                      required
-                      placeholder="Ex: 01xxxxxxxxx"
-                      value={phone}
-                      onChange={(ev) => setphone(ev.target.value)}
-                    />
-                  </div>
+                  {/*<div className={`${styles.formGroup}`}>*/}
+                  {/*  <label className={`${styles.formLabel} pe-2`}>*/}
+                  {/*    Enter your phone*/}
+                  {/*  </label>*/}
+                  {/*  <input*/}
+                  {/*    className={`w-75 ${styles.formControl}`}*/}
+                  {/*    type="tel"*/}
+                  {/*    required*/}
+                  {/*    placeholder="Ex: 01xxxxxxxxx"*/}
+                  {/*    value={phone}*/}
+                  {/*    onChange={(ev) => setphone(ev.target.value)}*/}
+                  {/*  />*/}
+                  {/*</div>*/}
 
                   <div className={`${styles.formBtn}`}>
                     <button

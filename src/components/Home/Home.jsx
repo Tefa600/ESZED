@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./Home.module.css";
 import Services from "../Services/Services";
 import homeBg from "../../images/1.jpg";
@@ -10,8 +10,31 @@ import About from "../About/About";
 import "../About/About.module.css";
 import Contact from "../ContactUs/Contact";
 import PartnerComponent from "../BecomePartner/BecomePartner";
+import axios from "../../api/axios";
+import { useNavigate } from "react-router";
+import { Navigate } from "react-router-dom";
 
 export default function Home() {
+  const [search, setSearch] = useState("");
+  const navigate = useNavigate();
+  const go = false;
+  const handleSearch = async () => {
+    console.log("final ", search);
+    let data = await axios
+      .get(`/api/places/getAllPlaces?zone=${search}`)
+      .then((response) => {
+        console.log(response.data.data);
+        alert(`Search Successful`);
+        console.log("resss", response.data);
+        handleSearch2(search);
+      });
+  };
+
+  const handleSearch2 = (search) => {
+    navigate(`/Recommendation?search=`);
+  };
+  // navigation.navigate("Surf", { data: response.data.data });
+
   return (
     <>
       <div
@@ -39,14 +62,26 @@ export default function Home() {
                   placeholder="Where do you want to work?"
                   className={`form-control mt-2 ${styles.homeInp}`}
                   name="your_zone"
+                  onChange={(e) => {
+                    const ss = e.target.value;
+                    setSearch(ss);
+                  }}
                 />
               </div>
               <button
                 className={`btn text-white px-4 py-2`}
                 style={{ backgroundColor: "#63ace5" }}
+                onClick={!go}
               >
                 Find Your Workspace
               </button>
+
+              {go && (
+                <Navigate
+                  to={`Recommendation/yourzone?=${search}`}
+                  replace={false}
+                />
+              )}
               <div className="clearfix"></div>
             </form>
           </div>
@@ -64,7 +99,7 @@ export default function Home() {
         <div className="mt-5" id="Contact-us">
           <Contact />
         </div>
-        
+
         <Footer></Footer>
       </div>
     </>

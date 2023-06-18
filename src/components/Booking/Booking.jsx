@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
+import { Link, Navigate, useHistory } from "react-router-dom";
 import Footer from "../Footer/Footer";
 import styles from "../Booking/Booking.module.css";
 import Pic from "../../images/10.jpg";
 import axios from "../../api/axios";
 import Calender from "./Calender/Calender";
+import { redirect, useNavigate } from "react-router";
 
 export default function Booking() {
   var currentDateTime = new Date();
@@ -17,53 +18,58 @@ export default function Booking() {
 
   const [spaceId, setSpaceId] = useState("");
   const [data, setData] = useState([]);
-  const [title, setTitle] = useState([]);
+  // const [title, setTitle] = useState([]);
   let [roomID, setRoomID] = useState("");
   let [roomIndex, setRoomIndex] = useState("");
-  // if (date < 10) {
-  //     date = '0' + date;
-  // }
-  // if (month < 10) {
-  //     month = '0' + month;
-  // }
-
-  // checkinElem.setAttribute("min", dateTomorrow);
-  //
-  // checkinElem.onchange = function () {
-  //     checkoutElem.setAttribute("min", this.value);
+  const [zoneId, setZoneId] = useState("");
   const [loading, setLoading] = useState(false);
   // }
   const pathSegments = window.location.pathname.split("/");
-  let zoneID, roomInd, roomId;
-  useEffect(() => {
-    if (pathSegments[pathSegments.length - 2] === "SharedArea") {
-      // title="SharedArea";
-      setTitle("Shared Area");
-      zoneID = pathSegments[pathSegments.length - 1];
-      console.log("room id ", roomID);
-    } else if (pathSegments[pathSegments.length - 2] === "SilentRoom") {
-      // title= "SilentArea";
-      setTitle("Silent Room");
-      zoneID = pathSegments[pathSegments.length - 1];
-      console.log("room id ", roomID);
-      console.log("title", title);
-    } else {
-      setRoomID = pathSegments[pathSegments.length - 1];
-      roomId = pathSegments[pathSegments.length - 1];
-      zoneID = pathSegments[pathSegments.length - 3];
-      setRoomIndex = pathSegments[pathSegments.length - 2];
-      roomInd = pathSegments[pathSegments.length - 2];
-      console.log("room id ", roomID);
-    }
+  let zoneID, roomInd, roomId, title;
+  if (pathSegments[pathSegments.length - 2] === "SharedArea") {
+    zoneID = pathSegments[pathSegments.length - 1];
+    title = "Shared Area";
+  } else if (pathSegments[pathSegments.length - 2] === "Silent Room") {
+    title = "Silent Room";
+    zoneID = pathSegments[pathSegments.length - 1];
+  } else {
+    roomID = pathSegments[pathSegments.length - 1];
+    zoneID = pathSegments[pathSegments.length - 3];
+    roomIndex = pathSegments[pathSegments.length - 2];
+    //     console.log("room id ", roomID);
+  }
+  // useEffect(() => {
+  //   if (pathSegments[pathSegments.length - 2] === "SharedArea") {
+  //     // title="SharedArea";
+  //     setTitle("Shared Area");
+  //     zoneID = pathSegments[pathSegments.length - 1];
+  //     console.log("zone id ", zoneID);
+  //   } else if (pathSegments[pathSegments.length - 2] === "SilentRoom") {
+  //     // title= "SilentArea";
+  //     setTitle("Silent Room");
+  //     zoneID = pathSegments[pathSegments.length - 1];
+  //     console.log("zone id ", zoneID);
+  //     console.log("title", title);
+  //   } else {
+  //     setRoomID = pathSegments[pathSegments.length - 1];
+  //     zoneID = pathSegments[pathSegments.length - 3];
+  //     setRoomIndex = pathSegments[pathSegments.length - 2];
+  //     console.log("room id ", roomID);
+  //   }
+  //
+  //   // console.log(roomID);
+  // }, []);
 
-    console.log("room index", roomIndex);
-    console.log("zone id", zoneID);
-    // console.log(roomID);
-    axios.get(`api/places/${zoneID}`).then((response) => {
-      setData(response.data.data);
-      console.log(response.data.data);
+  useEffect(() => {
+    axios.get(`api/places/${zoneID}`).then((res) => {
+      setData(res.data.data);
+      // console.log("data", data);
     });
   }, []);
+
+  // console.log("daaata ", data);
+  // zoneID = data._id;
+  // console.log("the zzone Id", String(zoneID));
 
   {
     /*async function isAvail(e) {*/
@@ -78,6 +84,13 @@ export default function Booking() {
   //
   //         })
   // }
+
+  const navigate = useNavigate();
+  function handleSharedBook() {
+    // redirect(`BB/SharedBook/${zoneID}`);
+    navigate(`../../BB/SharedArea/${zoneID}`, { replace: true });
+    // navigate(0);
+  }
 
   return (
     <>
@@ -119,15 +132,17 @@ export default function Booking() {
                           <i className="icon_star-half_alt" />
                         </div>
                         {zoneID && roomIndex && roomID && (
-                          <a href={`${zoneID}/${roomIndex}/${roomID}`}>
-                            Booking Now
-                          </a>
+                          <div onClick={handleSharedBook}>Booking Now Room</div>
                         )}
                         {title === "Shared Area" && (
-                          <a href={`BB/SharedArea/${zoneID}`}>Booking Now</a>
+                          <a href={`/BB/SharedArea/${zoneID}`}>
+                            Booking Now Shared
+                          </a>
                         )}
                         {title === "Silent Room" && (
-                          <a href={`BB/SilentRoom/${zoneID}`}>Booking Now</a>
+                          <div onClick={handleSharedBook}>
+                            Booking Now Silent
+                          </div>
                         )}
                       </div>
                     </div>

@@ -177,19 +177,24 @@ function AddSpace() {
       placePhotos: photoArray,
       address: address,
       zone: zone,
-
       number: spaceNumber,
       selfService: isSelfService,
       googleAddress: googleMapsLink,
       hourPrice: hourlyPrice,
       numberOfSeats: numberOfSeats,
+      openingHours: WD,
+      MeetingRooms: meetingRoomsArray,
+      TrainingRooms: trainingRoomsArray,
+      sharedAreaPhotos: [],
+      numberOfMeetingRooms: numberOfMeetingRooms,
+      numberOfTrainingRooms: numberOfTrainingRooms,
+      bio: bio,
+      rules: [],
+      amenities: [],
+      availableFor: "monthly",
       numberOfSilentSeats: numberOfSilentSeats,
       silentSeatPrice: vipHourlyPrice,
-      // openingHours: WD,
-      TrainingRooms: trainingRoomsArray,
-      MeetingRooms: meetingRoomsArray,
       silentRoomPhotos: [],
-      sharedAreaPhotos: [],
     };
     // Handle form submission logic here
     // You can access the form field values using the corresponding state variables
@@ -366,99 +371,135 @@ function AddSpace() {
     <>
       <div className="form-container">
         <div className={`row `}>
-          <div className={` col-md-3 `}>
+          <div className="col-md-7">
             <h2>Place Details</h2>
-            <Form onSubmit={handleSubmit}>
-              <Form.Group controlId="placeName">
-                <Form.Label>Place Name</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="Enter place name"
-                  value={placeName}
-                  onChange={(e) => setPlaceName(e.target.value)}
-                />
-              </Form.Group>
 
-              <Form.Group controlId="address">
-                <Form.Label>Address</Form.Label>
-                <Form.Control
-                  type="text"
+            <Form onSubmit={handleSubmit}>
+              <div className="row d-flex">
+                <div className="col-lg-6">
+                  <Form.Label>Place Name</Form.Label>
+                  <Form.Group
+                    className={`${styles.inputWrapper}`}
+                    controlId="placeName"
+                  >
+                    <input
+                      className={`${styles.searchInp}`}
+                      placeholder="Enter place name"
+                      value={placeName}
+                      onChange={(e) => setPlaceName(e.target.value)}
+                    />
+                  </Form.Group>
+                </div>
+                <div className="col-lg-6">
+                  <Form.Label>Number</Form.Label>
+                  <Form.Group
+                    className={`${styles.inputWrapper}`}
+                    controlId="spaceNumber"
+                  >
+                    <input
+                      className={`${styles.searchInp}`}
+                      type="number"
+                      maxLength={11}
+                      placeholder="Enter Space Number"
+                      value={spaceNumber}
+                      onChange={(e) => setSpaceNumber(e.target.value)}
+                    />
+                  </Form.Group>
+                </div>
+              </div>
+              <Form.Label>Address</Form.Label>
+              <Form.Group
+                className={`${styles.inputWrapper}`}
+                controlId="address"
+              >
+                <input
+                  className={`${styles.searchInp}`}
+                  // type="text"
                   placeholder="Enter address"
                   value={address}
                   onChange={(e) => setAddress(e.target.value)}
                 />
               </Form.Group>
 
-              <Form.Group controlId="spaceNumber">
-                <Form.Label>Number</Form.Label>
-                <Form.Control
-                  type="number"
-                  maxLength={11}
-                  placeholder="Enter Space Number"
-                  value={spaceNumber}
-                  onChange={(e) => setSpaceNumber(e.target.value)}
-                />
-              </Form.Group>
+              <div className="row">
+                <div className="col-lg-4">
+                  <Form.Label>Zone</Form.Label>
+                  <Form.Group controlId="zone">
+                    <Form.Control
+                      // className={`${styles.searchInp}`}
+                      style={{ fontSize: "13px", borderRadius: "25px" }}
+                      as="select"
+                      value={zone}
+                      onChange={(e) => setZone(e.target.value)}
+                    >
+                      <option value="">Select zone</option>
+                      <option value="Nasr City">Nasr City</option>
+                      <option value="Dokki">Dokki</option>
+                      <option value="">Cairo</option>
+                      <option value="">Giza</option>
+                      <option value="">Sheikh Zayed</option>
+                      <option value="">Heliopolis</option>
+                      <option value="">New Cairo</option>
+                      <option value="">Mohandeseen</option>
+                      <option value="">Omranyah</option>
+                      <option value="">6th October</option>
+                    </Form.Control>
+                  </Form.Group>
+                </div>
 
-              <Form.Group controlId="zone">
-                <Form.Label>Zone</Form.Label>
-                <Form.Control
-                  as="select"
-                  value={zone}
-                  onChange={(e) => setZone(e.target.value)}
-                >
-                  <option value="">Select zone</option>
-                  <option value="Nasr City">Nasr City</option>
-                  <option value="Dokki">Dokki</option>
-                  <option value="">Cairo</option>
-                  <option value="">Giza</option>
-                  <option value="">Sheikh Zayed</option>
-                  <option value="">Heliopolis</option>
-                  <option value="">New Cairo</option>
-                  <option value="">Mohandeseen</option>
-                  <option value="">Omranyah</option>
-                  <option value="">6th October</option>
-                </Form.Control>
-              </Form.Group>
+                <div className="col-lg-4">
+                  <Form.Label>Booking Availability</Form.Label>
+                  <Form.Group controlId="availability">
+                    <Form.Control
+                      className={`${styles.searchInp}`}
+                      style={{ fontSize: "13px", borderRadius: "25px" }}
+                      as="select"
+                      value={avail}
+                      onChange={(e) => setZone(e.target.value)}
+                    >
+                      <option value="">Work Space Available</option>
+                      <option value="Week">Weekly</option>
+                      <option value="Month">Monthly</option>
+                    </Form.Control>
+                  </Form.Group>
+                </div>
 
-              <Form.Group controlId="availability">
-                <Form.Label>Booking Availability</Form.Label>
-                <Form.Control
-                  as="select"
-                  value={avail}
-                  onChange={(e) => setZone(e.target.value)}
-                >
-                  <option value="">Work Space Available</option>
-                  <option value="Week">Weekly</option>
-                  <option value="Month">Monthly</option>
-                </Form.Control>
-              </Form.Group>
-
-              <Form.Group controlId="isSelfService">
-                <Form.Label>Self Service</Form.Label>
-                <Form.Control
-                  as="select"
-                  value={isSelfService}
-                  onChange={(e) => setIsSelfService(e.target.value)}
-                >
-                  <option value="">Choose Service Option</option>
-                  <option value="true">Help Yourself</option>
-                  <option value="false">We are at your service</option>
-                </Form.Control>
-              </Form.Group>
-              <Form.Group controlId="googleMapsLink">
-                <Form.Label>Google Maps Link</Form.Label>
-                <Form.Control
+                <div className="col-lg-4">
+                  <Form.Label>Self Service</Form.Label>
+                  <Form.Group controlId="isSelfService">
+                    <Form.Control
+                      className={`${styles.searchInp}`}
+                      style={{ fontSize: "13px", borderRadius: "25px" }}
+                      as="select"
+                      value={isSelfService}
+                      onChange={(e) => setIsSelfService(e.target.value)}
+                    >
+                      <option value="">Choose Service Option</option>
+                      <option value="true">Help Yourself</option>
+                      <option value="false">We are at your service</option>
+                    </Form.Control>
+                  </Form.Group>
+                </div>
+              </div>
+              <Form.Label>Google Maps Link</Form.Label>
+              <Form.Group
+                className={`${styles.inputWrapper}`}
+                controlId="googleMapsLink"
+              >
+                <input
+                  className={`${styles.searchInp}`}
                   type="text"
                   placeholder="Enter Google Maps link"
                   value={googleMapsLink}
                   onChange={(e) => setGoogleMapsLink(e.target.value)}
                 />
               </Form.Group>
-              <Form.Group controlId="bio">
-                <Form.Label>Bio</Form.Label>
-                <Form.Control
-                  as="textarea"
+              <Form.Label>Bio</Form.Label>
+              <Form.Group className={`${styles.inputWrapper}`} controlId="bio">
+                <input
+                  type="textarea"
+                  className={`${styles.searchInp}`}
+                  style={{ fontSize: "12px", borderRadius: "25px" }}
                   rows={3}
                   placeholder="Enter Space Bio"
                   value={bio}
@@ -470,97 +511,44 @@ function AddSpace() {
 
               {/* ******************************************************************** */}
               {/* ************************************************* */}
-              <div
-                className={`container py-4 px-4 bg-white shadow w-50 ${styless.week}`}
-              >
-                <div
-                  className={`row my-3 py-3 m-auto shadow ${styless.Weekly}`}
-                >
-                  {checkboxes.map((checkbox) => (
-                    <div key={checkbox.id} className="d-flex">
-                      <div className="col-lg-4 my-2 ">
-                        <div className="week mt-2">
-                          <label className={`mx-2 ${styless.switch}`}>
-                            <input
-                              type="checkbox"
-                              className={` ${styless.checkbox}`}
-                              onChange={() => handleCheckboxChange(checkbox.id)}
-                            />
-                            <div className={`${styless.slider}`} />
-                          </label>
-                          {checkbox.Day}
-                        </div>
-                      </div>
 
-                      {checkbox.checked && (
-                        <div className="col-lg-2 my-2">
-                          <select
-                            disabled={checkbox.checkedAll}
-                            className={`w-175 ${styless.checkControl}`}
-                            required
-                            onChange={(e) =>
-                              handleStartChange(checkbox.id, e.target.value)
-                            }
-                          >
-                            <span className={`${styless.selectArr}`} />
-                            <option value selected hidden>
-                              start:
-                            </option>
-                            {Array.from({ length: 24 }, (_, index) => (
-                              <option key={index}>{index}</option>
-                            ))}
-                          </select>
-                        </div>
-                      )}
-                      {checkbox.checked && checkbox.start && (
-                        <div className="col-lg-2 my-2">
-                          <select
-                            disabled={checkbox.checkedAll}
-                            className={`w-175 ${styless.checkControl}`}
-                            required
-                            onChange={(e) =>
-                              handleEndChange(checkbox.id, e.target.value)
-                            }
-                          >
-                            <span className={`${styless.selectArr}`} />
-                            <option value selected hidden>
-                              end:
-                            </option>
-                            {Array.from(
-                              { length: 24 - Number(checkbox.start) },
-                              (_, index) => (
-                                <option key={index}>
-                                  {Number(checkbox.start) + index + 1}
-                                </option>
-                              )
-                            )}
-                          </select>
-                        </div>
-                      )}
-                    </div>
-                  ))}
+              {/* ******************************* */}
+              <div className="row">
+                <div className="col-lg-6">
+                  <Form.Label>Number of Seats</Form.Label>
+                  <Form.Group
+                    className={`${styles.inputWrapper}`}
+                    controlId="numberOfSeats"
+                  >
+                    <input
+                      className={`${styles.searchInp}`}
+                      type="number"
+                      placeholder="Enter Number of Shared Area seats "
+                      onChange={(e) => setNumberOfSeats(e.target.value)}
+                    />
+                  </Form.Group>
+                </div>
+
+                <div className="col-lg-6">
+                  <Form.Label>Hourly Price</Form.Label>
+                  <Form.Group
+                    className={`${styles.inputWrapper}`}
+                    controlId="hourlyPrice"
+                  >
+                    <input
+                      className={`${styles.searchInp}`}
+                      type="number"
+                      placeholder="Enter hourly price EGP"
+                      onChange={(e) => setHourlyPrice(e.target.value)}
+                    />
+                  </Form.Group>
                 </div>
               </div>
-              {/* ******************************* */}
 
-              <Form.Group controlId="numberOfSeats">
-                <Form.Label>Number of Seats</Form.Label>
-                <Form.Control
-                  type="number"
-                  placeholder="Enter Number of Shared Area seats "
-                  onChange={(e) => setNumberOfSeats(e.target.value)}
-                />
-              </Form.Group>
-              <Form.Group controlId="hourlyPrice">
-                <Form.Label>Hourly Price</Form.Label>
-                <Form.Control
-                  type="number"
-                  placeholder="Enter hourly price EGP"
-                  onChange={(e) => setHourlyPrice(e.target.value)}
-                />
-              </Form.Group>
-
-              <Form.Group controlId="isSilentSeats">
+              <Form.Group
+                className={`w-50 ${styles.inputWrapper}`}
+                controlId="isSilentSeats"
+              >
                 <Form.Check
                   type="checkbox"
                   label="Silent Seats"
@@ -574,35 +562,59 @@ function AddSpace() {
                   }}
                 />
               </Form.Group>
-              {isSilentSeats && (
-                <Form.Group controlId="vipHourlyPrice">
-                  <Form.Label>Silent seats hourly Price</Form.Label>
-                  <Form.Control
-                    type="number"
-                    placeholder="Enter hourly price EGP"
-                    value={vipHourlyPrice}
-                    onChange={(e) => setVipHourlyPrice(e.target.value)}
-                  />
-                </Form.Group>
-              )}
-              {isSilentSeats && (
-                <Form.Group controlId="numberOfSilentSeats">
-                  <Form.Label>Number of Silent Seats</Form.Label>
-                  <Form.Control
-                    type="number"
-                    minLength={1}
-                    placeholder="Enter the number of the silent seats"
-                    onChange={handleSilentSeatsChange}
-                  />
-                  {numberOfSilentSeats <= 0 && (
-                    <div>
-                      You can't choose that number of rooms if it's 0 please
-                      uncheck the room type above
-                    </div>
+              <div className="row">
+                <div className="col-lg-6">
+                  {isSilentSeats && (
+                    <Form.Group
+                      className={`${styles.inputWrapper}`}
+                      controlId="vipHourlyPrice"
+                    >
+                      {/* <Form.Label>Silent seats hourly Price</Form.Label> */}
+                      <input
+                        className={`${styles.searchInp}`}
+                        type="number"
+                        placeholder="Enter hourly price EGP"
+                        value={vipHourlyPrice}
+                        onChange={(e) => setVipHourlyPrice(e.target.value)}
+                      />
+                    </Form.Group>
                   )}
-                </Form.Group>
-              )}
-              <Form.Group controlId="isMeetingRoom">
+                </div>
+                <div className="col-lg-6">
+                  {isSilentSeats && (
+                    <Form.Group
+                      className={`${styles.inputWrapper}`}
+                      controlId="numberOfSilentSeats"
+                    >
+                      {/* <Form.Label>Number of Silent Seats</Form.Label> */}
+                      <input
+                        className={`${styles.searchInp}`}
+                        type="number"
+                        minLength={1}
+                        placeholder="Enter the number of the silent seats"
+                        onChange={handleSilentSeatsChange}
+                      />{" "}
+                      <br></br>
+                      {numberOfSilentSeats <= 0 && (
+                        <div
+                          style={{
+                            fontSize: "11px",
+                            marginBottom: "6px",
+                          }}
+                        >
+                          You can't choose that number of rooms if it's 0 please
+                          uncheck the room type above
+                        </div>
+                      )}
+                    </Form.Group>
+                  )}
+                </div>
+              </div>
+
+              <Form.Group
+                className={` w-50 ${styles.inputWrapper}`}
+                controlId="isMeetingRoom"
+              >
                 <Form.Check
                   type="checkbox"
                   label="Meeting Room"
@@ -616,15 +628,21 @@ function AddSpace() {
                 />
               </Form.Group>
               {isMeetingRoom && (
-                <Form.Group controlId="numberOfMeetingRooms">
-                  <Form.Label>Number of Meeting Rooms</Form.Label>
-                  <Form.Control
+                <Form.Group
+                  className={`${styles.inputWrapper}`}
+                  controlId="numberOfMeetingRooms"
+                >
+                  <Form.Label style={{ fontSize: "12px", marginRight: "3px" }}>
+                    Number of Meeting Rooms:{" "}
+                  </Form.Label>
+                  <input
+                    className={`w-50 ${styles.searchInp}`}
                     type="number"
                     minLength={1}
                     min={1}
                     placeholder="Enter the Meeting Rooms number"
                     onChange={handleMeetingRoomsChange}
-                  ></Form.Control>
+                  ></input>
                   {/*{numberOfMeetingRooms <= 0 && (*/}
                   {/*  <div>*/}
                   {/*    You can't choose that number of rooms if it's 0 please*/}
@@ -633,8 +651,11 @@ function AddSpace() {
                   {/*)}*/}
                 </Form.Group>
               )}
-              {meetingRoomInputs}
-              <Form.Group controlId="isTrainingRoom">
+              {isMeetingRoom && numberOfMeetingRooms != 0 && meetingRoomInputs}
+              <Form.Group
+                className={`w-50 ${styles.inputWrapper}`}
+                controlId="isTrainingRoom"
+              >
                 <Form.Check
                   type="checkbox"
                   label="Training Room"
@@ -650,14 +671,23 @@ function AddSpace() {
 
               {isTrainingRoom && (
                 <Form.Group controlId="numberOfTrainingRooms">
-                  <Form.Label>Number of Training Rooms</Form.Label>
+                  <Form.Label style={{ flexDirection: "row" }}>
+                    Number of Training Rooms
+                  </Form.Label>
                   <Form.Control
+                    className={`w-50 ${styles.searchInp}`}
                     type="number"
                     placeholder="Enter the Training Rooms number"
                     onChange={handleTrainingRoomsChange}
                   ></Form.Control>
+                  <br></br>
                   {numberOfTrainingRooms <= 0 && (
-                    <div>
+                    <div
+                      style={{
+                        fontSize: "11px",
+                        marginBottom: "6px",
+                      }}
+                    >
                       You can't choose that number of meeting rooms if it's 0
                       please uncheck the room type above
                     </div>
@@ -665,19 +695,88 @@ function AddSpace() {
                 </Form.Group>
               )}
 
-              {trainingRoomInputs}
+              {isTrainingRoom &&
+                numberOfTrainingRooms != 0 &&
+                trainingRoomInputs}
 
               {/* <WrokSpaceForm></WrokSpaceForm> */}
-
-              <Button variant="primary" type="submit">
-                Submit
-              </Button>
             </Form>
+            <Button variant="primary" type="submit">
+              Submit{" "}
+            </Button>
+          </div>
+          <div className="col-md-4">
+            <div className={`py-4 px-4 bg-white shadow ${styless.week}`}>
+              <div className={`row my-3 py-3 m-auto shadow ${styless.Weekly}`}>
+                {checkboxes.map((checkbox) => (
+                  <div key={checkbox.id} className="d-flex">
+                    <div className="col-lg-4 my-2 ">
+                      <div className="week mt-2">
+                        <label className={`mx-2 ${styless.switch}`}>
+                          <input
+                            type="checkbox"
+                            className={` ${styless.checkbox}`}
+                            onChange={() => handleCheckboxChange(checkbox.id)}
+                          />
+                          <div className={`${styless.slider}`} />
+                        </label>
+                        {checkbox.Day}
+                      </div>
+                    </div>
+
+                    {checkbox.checked && (
+                      <div className="col-lg-2 mr-5 my-2">
+                        <select
+                          disabled={checkbox.checkedAll}
+                          className={`w-175 ${styless.checkControl}`}
+                          required
+                          onChange={(e) =>
+                            handleStartChange(checkbox.id, e.target.value)
+                          }
+                        >
+                          <span className={`${styless.selectArr}`} />
+                          <option value selected hidden>
+                            start:
+                          </option>
+                          {Array.from({ length: 24 }, (_, index) => (
+                            <option key={index}>{index}</option>
+                          ))}
+                        </select>
+                      </div>
+                    )}
+                    {checkbox.checked && checkbox.start && (
+                      <div className="col-lg-2 my-2 mx-5">
+                        <select
+                          disabled={checkbox.checkedAll}
+                          className={`w-175 ${styless.checkControl}`}
+                          required
+                          onChange={(e) =>
+                            handleEndChange(checkbox.id, e.target.value)
+                          }
+                        >
+                          <span className={`${styless.selectArr}`} />
+                          <option value selected hidden>
+                            end:
+                          </option>
+                          {Array.from(
+                            { length: 24 - Number(checkbox.start) },
+                            (_, index) => (
+                              <option key={index}>
+                                {Number(checkbox.start) + index + 1}
+                              </option>
+                            )
+                          )}
+                        </select>
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </>
   );
 }
-
 export default AddSpace;

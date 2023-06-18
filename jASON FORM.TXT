@@ -1,64 +1,36 @@
 {
-    "placeName": "Kareem's Awesome World",
-    "placePhotos":["https://images.popularplaces-all.com/hotelimage.php?p_id=1000&code=778bfcbaeb7470b01b9a3474f09d9676&webpage=coworkingspaces.me&link=https%3A%2F%2Fsubdomain.cloudimg.io%2Fcrop%2F1024x768%2Fq70.fcontrast10.fbright0.fsharp5%2Fhttps%3A%2F%2Fmaps.googleapis.com%2Fmaps%2Fapi%2Fplace%2Fphoto%3Fmaxwidth%3D1024%26photoreference%3DATtYBwI0RWCLMYBbZ8obozIloWmZCWdVb5-ovdrtvs_6Gk8gGBJ1kdG4Lg8GQiWoOTi8Ir6M6FFfoWeQt58wpWKR2MucAEOKZ_ZDg7vmy_KImSBKfBfDhuHNAq58P9PlAIX_Ha939L76xyHFYqiCgxNSAY6VbOTWtcR4Vkr37cCzWugO2OZj%26key%3Dgoogle_api_key",
-    "https://925egypt.com/wp-content/uploads/2022/10/41DD881F-1B3F-4471-AE36-B8A4DE7C29E0.jpeg"
-    ],
-    "address":"5 Mohammed Saleh Ln, Ad Doqi, Agouza, Giza Governorate 3751222",
+    "placeName": "Creativo Coworking Space Test",
+    "placePhotos":["https://scontent.fcai19-4.fna.fbcdn.net/v/t1.6435-9/60089752_2367207416676646_887315646075895808_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=730e14&_nc_eui2=AeFEobxlYOiy1Lifoy4a9AC3dwp0OTp7S0p3CnQ5OntLSgoTP8WQaqhJK-nr9OsyPmEzprcRcCD9EL3nXX0Rtbwk&_nc_ohc=RUJaBdxcim0AX_-2z6w&_nc_ht=scontent.fcai19-4.fna&oh=00_AfAXnuiWB3sD84v1bdbubeqkGdxmqX12eD8bcxXUgMCxbQ&oe=64AEB382","https://scontent.fcai19-4.fna.fbcdn.net/v/t1.6435-9/60406636_2367207370009984_7094051380347797504_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=730e14&_nc_eui2=AeFBIpyPwPUJs48iaOq7epBJOiHoJH0XvdA6IegkfRe90J1-EgSOU6Pwl1ogsf_UU_NSFX76qJ9zTAM3nBE-aKUS&_nc_ohc=LBWQeJ5SXA0AX_7V9fO&_nc_oc=AQkOqovC8MqffxJ1lyDfzBn1PjBdEC3hwbIB7hxux9rQtO1dnG__5-jGCDenucmvDsM&_nc_ht=scontent.fcai19-4.fna&oh=00_AfBPf-27PVnLlmUNjarUDZOWE4m91AJqCkT8M5G2adt6nA&oe=64AE8E17","https://scontent-hbe1-1.xx.fbcdn.net/v/t1.6435-9/60283135_2367217450008976_1404511433152004096_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=730e14&_nc_eui2=AeHxOHB4AXGEn10VFhhpSpL7ebXNdYTXrOF5tc11hNes4RlNdDTKQ3zxj4nkyLt9Bec6vsBuUMdNZ_BsgpExoZZY&_nc_ohc=AGj41EM1vMIAX9c96gL&_nc_ht=scontent-hbe1-1.xx&oh=00_AfCDnmOd9oBGJsL4rd0TVDrTMSmlpo4eIfViVLKY1fZfXA&oe=64AE9584"],
+    "address":"Al Mesaha, Ad Doqi A, Dokki, Giza Governorate",
     "zone":"Dokii",
-    "number":"01013291205",
+    "number":"01111595410",
     "selfService":"true",
-    "googleAddress":"https://goo.gl/maps/J7fRDjqLKXz3GCaN9?coh=178572&entry=tt",
-    "hourPrice": 7,
-    "numberOfSeats": 15,
-    "numberOfSilentSeats" : 10,
-    "silentSeatPrice" : 20,
-    "openingHours" : [
-        {"day" : "Sunday" , "openTime" : 12 , "closeTime" : 19},
-        {"day" : "Monday" , "openTime" : 13 , "closeTime" : 20},
-        {"day" : "Tuesday" , "openTime" : 10 , "closeTime" : 13},
-        {"day" : "Wednesday" , "closed" : true},
-        {"day" : "Thursday" , "closed" :true },
-        {"day" : "Friday" , "openTime": 7 , "closeTime": 19},
-        {"day" : "Saturday" , "openTime" : 12 , "closeTime" : 19} 
-    ],
-    "MeetingRooms":[
-        {"seats": 25 , "price":150 ,"roomPhotos":["https://ctfassets.imgix.net/vh7r69kgcki3/46VeGE2tnqmkRLYI6VEJeh/9e35ea0ec8c67569128be3f0bccff6eb/Web_150DPI-20221216_WeWork_Product_Shoot_Q4_3.jpg?auto=format%20compress&fit=crop&q=50&w=500px","https://www.mindspace.me/wp-content/uploads/2020/03/mg@2x-6.png"] },
-        {"seats":20 , "price":120,"roomPhotos":["https://www.workspace.co.uk/media/properties/the%20print%20rooms/the-print-rooms-meeting-room-image-greet.jpg?width=1200&height=630&mode=crop&format=jpeg&quality=60&v=202105191500","https://www.workspace.co.uk/media/properties/the%20leather%20market/workspace-15.jpg?width=1200&height=630&mode=crop&format=jpeg&quality=60&v=202207051736"]}
-    ],
+    "googleAddress":"https://goo.gl/maps/w3U7DhQQ4SmVFyw5A",
+    "hourPrice": 9,
+    "numberOfSeats": 25,
+    "openingHours" : [        {"day" : "Sunday" , "openTime" : 12 , "closeTime" : 19},       {"day" : "Monday" , "openTime" : 13 , "closeTime" : 20}, {"day" : "Tuesday" , "openTime" : 10 , "closeTime" : 13},        {"day" : "Wednesday" , "openTime":10,"closeTime":20},{"day" : "Thursday" , "openTime":0,"closeTime":24 },        {"day" : "Friday" , "closed":true},{"day" : "Saturday" , "closed":true}],
+    "MeetingRooms":[        {"seats": 25 , "price":150 ,"roomPhotos":["https://ctfassets.imgix.net/vh7r69kgcki3/46VeGE2tnqmkRLYI6VEJeh/9e35ea0ec8c67569128be3f0bccff6eb/Web_150DPI-20221216_WeWork_Product_Shoot_Q4_3.jpg?auto=format%20compress&fit=crop&q=50&w=500px","https://www.mindspace.me/wp-content/uploads/2020/03/mg@2x-6.png"] , "description":"Room Has WC" },  {"seats":20 , "price":120,"roomPhotos":["https://www.workspace.co.uk/media/properties/the%20print%20rooms/the-print-rooms-meeting-room-image-greet.jpg?width=1200&height=630&mode=crop&format=jpeg&quality=60&v=202105191500","https://www.workspace.co.uk/media/properties/the%20leather%20market/workspace-15.jpg?width=1200&height=630&mode=crop&format=jpeg&quality=60&v=202207051736"],"description":"Room Has Projector"}],
     "TrainingRooms":[
-        {"seats":30 , "price":200 , "roomPhotos":["https://www.levelofficelandscape.com/wp-content/uploads/2020/01/Pareti-impacchettabili-Leo-Pharma-Training-Room-Level-Office-Landscape.jpg","https://msof.com/wp-content/uploads/utah-office-furniture-for-training-rooms.jpg"]},
-        {"seats":20 , "price":175 , "roomPhotos":["https://www.wybostonlakes.co.uk/media/11006/training-venue-cambridge-3.jpg?anchor=center&mode=crop&width=960&height=576&format=jpg&quality=90&rnd=132424772820000000","https://www.avanta.co.in/wp-content/uploads/2020/03/Training-Rooms.jpg"]}
+        {"seats":30 , "price":200 , "roomPhotos":["https://www.levelofficelandscape.com/wp-content/uploads/2020/01/Pareti-impacchettabili-Leo-Pharma-Training-Room-Level-Office-Landscape.jpg","https://msof.com/wp-content/uploads/utah-office-furniture-for-training-rooms.jpg"],"description":"Room Has AC"},
+        {"seats":20 , "price":175 , "roomPhotos":["https://www.wybostonlakes.co.uk/media/11006/training-venue-cambridge-3.jpg?anchor=center&mode=crop&width=960&height=576&format=jpg&quality=90&rnd=132424772820000000","https://www.avanta.co.in/wp-content/uploads/2020/03/Training-Rooms.jpg"] , "description":"Room Has WI-FI"}
     ],
-     "silentRoomPhotos" : [
-      "",""
-     ],
-     "sharedAreaPhotos":[
-      "",""
-     ]
+    "sharedAreaPhotos":[
+        "https://coworker.imgix.net/photos/egypt/cairo/creativo/main.jpg?w=1200&h=630&q=90&auto=format,compress&fit=crop&mark=/template/img/wm_icon.png&markscale=5&markalign=center,middle"
+    ],
+    "numberOfMeetingRooms" : 2,                     // will be used in get number of rooms
+    "numberOfTrainingRooms" : 2,                    // will be used in get number of rooms
+    "bio" : "Good Place To Study with friends <3",
+    "rules":[
+        "No Rules",
+        "No fighting",
+        "No Eating"
+    ],
+    "amenities" : [
+        "WI-FI",
+        "WC",
+        "AC",
+        "TV",
+        "Projector"
+    ],
+    "availableFor":"monthly"          // if didn't provided defult = weekly
 }
-
-const req = {
-placeName : - ,
-address : - ,
-zone: -,
-.
-.
-.
-openingHours: OpenHours
-}
-
-const OpenHours ={
-[
-day1, day2 , day3 , day 4 ....
-]
-}
-
-const day1 = {
-day: 
-openTime : -,
-close:-
-
-}
-
-
-MeetingRoomsss = { 

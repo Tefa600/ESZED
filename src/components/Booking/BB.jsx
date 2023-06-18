@@ -72,12 +72,11 @@ export default function BB() {
 
   function BookThisRoom() {
     const inputs = {
-      startTime,
-      endTime,
-      numOfSeats,
-      date,
-      paymentMethod,
-      phone,
+      startTime: startTime,
+      endTime: endTime,
+      numberOfSeats: numOfSeats,
+      Date: date,
+      paymentMethod: paymentMethod,
     };
     console.log("data", data);
     useEffect(() => {

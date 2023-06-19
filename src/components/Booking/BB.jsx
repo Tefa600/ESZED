@@ -134,18 +134,19 @@ export default function BB() {
                     {/*</div>*/}
                     <div>
                       <h1>Date</h1>
-                      <select onChange={handleDateChange}>
+                      <select    className={`w-175 ${styless.checkControl}`} onChange={handleDateChange}>
                         <option> Select a date</option>
                         {getNextSevenDays().map((date, index) => (
-                          <option key={index} value={date.toISOString()}>
+                  
+                          <option className={`${styless.selectArr}`} key={index} value={date.toISOString()}>
                             {date.toLocaleString().split(",")[0]}
                           </option>
                         ))}
                       </select>
                     </div>
-                    <div className="col-md-4">
+                    <div className="col-md-4 mt-2">
                       <span className={`${styles.formLabel}`}>Start</span>
-                      <div className="col-lg-2 my-2">
+                      <div className="col-lg-2">
                         <select
                           className={`w-175 ${styless.checkControl}`}
                           required
@@ -195,8 +196,8 @@ export default function BB() {
                           required
                           onChange={handlePayment}
                         >
-                          <span className={`${styles.selectArrow}`} />
-                          <option value selected hidden>
+                          <span className={`${styles.selectArr}`} />
+                          <option  className={` ${styless.checkControl}`}  value selected hidden>
                             Select Payment Method
                           </option>
                           <option>Cash </option>

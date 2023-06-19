@@ -6,7 +6,9 @@ import Pic from "../../images/10.jpg";
 import axios from "../../api/axios";
 import Calender from "./Calender/Calender";
 import { redirect, useNavigate } from "react-router";
-
+import R2 from "../../images/16.jpg";
+import R3 from "../../images/17.jpg";
+import R4 from "../../images/coworking.jpg"; 
 export default function Booking() {
   var currentDateTime = new Date();
   var year = currentDateTime.getFullYear();
@@ -91,6 +93,30 @@ export default function Booking() {
     navigate(`../../BB/SharedArea/${zoneID}`, { replace: true });
     // navigate(0);
   }
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const slides = [
+      {
+          image: R2,
+          caption: 'Room 1'
+      },
+      {
+          image: R3,
+          caption: 'Room 2'
+      },
+      {
+          image: R4,
+          caption: 'Room 3'
+      }
+  ];
+
+  const prevSlide = () => {
+      setCurrentSlide(currentSlide === 0 ? slides.length - 1 : currentSlide - 1);
+  };
+
+  const nextSlide = () => {
+      setCurrentSlide(currentSlide === slides.length - 1 ? 0 : currentSlide + 1);
+  };
+
 
   return (
     <>
@@ -100,7 +126,7 @@ export default function Booking() {
             <div className="row">
               <div className="col-lg-12">
                 <div className={`${styles.breadcrumbText}`}>
-                  <h2>Our Rooms</h2>
+                  <h2>Our Room</h2>
                   <div className={`${styles.btOption}`}>
                     <a href="./Home">Home</a>
                     <span>{">"}</span>
@@ -116,21 +142,60 @@ export default function Booking() {
         <section className={`spad ${styles.roomDetailsSection}`}>
           <div className="container">
             <div className="row">
-              <div className="col-lg-4">
-                <div className={`${styles.roomDetailsItem}`}>
-                  <img className={`${styles.roomDetailsImg}`} src={Pic} alt />
-                  <div className={`${styles.rdText}`}>
-                    <div className={`${styles.rdTitle}`}>
-                      {roomIndex ? data.roomsB[roomIndex].roomType : title}
-                      <h3></h3>
-                      <div className={`${styles.rdtRight}`}>
-                        <div className="rating">
+              <div className="col-lg-6">
+              <div id="slider" className={`carousel slide ${styles.slider}`} data-bs-ride="carousel">
+            <div className="carousel-indicators gliders">
+                {slides.map((slide, index) => (
+                    <button
+                        key={index}
+                        type="button"
+                        data-bs-target="#slider"
+                        data-bs-slide-to={index}
+                        className={index === currentSlide ? 'active' : ''}
+                        aria-current={index === currentSlide ? 'true' : 'false'}
+                        aria-label={`Slide ${index + 1}`}
+                    ></button>
+                ))}
+            </div>
+            <div className="coco">
+                <button className="carousel-control-prev bb" type="button" onClick={prevSlide}>
+                    <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span className="visually-hidden">Previous</span>
+                </button>
+
+                <div className="carousel-inner">
+                    {slides.map((slide, index) => (
+                        <div key={index} className={`carousel-item ${index === currentSlide ? 'active' : ''}`}>
+                            <img src={slide.image} className="d-block w-100" alt={`Slide ${index + 1}`}/>
+                            <div className="carousel-caption d-none d-md-block">
+                                <h5>{slide.caption}</h5>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+
+                <button className="carousel-control-next bb" type="button" onClick={nextSlide}>
+                    <span className="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span className="visually-hidden">Next</span>
+                </button>
+            </div>
+            </div>
+              </div>
+              <div className="col-lg-6">
+                <div className={`shadow ${styles.roomBooking}`}>
+                  <div className="row">
+                    <div className="col-lg-6">
+                    <h3>Room Details</h3>
+                    </div>
+                    <div className="col-lg-6">
+                    <div className={`mt-3 ${styles.rdtRight}`}>
+                        {/* <div className="rating">
                           <i className="fa fa-icon_star" />
                           <i className="icon_star" />
                           <i className="icon_star" />
                           <i className="icon_star" />
                           <i className="icon_star-half_alt" />
-                        </div>
+                        </div> */}
                         {zoneID && roomIndex && roomID && (
                           <div onClick={handleSharedBook}>Booking Now Room</div>
                         )}
@@ -145,6 +210,14 @@ export default function Booking() {
                           </div>
                         )}
                       </div>
+                    </div>
+                  </div>
+               <div className="container"> 
+                 <div className={`${styles.rdText}`}>
+                    <div className={`${styles.rdTitle}`}>
+                      {roomIndex ? data.roomsB[roomIndex].roomType : title}
+            
+                    
                     </div>
                     <h2>
                       {roomIndex && (
@@ -171,10 +244,6 @@ export default function Booking() {
                           <td>{data.numberOfSeats}</td>
                         </tr>
                         <tr>
-                          <td className={`${styles.ro}`}>Size:</td>
-                          <td>30 ft</td>
-                        </tr>
-                        <tr>
                           <td className={`${styles.ro}`}>Capacity:</td>
                           <td>Max person 20</td>
                         </tr>
@@ -184,14 +253,8 @@ export default function Booking() {
                         </tr>
                       </tbody>
                     </table>
-                  </div>
-                </div>
-              </div>
-              <div className="col-lg-8">
-                <div className={`shadow ${styles.roomBooking}`}>
-                  <h3>Your Reservation</h3>
-
-                  <form action="#">
+                  </div></div>
+                  {/* <form action="#">
                     <div className={`${styles.kaka}`}>
                       <div className={`${styles.checkDate}`}>
                         <label htmlFor="date-in">Check In:</label>
@@ -213,7 +276,6 @@ export default function Booking() {
                       </div>
                     </div>
 
-                    <Calender />
 
                     <div className="row">
                       <div className="col-lg-4">
@@ -252,7 +314,7 @@ export default function Booking() {
                         </svg>
                       </span>
                     </button>
-                  </form>
+                  </form> */}
                 </div>
 
                 {/* <form action="reservation.php" method="post">

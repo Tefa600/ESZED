@@ -140,8 +140,8 @@ export default function Navbar() {
                   <i className="fa fa-caret-down px-1 " />
                 </button>
                 <div className={`${styles.dropdownContent}`}>
-                  <a href="Login">as a guest</a>
-                  <a href="Ologin">as a owner</a>
+                  <a href="/Login">as a guest</a>
+                  <a href="/Ologin">as a owner</a>
                 </div>
               </div>
             </li>
@@ -152,8 +152,8 @@ export default function Navbar() {
                   <i className="fa fa-caret-down px-1" />
                 </button>
                 <div className={`${styles.dropdownContent}`}>
-                  <a href="Register">as a guest</a>
-                  <a href="Osignup">as a owner</a>
+                  <a href="/Register">as a guest</a>
+                  <a href="/Osignup">as a owner</a>
                 </div>
               </div>
             </li>

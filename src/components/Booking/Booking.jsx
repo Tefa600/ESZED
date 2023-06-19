@@ -18,26 +18,34 @@ export default function Booking() {
 
   const [spaceId, setSpaceId] = useState("");
   const [data, setData] = useState([]);
-  // const [title, setTitle] = useState([]);
+  const [title, setTitle] = useState("");
   let [roomID, setRoomID] = useState("");
   let [roomIndex, setRoomIndex] = useState("");
   const [zoneId, setZoneId] = useState("");
   const [loading, setLoading] = useState(false);
+  const [roomPrice, setRoomPrice] = useState("");
   // }
   const pathSegments = window.location.pathname.split("/");
-  let zoneID, roomInd, roomId, title;
-  if (pathSegments[pathSegments.length - 2] === "SharedArea") {
-    zoneID = pathSegments[pathSegments.length - 1];
-    title = "Shared Area";
-  } else if (pathSegments[pathSegments.length - 2] === "Silent Room") {
-    title = "Silent Room";
-    zoneID = pathSegments[pathSegments.length - 1];
-  } else {
-    roomID = pathSegments[pathSegments.length - 1];
-    zoneID = pathSegments[pathSegments.length - 3];
-    roomIndex = pathSegments[pathSegments.length - 2];
-    //     console.log("room id ", roomID);
-  }
+  let zoneID, roomInd, roomId;
+
+  useEffect(() => {
+    if (pathSegments[pathSegments.length - 2] === "SharedArea") {
+      zoneID = pathSegments[pathSegments.length - 1];
+      setTitle("Shared Area");
+    } else if (pathSegments[pathSegments.length - 2] === "Silent Room") {
+      setTitle("Shared Room");
+
+      zoneID = pathSegments[pathSegments.length - 1];
+    } else {
+      roomId = pathSegments[pathSegments.length - 1];
+      zoneID = pathSegments[pathSegments.length - 3];
+      setRoomIndex(String(pathSegments[pathSegments.length - 2]));
+      console.log("room id ", roomId);
+      console.log("zoneID", zoneID);
+      console.log("roomIndex", roomIndex);
+      //     console.log("room id ", roomID);
+    }
+  });
   // useEffect(() => {
   //   if (pathSegments[pathSegments.length - 2] === "SharedArea") {
   //     // title="SharedArea";
@@ -63,27 +71,14 @@ export default function Booking() {
   useEffect(() => {
     axios.get(`api/places/${zoneID}`).then((res) => {
       setData(res.data.data);
-      // console.log("data", data);
+      console.log("data price", data.rooms[0].price);
+      console.log("data tyoe", data.rooms[0].roomType);
+      if (roomIndex) {
+        setTitle(data.rooms[0].roomType);
+        setRoomPrice(data.rooms[0].price);
+      }
     });
-  }, []);
-
-  // console.log("daaata ", data);
-  // zoneID = data._id;
-  // console.log("the zzone Id", String(zoneID));
-
-  {
-    /*async function isAvail(e) {*/
-  }
-  {
-    /*    e.preventDefault();*/
-  }
-  //     setLoading(true);
-  //     let testData = await axios
-  //         .post(`/api/booking/${spaceId}`)
-  //         .then((response) => {
-  //
-  //         })
-  // }
+  }, [data]);
 
   const navigate = useNavigate();
   function handleSharedBook() {
@@ -92,6 +87,8 @@ export default function Booking() {
     // navigate(0);
   }
 
+  console.log("title", title);
+  console.log("room price", roomPrice);
   return (
     <>
       <div>
@@ -121,7 +118,7 @@ export default function Booking() {
                   <img className={`${styles.roomDetailsImg}`} src={Pic} alt />
                   <div className={`${styles.rdText}`}>
                     <div className={`${styles.rdTitle}`}>
-                      {roomIndex ? data.roomsB[roomIndex].roomType : title}
+                      {/*{data.rooms[0].roomType}*/}
                       <h3></h3>
                       <div className={`${styles.rdtRight}`}>
                         <div className="rating">
@@ -131,9 +128,9 @@ export default function Booking() {
                           <i className="icon_star" />
                           <i className="icon_star-half_alt" />
                         </div>
-                        {zoneID && roomIndex && roomID && (
-                          <div onClick={handleSharedBook}>Booking Now Room</div>
-                        )}
+                        {/*{zoneID && roomIndex && roomId && (*/}
+                        {/*  <div onClick={handleSharedBook}>Booking Now Room</div>*/}
+                        {/*)}*/}
                         {title === "Shared Area" && (
                           <a href={`/BB/SharedArea/${zoneID}`}>
                             Booking Now Shared
@@ -147,11 +144,12 @@ export default function Booking() {
                       </div>
                     </div>
                     <h2>
-                      {roomIndex && (
-                        <>
-                          {data.rooms[roomIndex].price} EGP <span>/ hour</span>
-                        </>
-                      )}
+                      {/*{roomIndex && (*/}
+                      {/*  <>*/}
+                      {/*    price*/}
+                      {/*    {data.rooms[0]} EGP <span>/ hour</span>*/}
+                      {/*  </>*/}
+                      {/*)}*/}
                       {title === "Shared Area" && (
                         <>
                           {" "}

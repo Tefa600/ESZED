@@ -86,7 +86,9 @@ export default function WorkSpace() {
                       </div>
                     </div>
                     <a
-                      href={`/Booking/${sArea._id}/${index}/${card._id}}`}
+                      href={`/Booking/${sArea._id}/${String(index)}/${
+                        card._id
+                      }}`}
                       className={`btn text-white m-auto ${styles.btnCard}`}
                     >
                       <span>Book now</span>

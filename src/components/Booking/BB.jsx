@@ -79,6 +79,8 @@ export default function BB() {
       paymentMethod: paymentMethod,
     };
     console.log("data", data);
+    console.log("inputs ", inputs);
+    alert("data");
     useEffect(() => {
       axios
         .post(`api/booking/bookSeat/${roomID}`, inputs, {
@@ -199,7 +201,7 @@ export default function BB() {
                             Select Payment Method
                           </option>
                           <option>Cash </option>
-                          <option>Walled </option>
+                          <option>Wallet </option>
                           <option>Credit Card</option>
                         </select>
                       </div>
@@ -223,7 +225,11 @@ export default function BB() {
                       <div className={`${styles.formGroup}`}>
                         <span className={`${styles.formLabel}`}>Price</span>
                         {startTime && endTime && (
-                          <div>{(endTime - startTime) * data.hourPrice}</div>
+                          <div>
+                            {(endTime - startTime) *
+                              data.hourPrice *
+                              numOfSeats}
+                          </div>
                         )}
                       </div>
                     </div>

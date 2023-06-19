@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 
 function Spaces(props) {
   const [spaceData, setSpaceData] = useState([]);
-  console.log();
+  console.log("cookies", Cookies.get("token"));
   // console.log(Cookies.get("token"));
 
   useEffect(() => {
@@ -40,6 +40,7 @@ function Spaces(props) {
           className="row row-cols-4   mt-1"
           style={{ width: "1200px", display: "flex", marginLeft: "10rem" }}
         >
+          heelo
           {spaceData.map((spac) => (
             <div key={spac.id}>
               <div

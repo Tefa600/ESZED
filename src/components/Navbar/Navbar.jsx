@@ -10,10 +10,12 @@ export default function Navbar() {
   const [userData, setUserData] = useState([]);
 
   function Logout() {
+    Cookies.remove("token");
     axios
       .post("api/user/logout")
       .then((e) => {
         console.log(e.status);
+        console.log(Cookies.get("token"));
       })
       .catch();
   }
@@ -157,7 +159,7 @@ export default function Navbar() {
                 </div>
               </div>
             </li>
-            <Link className="nav-link" onClick={Logout} to="Login">
+            <Link className="nav-link" onClick={Logout} to="/Login">
               Logout
             </Link>
           </ul>

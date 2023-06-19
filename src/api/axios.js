@@ -1,6 +1,8 @@
-import axios from 'axios'
+import axios from "axios";
 
 export default axios.create({
-    baseURL: 'https://spacezone-backend.cyclic.app',timeout: 10000,
-    withCredentials: true,
-})
+  baseURL: "https://spacezone-backend-backup.cyclic.app/",
+  timeout: 10000,
+
+  withCredentials: true,
+});

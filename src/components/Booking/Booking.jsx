@@ -71,14 +71,14 @@ export default function Booking() {
   useEffect(() => {
     axios.get(`api/places/${zoneID}`).then((res) => {
       setData(res.data.data);
-      console.log("data price", data.rooms[0].price);
-      console.log("data tyoe", data.rooms[0].roomType);
+      console.log("data price", data);
+      // console.log("data tyoe", data.rooms[0].roomType);
       if (roomIndex) {
-        setTitle(data.rooms[0].roomType);
-        setRoomPrice(data.rooms[0].price);
+        setTitle(data.rooms[roomIndex].roomType);
+        setRoomPrice(data.rooms[roomIndex].price);
       }
     });
-  }, [data]);
+  }, []);
 
   const navigate = useNavigate();
   function handleSharedBook() {
@@ -118,38 +118,28 @@ export default function Booking() {
                   <img className={`${styles.roomDetailsImg}`} src={Pic} alt />
                   <div className={`${styles.rdText}`}>
                     <div className={`${styles.rdTitle}`}>
-                      {/*{data.rooms[0].roomType}*/}
+                      {title}
                       <h3></h3>
                       <div className={`${styles.rdtRight}`}>
-                        <div className="rating">
-                          <i className="fa fa-icon_star" />
-                          <i className="icon_star" />
-                          <i className="icon_star" />
-                          <i className="icon_star" />
-                          <i className="icon_star-half_alt" />
-                        </div>
-                        {/*{zoneID && roomIndex && roomId && (*/}
-                        {/*  <div onClick={handleSharedBook}>Booking Now Room</div>*/}
-                        {/*)}*/}
+                        {zoneID && roomIndex && roomId && (
+                          <div onClick={handleSharedBook}>Booking {title}</div>
+                        )}
                         {title === "Shared Area" && (
                           <a href={`/BB/SharedArea/${zoneID}`}>
-                            Booking Now Shared
+                            Booking {title}
                           </a>
                         )}
                         {title === "Silent Room" && (
-                          <div onClick={handleSharedBook}>
-                            Booking Now Silent
-                          </div>
+                          <div onClick={handleSharedBook}>Booking {title}</div>
                         )}
                       </div>
                     </div>
                     <h2>
-                      {/*{roomIndex && (*/}
-                      {/*  <>*/}
-                      {/*    price*/}
-                      {/*    {data.rooms[0]} EGP <span>/ hour</span>*/}
-                      {/*  </>*/}
-                      {/*)}*/}
+                      {roomIndex && (
+                        <>
+                          {roomPrice} EGP<span>/hour</span>
+                        </>
+                      )}
                       {title === "Shared Area" && (
                         <>
                           {" "}

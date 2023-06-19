@@ -31,7 +31,7 @@ function AddSpace() {
   const [rules, setRules] = useState([]);
   const [meetingRoomInputs, setMeetingRoomInputs] = useState([]);
   const [trainingRoomInputs, setTrainingRoomInputs] = useState([]);
-  const photoArray = [""];
+  const [placePhotos, setPlacePhotos] = useState([]);
   const [sharedAreaPhotos, setSharedAreaPhotos] = useState([]);
   const [silentRoomPhotos, setSilentRoomPhotos] = useState([]);
 
@@ -52,32 +52,32 @@ function AddSpace() {
     const meetingRoomsArray = Array.from(
       { length: MeetingRoomLength },
       (_, index) => {
-        const mRoomName = document.getElementById(
+        const RoomName = document.getElementById(
           `meetingRoomName_${index + 1}`
         ).value;
-        const mRoomPhotos = document
+        const roomPhotos = document
           .getElementById(`meetingRoomPhotos_${index + 1}`)
           .value.split(",");
-        const mCapacity = parseInt(
+        const seats = parseInt(
           document.getElementById(`meetingRoomCapacity_${index + 1}`).value
         );
         const mAmenities = document.getElementById(
           `meetingRoomAmenities_${index + 1}`
         ).value;
-        const mDescription = document.getElementById(
+        const description = document.getElementById(
           `meetingRoomDescription_${index + 1}`
         ).value;
-        const mPrice = parseFloat(
+        const price = parseFloat(
           document.getElementById(`meetingRoomPrice_${index + 1}`).value
         );
 
         return {
-          mRoomName,
-          mRoomPhotos,
-          mCapacity,
-          mAmenities,
-          mDescription,
-          mPrice,
+          // RoomName,
+          roomPhotos,
+          seats,
+          // mAmenities,
+          description,
+          price,
         };
       }
     );
@@ -97,7 +97,7 @@ function AddSpace() {
         const roomPhotos = document
           .getElementById(`trainingRoomPhotos_${index + 1}`)
           .value.split(",");
-        const capacity = parseInt(
+        const seats = parseInt(
           document.getElementById(`trainingRoomCapacity_${index + 1}`).value
         );
         const amenities = document.getElementById(
@@ -113,7 +113,7 @@ function AddSpace() {
         return {
           roomName,
           roomPhotos,
-          capacity,
+          seats,
           amenities,
           description,
           price,
@@ -181,14 +181,23 @@ function AddSpace() {
     const trainingRoomsArray = fillTrainingRoomsArray();
     const meetingRoomsArray = fillMeetingRoomsArray();
     const inSpace = {
+      // req
       placeName: placeName,
-      placePhotos: photoArray,
+      // req
+      placePhotos: placePhotos,
+      // req
       address: address,
+      // req
       zone: zone,
+      // req
       number: spaceNumber,
+      // req
       selfService: isSelfService,
+      // req
       googleAddress: googleMapsLink,
+      // req
       hourPrice: hourlyPrice,
+      // req
       numberOfSeats: numberOfSeats,
       openingHours: WD,
       MeetingRooms: meetingRoomsArray,
@@ -223,11 +232,11 @@ function AddSpace() {
     console.log("TRA", trainingRoomsArray);
     console.log("MRA", meetingRoomsArray);
 
-    const JJForm = JSON.stringify(inSpace);
-    console.log("JSON form", JJForm);
+    // const JJForm = JSON.stringify(inSpace);
+    // console.log("JSON form", JJForm);
 
     let daataa = await axios
-      .post("/api/owner/addOwnerPlaces", JJForm, {
+      .post("/api/owner/addOwnerPlaces", inSpace, {
         headers: { Authorization: `Bearer ${Cookies.get("token")}` },
       })
       .then((res) => {
@@ -363,6 +372,19 @@ function AddSpace() {
     setNumberOfTrainingRooms(countTrain);
   };
 
+  function handlePlacePhotos(e) {
+    const photarr = e.target.value.split(",");
+    setPlacePhotos(photarr);
+  }
+  function handleSharedPhotos(e) {
+    const photarr = e.target.value.split(",");
+    setSharedAreaPhotos(photarr);
+  }
+  function handleSilentPhotos(e) {
+    const photarr = e.target.value.split(",");
+    setSilentRoomPhotos(photarr);
+  }
+
   return (
     <>
       <div className="form-container">
@@ -377,6 +399,16 @@ function AddSpace() {
                   placeholder="Enter place name"
                   value={placeName}
                   onChange={(e) => setPlaceName(e.target.value)}
+                />
+              </Form.Group>
+
+              <Form.Group controlId="placePhotos">
+                <Form.Label>Place Photos</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Enter place Photos"
+                  value={placePhotos}
+                  onChange={(e) => setPlacePhotos(e.target.value)}
                 />
               </Form.Group>
 
@@ -411,14 +443,14 @@ function AddSpace() {
                   <option value="">Select zone</option>
                   <option value="Nasr City">Nasr City</option>
                   <option value="Dokki">Dokki</option>
-                  <option value="">Cairo</option>
-                  <option value="">Giza</option>
-                  <option value="">Sheikh Zayed</option>
-                  <option value="">Heliopolis</option>
-                  <option value="">New Cairo</option>
-                  <option value="">Mohandeseen</option>
-                  <option value="">Omranyah</option>
-                  <option value="">6th October</option>
+                  <option value="Cairo">Cairo</option>
+                  <option value="Giza">Giza</option>
+                  <option value="Sheikh Zayed">Sheikh Zayed</option>
+                  <option value="Heliopolis">Heliopolis</option>
+                  <option value="New Cairo">New Cairo</option>
+                  <option value="Mohandeseen">Mohandeseen</option>
+                  <option value="Omranyah">Omranyah</option>
+                  <option value="6th October">6th October</option>
                 </Form.Control>
               </Form.Group>
 
@@ -427,11 +459,11 @@ function AddSpace() {
                 <Form.Control
                   as="select"
                   value={avail}
-                  onChange={(e) => setZone(e.target.value)}
+                  onChange={(e) => setAvail(e.target.value)}
                 >
                   <option value="">Work Space Available</option>
-                  <option value="Week">Weekly</option>
-                  <option value="Month">Monthly</option>
+                  <option value="weekly">weekly</option>
+                  <option value="monthly">monthly</option>
                 </Form.Control>
               </Form.Group>
 
@@ -561,7 +593,7 @@ function AddSpace() {
                       className={`${styles.searchInp}`}
                       type="text"
                       placeholder="Enter shared area photos seperated by ,"
-                      onChange={(e) => setSharedAreaPhotos(e.target.value)}
+                      onChange={(e) => handlePlacePhotos(e)}
                     />
                   </Form.Group>
                 </div>

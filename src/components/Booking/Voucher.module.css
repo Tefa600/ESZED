@@ -1,0 +1,44 @@
+.inputContain {
+    width: 100%;
+    height: 2.5rem;
+    /* border: none; */
+    border-color: #4b86b4;
+    border-radius: 20px;
+    padding: 0 15px;
+    box-shadow: 0px 0px 8px #ddd;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    color: black;
+    
+  }
+  .vouCon{
+   margin-top: 15%;
+  }
+  .vouInp {
+    background-color: transparent;
+    border: none;
+    height: 100%;
+    font-size: 14px;
+    width: 150%;
+    margin-left: 5px;
+    
+  }
+  
+  .vouInp:focus {
+    outline: none;
+  }
+  
+
+
+
+
+.voubtn{
+    background-color: #4b86b4!important;
+    border-radius: 50px!important;
+}
+.voubtn:hover{
+    background-color: #63ace5!important;
+    width: 220px;
+   
+}

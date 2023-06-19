@@ -1,20 +1,22 @@
 import React from "react";
 import HistoryCardOwner from "./HistoryCardOwner";
-
+import img1 from "../../../../images/4.jpg"
+import { Row, Col } from 'react-bootstrap';
 const ShowHistoryOwner = () => {
   let bookingsHistoryForOwner = [
     {
-      id: 1,
-      name: "Guest Name",
-      date: "2023-01-01",
-      description: "The name, and the type of the booked property",
+      title: "Majal",
       price: "100",
-      duration: "3",
-      paymentMethod: "cash",
+      image:img1
     },
   ];
   return (
+    
+    <div >
     <HistoryCardOwner bookings={bookingsHistoryForOwner}></HistoryCardOwner>
+    </div>
+        
+     
   );
 };
 

@@ -94,17 +94,8 @@ const [profileData, setProfileData] = useState({
               onChange={handleInputChange}
             />
           </Form.Group>
-          {/* <Form.Group controlId="formBasicBio">
-            <Form.Label>Bio:</Form.Label>
-            <Form.Control
-              as="textarea"
-              name="bio"
-              value={profileData.bio}
-              onChange={handleInputChange}
-            />
-          </Form.Group> */}
           <Button variant="primary" type="submit" className="mr-2 m-lg-3">
-            Save
+            Save Changes
           </Button>
           <Button variant="secondary" onClick={() => setIsEditMode(false)}>
             Cancel

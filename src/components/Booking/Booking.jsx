@@ -172,16 +172,7 @@ let zoneId;
                                     <div className={`${styles.rdTitle}`}>
                                         {roomIndex ? data.rooms[roomIndex].roomType: title }
                                         <h3></h3>
-                                        <div className={`${styles.rdtRight}`}>
-                                            <div className="rating">
-                                                <i className="icon_star"/>
-                                                <i className="icon_star"/>
-                                                <i className="icon_star"/>
-                                                <i className="icon_star"/>
-                                                <i className="icon_star-half_alt"/>
-                                            </div>
-                                            <a href="/BB">Booking Now</a>
-                                        </div>
+                                        
                                     </div>
                                     <h2>{data.hourPrice} EGP<span>/ hour</span></h2>
                                     <table>
@@ -223,22 +214,32 @@ let zoneId;
                                     </div>
               <div className="row">
                 <div className="col-lg-4"><div className={`${styles.selectOption}`}>
-                <label htmlFor="guest">Guests:</label>
+                <label htmlFor="guest">Seats:</label>
                 <select id="guest">
                   <option value>3</option>
                 </select>
               </div>
               </div>
                 <div className="col-lg-4"> <div className={`${styles.selectOption}`}>
-                <label htmlFor="room">Room:</label>
+                <label htmlFor="room">Price:</label>
                 <select id="room">
-                  <option value>1 Room</option>
+                  <option value>150</option>
                 </select>
               </div>
               </div>
-              
+              <div className={`${styles.rdtRight}`}>
+                                            <div className="rating">
+                                                <i className="icon_star"/>
+                                                <i className="icon_star"/>
+                                                <i className="icon_star"/>
+                                                <i className="icon_star"/>
+                                                <i className="icon_star-half_alt"/>
+                                            </div>
+                                            <a href="/BB">Booking Now</a>
+                                        </div>
               </div>
-                                    <button type="submit"><span className='label'>Check Availability</span>
+              
+                                    {/* <button type="submit"><span className='label'>Check Availability</span>
 
                                         <span class="icon">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none"
@@ -246,7 +247,7 @@ let zoneId;
         fill="currentColor"
         d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z"></path></svg>
   </span>
-                                    </button>
+                                    </button> */}
                                 </form>
                             </div>
 

@@ -1,5 +1,4 @@
 // this one when we can get data from database
-
 import React from "react";
 import {Container, Row, Col, Image} from "react-bootstrap";
 import styles from "./HistoryCard.module.css"
@@ -23,14 +22,15 @@ const HistoryCard = ({bookings}) => {
                             </div>
                             <div className="card-body text-dark">
                                 {/* <p className="card-room"><strong>{booking.title}</strong></p> */}
-                                <div class={`${styles.verticalLine}`}>
-                            </div>
+                                
                                 <div className={`${styles.tapp}`}>
                                 
                                     <span className={`${styles.cardTitle}`}>{booking.title}
                                     </span>
                                     
                                     <span className={`float-end ${styles.priceWs}`}>
+                                    <div class={`${styles.verticalLine}`}>
+                                </div>
                                     {booking.price}{" "}
                                     <span
                                         className={`float-end`}
@@ -43,7 +43,7 @@ const HistoryCard = ({bookings}) => {
                                 </div>
                                 <div className="card-footer">
                                     <div className="card-text text-secondary">
-                                        {booking.duration}
+                                        {booking.numberOfSeats}
                                     </div>
                                     <p>{booking.date}</p>
                                 </div>

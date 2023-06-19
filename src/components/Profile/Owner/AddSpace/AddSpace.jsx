@@ -11,6 +11,7 @@ function AddSpace() {
   const [spaceNumber, setSpaceNumber] = useState("");
   const [address, setAddress] = useState("");
   const [zone, setZone] = useState("");
+  const [avail, setAvail] = useState("weekly");
   const [googleMapsLink, setGoogleMapsLink] = useState("");
   const [hourlyPrice, setHourlyPrice] = useState(0);
   const [isSilentSeats, setIsSilentSeats] = useState(false);
@@ -28,18 +29,93 @@ function AddSpace() {
   const [rules, setRules] = useState([]);
   const [meetingRoomInputs, setMeetingRoomInputs] = useState([]);
   const [trainingRoomInputs, setTrainingRoomInputs] = useState([]);
-  const [isSundayChecked, setIsSundayChecked] = useState(false);
   const photoArray = [""];
 
   const [checkboxes, setCheckboxes] = useState([
     { id: "checkbox1", Day: "Sunday", checked: false, start: "", end: "" },
     { id: "checkbox2", Day: "Monday", checked: false, start: "", end: "" },
-    { id: "checkbox3", Day: "Tuseday", checked: false, start: "", end: "" },
+    { id: "checkbox3", Day: "Tuesday", checked: false, start: "", end: "" },
     { id: "checkbox4", Day: "Wednesday", checked: false, start: "", end: "" },
     { id: "checkbox5", Day: "Thursday", checked: false, start: "", end: "" },
     { id: "checkbox6", Day: "Friday", checked: false, start: "", end: "" },
     { id: "checkbox7", Day: "Saturday", checked: false, start: "", end: "" },
   ]);
+
+  const TrainingRoomLength = numberOfTrainingRooms; // Number of training rooms determined elsewhere
+  const MeetingRoomLength = numberOfMeetingRooms;
+
+  function fillMeetingRoomsArray() {
+    const meetingRoomsArray = Array.from(
+      { length: MeetingRoomLength },
+      (_, index) => {
+        const mRoomName = document.getElementById(
+          `meetingRoomName_${index + 1}`
+        ).value;
+        const mRoomPhotos = document
+          .getElementById(`meetingRoomPhotos_${index + 1}`)
+          .value.split(",");
+        const mCapacity = parseInt(
+          document.getElementById(`meetingRoomCapacity_${index + 1}`).value
+        );
+        const mAmenities = document.getElementById(
+          `meetingRoomAmenities_${index + 1}`
+        ).value;
+        const mDescription = document.getElementById(
+          `meetingRoomDescription_${index + 1}`
+        ).value;
+        const mPrice = parseFloat(
+          document.getElementById(`meetingRoomPrice_${index + 1}`).value
+        );
+
+        return {
+          mRoomName,
+          mRoomPhotos,
+          mCapacity,
+          mAmenities,
+          mDescription,
+          mPrice,
+        };
+      }
+    );
+    return meetingRoomsArray;
+  }
+  const fillTrainingRoomsArray = () => {
+    const trainingRoomsArray = Array.from(
+      { length: TrainingRoomLength },
+      (_, index) => {
+        const roomName = document.getElementById(
+          `trainingRoomName_${index + 1}`
+        ).value;
+        const roomPhotos = document
+          .getElementById(`trainingRoomPhotos_${index + 1}`)
+          .value.split(",");
+        const capacity = parseInt(
+          document.getElementById(`trainingRoomCapacity_${index + 1}`).value
+        );
+        const amenities = document.getElementById(
+          `trainingRoomAmenities_${index + 1}`
+        ).value;
+        const description = document.getElementById(
+          `trainingRoomDescription_${index + 1}`
+        ).value;
+        const price = parseFloat(
+          document.getElementById(`trainingRoomPrice_${index + 1}`).value
+        );
+
+        return {
+          roomName,
+          roomPhotos,
+          capacity,
+          amenities,
+          description,
+          price,
+        };
+      }
+    );
+
+    console.log("training Room array", trainingRoomsArray);
+    return trainingRoomsArray; // Return the array if needed elsewhere in the code
+  };
 
   const handleCheckboxChange = (checkboxId) => {
     const updatedCheckboxes = checkboxes.map((checkbox) => {
@@ -89,26 +165,32 @@ function AddSpace() {
     return schedule;
   };
   const WD = handleGenerateSchedule();
-  const inSpace = {
-    placeName: placeName,
-    placePhotos: photoArray,
-    address: address,
-    zone: zone,
-    number: spaceNumber,
-    selfService: isSelfService,
-    googleAddress: googleMapsLink,
-    hourPrice: hourlyPrice,
-    numberOfSeats: numberOfSeats,
-    numberOfSilentSeats: numberOfSilentSeats,
-    silentSeatPrice: vipHourlyPrice,
-    openingHours: WD,
-    TrainingRooms: [],
-    silentRoomPhotos: [],
-    sharedAreaPhotos: [],
-  };
+  // const TD = fillTrainingRoomsArray();
+  // const MD = fillMeetingRoomsArray();
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const trainingRoomsArray = fillTrainingRoomsArray();
+    const meetingRoomsArray = fillMeetingRoomsArray();
+    const inSpace = {
+      placeName: placeName,
+      placePhotos: photoArray,
+      address: address,
+      zone: zone,
+
+      number: spaceNumber,
+      selfService: isSelfService,
+      googleAddress: googleMapsLink,
+      hourPrice: hourlyPrice,
+      numberOfSeats: numberOfSeats,
+      numberOfSilentSeats: numberOfSilentSeats,
+      silentSeatPrice: vipHourlyPrice,
+      // openingHours: WD,
+      TrainingRooms: trainingRoomsArray,
+      MeetingRooms: meetingRoomsArray,
+      silentRoomPhotos: [],
+      sharedAreaPhotos: [],
+    };
     // Handle form submission logic here
     // You can access the form field values using the corresponding state variables
     console.log("Form submitted!");
@@ -123,8 +205,37 @@ function AddSpace() {
     console.log("Working days", checkboxes);
     console.log("schedule", WD);
     console.log("JSON PROP", inSpace);
-    handleGenerateSchedule();
-    console.log();
+    // handleGenerateSchedule();
+
+    console.log("TRA", trainingRoomsArray);
+    console.log("MRA", meetingRoomsArray);
+
+    //
+    // const form = e.target;
+    // const dynamicArray = [];
+    //
+    // // Populate dynamic array with training room data
+    // for (let i = 1; i <= numberOfTrainingRooms; i++) {
+    //   const roomName = form[`trainingRoomName_${i}`].value;
+    //   const roomPhotos = form[`trainingRoomPhotos_${i}`].value.split(","); // Assuming room photos are comma-separated
+    //   const capacity = form[`trainingRoomCapacity_${i}`].value;
+    //   const amenities = form[`trainingRoomAmenities_${i}`].value;
+    //   const description = form[`trainingRoomDescription_${i}`].value;
+    //   const price = form[`trainingRoomPrice_${i}`].value;
+    //
+    //   const trainingRoom = {
+    //     roomName,
+    //     roomPhotos,
+    //     capacity,
+    //     amenities,
+    //     description,
+    //     price,
+    //   };
+    //
+    //   dynamicArray.push(trainingRoom);
+    // }
+    //
+    // console.log("try 100 and keep", dynamicArray);
   };
 
   useEffect(() => {
@@ -184,9 +295,6 @@ function AddSpace() {
   useEffect(() => {
     const renderMeetingRoomInputs = () => {
       const meetingInputs = [];
-      for (let index = 0; index < numberOfMeetingRooms; index++) {
-        console.log(`This is the meeting room ${index}`);
-      }
       for (let i = 1; i <= numberOfMeetingRooms; i++) {
         meetingInputs.push(
           <div key={i}>
@@ -235,9 +343,10 @@ function AddSpace() {
     if (isMeetingRoom && numberOfMeetingRooms > 0) {
       const effMeetingInputs = renderMeetingRoomInputs();
       setMeetingRoomInputs(effMeetingInputs);
-    } else {
-      setMeetingRoomInputs([]);
     }
+    // else {
+    //   setMeetingRoomInputs([]);
+    // }
   }, [isMeetingRoom, numberOfMeetingRooms]);
 
   const handleMeetingRoomsChange = (e) => {
@@ -256,286 +365,317 @@ function AddSpace() {
   return (
     <>
       <div className="form-container">
-      <div className={`row ` }>
-      <div className={` col-md-3 `} >
-        <h2>Place Details</h2>
-        <Form onSubmit={handleSubmit}>
-        
-          
-          <Form.Group controlId="placeName">
-            <Form.Label>Place Name</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Enter place name"
-              value={placeName}
-              onChange={(e) => setPlaceName(e.target.value)}
-            />
-          </Form.Group>
+        <div className={`row `}>
+          <div className={` col-md-3 `}>
+            <h2>Place Details</h2>
+            <Form onSubmit={handleSubmit}>
+              <Form.Group controlId="placeName">
+                <Form.Label>Place Name</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Enter place name"
+                  value={placeName}
+                  onChange={(e) => setPlaceName(e.target.value)}
+                />
+              </Form.Group>
 
-          <Form.Group controlId="address">
-            <Form.Label>Address</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Enter address"
-              value={address}
-              onChange={(e) => setAddress(e.target.value)}
-            />
-          </Form.Group>
+              <Form.Group controlId="address">
+                <Form.Label>Address</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Enter address"
+                  value={address}
+                  onChange={(e) => setAddress(e.target.value)}
+                />
+              </Form.Group>
 
-          <Form.Group controlId="spaceNumber">
-            <Form.Label>Number</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Enter Space Number"
-              value={spaceNumber}
-              onChange={(e) => setSpaceNumber(e.target.value)}
-            />
-          </Form.Group>
+              <Form.Group controlId="spaceNumber">
+                <Form.Label>Number</Form.Label>
+                <Form.Control
+                  type="phone"
+                  maxLength={11}
+                  placeholder="Enter Space Number"
+                  value={spaceNumber}
+                  onChange={(e) => setSpaceNumber(e.target.value)}
+                />
+              </Form.Group>
 
-          <Form.Group controlId="zone">
-            <Form.Label>Zone</Form.Label>
-            <Form.Control
-              as="select"
-              value={zone}
-              onChange={(e) => setZone(e.target.value)}
-            >
-              <option value="">Select zone</option>
-              <option value="Zone A">Zone A</option>
-              <option value="Zone B">Zone B</option>
-              <option value="Zone C">Zone C</option>
-            </Form.Control>
-          </Form.Group>
-          <Form.Group controlId="isSelfService">
-            <Form.Label>Self Service</Form.Label>
-            <Form.Control
-              as="select"
-              value={isSelfService}
-              onChange={(e) => setIsSelfService(e.target.value)}
-            >
-              <option value="">Choose Service Option</option>
-              <option value="true">Help Yourself</option>
-              <option value="false">We are at your service</option>
-            </Form.Control>
-          </Form.Group>
-          <Form.Group controlId="googleMapsLink">
-            <Form.Label>Google Maps Link</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Enter Google Maps link"
-              value={googleMapsLink}
-              onChange={(e) => setGoogleMapsLink(e.target.value)}
-            />
-          </Form.Group>
-          <Form.Group controlId="bio">
-            <Form.Label>Bio</Form.Label>
-            <Form.Control
-              as="textarea"
-              rows={3}
-              placeholder="Enter Space Bio"
-              value={bio}
-              onChange={(e) => setBio(e.target.value)}
-            />
-          </Form.Group>
-          
-          {/* <Bio></Bio> */}
+              <Form.Group controlId="zone">
+                <Form.Label>Zone</Form.Label>
+                <Form.Control
+                  as="select"
+                  value={zone}
+                  onChange={(e) => setZone(e.target.value)}
+                >
+                  <option value="">Select zone</option>
+                  <option value="Nasr City">Nasr City</option>
+                  <option value="Dokki">Dokki</option>
+                  <option value="">Cairo</option>
+                  <option value="">Giza</option>
+                  <option value="">Sheikh Zayed</option>
+                  <option value="">Heliopolis</option>
+                  <option value="">New Cairo</option>
+                  <option value="">Mohandeseen</option>
+                  <option value="">Omranyah</option>
+                  <option value="">6th October</option>
+                </Form.Control>
+              </Form.Group>
 
-          {/* ******************************************************************** */}
-          {/* ************************************************* */}
-          <div
-            className={`container py-4 px-4 bg-white shadow w-50 ${styless.week}`}
-          >
-            <div className={`row my-3 py-3 m-auto shadow ${styless.Weekly}`}>
-              {checkboxes.map((checkbox) => (
-                <div key={checkbox.id} className="d-flex">
-                  <div className="col-lg-4 my-2 ">
-                    <div className="week mt-2">
-                      <label className={`mx-2 ${styless.switch}`}>
-                        <input
-                          type="checkbox"
-                          className={` ${styless.checkbox}`}
-                          onChange={() => handleCheckboxChange(checkbox.id)}
-                        />
-                        <div className={`${styless.slider}`} />
-                      </label>
-                      {checkbox.Day}
-                    </div>
-                  </div>
+              <Form.Group controlId="availability">
+                <Form.Label>Booking Availability</Form.Label>
+                <Form.Control
+                  as="select"
+                  value={avail}
+                  onChange={(e) => setZone(e.target.value)}
+                >
+                  <option value="">Work Space Available</option>
+                  <option value="Week">Weekly</option>
+                  <option value="Month">Monthly</option>
+                </Form.Control>
+              </Form.Group>
 
-                  {checkbox.checked && (
-                    <div className="col-lg-2 my-2">
-                      <select
-                        disabled={checkbox.checkedAll}
-                        className={`w-175 ${styless.checkControl}`}
-                        required
-                        onChange={(e) =>
-                          handleStartChange(checkbox.id, e.target.value)
-                        }
-                      >
-                        <span className={`${styless.selectArr}`} />
-                        <option value selected hidden>
-                          start:
-                        </option>
-                        {Array.from({ length: 24 }, (_, index) => (
-                          <option key={index}>{index}</option>
-                        ))}
-                      </select>
-                    </div>
-                  )}
-                  {checkbox.checked && checkbox.start && (
-                    <div className="col-lg-2 my-2">
-                      <select
-                        disabled={checkbox.checkedAll}
-                        className={`w-175 ${styless.checkControl}`}
-                        required
-                        onChange={(e) =>
-                          handleEndChange(checkbox.id, e.target.value)
-                        }
-                      >
-                        <span className={`${styless.selectArr}`} />
-                        <option value selected hidden>
-                          end:
-                        </option>
-                        {Array.from(
-                          { length: 24 - Number(checkbox.start) },
-                          (_, index) => (
-                            <option key={index}>
-                              {Number(checkbox.start) + index + 1}
+              <Form.Group controlId="isSelfService">
+                <Form.Label>Self Service</Form.Label>
+                <Form.Control
+                  as="select"
+                  value={isSelfService}
+                  onChange={(e) => setIsSelfService(e.target.value)}
+                >
+                  <option value="">Choose Service Option</option>
+                  <option value="true">Help Yourself</option>
+                  <option value="false">We are at your service</option>
+                </Form.Control>
+              </Form.Group>
+              <Form.Group controlId="googleMapsLink">
+                <Form.Label>Google Maps Link</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Enter Google Maps link"
+                  value={googleMapsLink}
+                  onChange={(e) => setGoogleMapsLink(e.target.value)}
+                />
+              </Form.Group>
+              <Form.Group controlId="bio">
+                <Form.Label>Bio</Form.Label>
+                <Form.Control
+                  as="textarea"
+                  rows={3}
+                  placeholder="Enter Space Bio"
+                  value={bio}
+                  onChange={(e) => setBio(e.target.value)}
+                />
+              </Form.Group>
+
+              {/* <Bio></Bio> */}
+
+              {/* ******************************************************************** */}
+              {/* ************************************************* */}
+              <div
+                className={`container py-4 px-4 bg-white shadow w-50 ${styless.week}`}
+              >
+                <div
+                  className={`row my-3 py-3 m-auto shadow ${styless.Weekly}`}
+                >
+                  {checkboxes.map((checkbox) => (
+                    <div key={checkbox.id} className="d-flex">
+                      <div className="col-lg-4 my-2 ">
+                        <div className="week mt-2">
+                          <label className={`mx-2 ${styless.switch}`}>
+                            <input
+                              type="checkbox"
+                              className={` ${styless.checkbox}`}
+                              onChange={() => handleCheckboxChange(checkbox.id)}
+                            />
+                            <div className={`${styless.slider}`} />
+                          </label>
+                          {checkbox.Day}
+                        </div>
+                      </div>
+
+                      {checkbox.checked && (
+                        <div className="col-lg-2 my-2">
+                          <select
+                            disabled={checkbox.checkedAll}
+                            className={`w-175 ${styless.checkControl}`}
+                            required
+                            onChange={(e) =>
+                              handleStartChange(checkbox.id, e.target.value)
+                            }
+                          >
+                            <span className={`${styless.selectArr}`} />
+                            <option value selected hidden>
+                              start:
                             </option>
-                          )
-                        )}
-                      </select>
+                            {Array.from({ length: 24 }, (_, index) => (
+                              <option key={index}>{index}</option>
+                            ))}
+                          </select>
+                        </div>
+                      )}
+                      {checkbox.checked && checkbox.start && (
+                        <div className="col-lg-2 my-2">
+                          <select
+                            disabled={checkbox.checkedAll}
+                            className={`w-175 ${styless.checkControl}`}
+                            required
+                            onChange={(e) =>
+                              handleEndChange(checkbox.id, e.target.value)
+                            }
+                          >
+                            <span className={`${styless.selectArr}`} />
+                            <option value selected hidden>
+                              end:
+                            </option>
+                            {Array.from(
+                              { length: 24 - Number(checkbox.start) },
+                              (_, index) => (
+                                <option key={index}>
+                                  {Number(checkbox.start) + index + 1}
+                                </option>
+                              )
+                            )}
+                          </select>
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </div>
+              {/* ******************************* */}
+
+              <Form.Group controlId="numberOfSeats">
+                <Form.Label>Number of Seats</Form.Label>
+                <Form.Control
+                  type="number"
+                  placeholder="Enter Number of Shared Area seats "
+                  onChange={(e) => setNumberOfSeats(e.target.value)}
+                />
+              </Form.Group>
+              <Form.Group controlId="hourlyPrice">
+                <Form.Label>Hourly Price</Form.Label>
+                <Form.Control
+                  type="number"
+                  placeholder="Enter hourly price EGP"
+                  onChange={(e) => setHourlyPrice(e.target.value)}
+                />
+              </Form.Group>
+
+              <Form.Group controlId="isSilentSeats">
+                <Form.Check
+                  type="checkbox"
+                  label="Silent Seats"
+                  checked={isSilentSeats}
+                  className={`${styless.switch}`}
+                  onChange={(e) => {
+                    setIsSilentSeats(e.target.checked);
+                    if (!e.target.checked) {
+                      setNumberOfSilentSeats(0);
+                    }
+                  }}
+                />
+              </Form.Group>
+              {isSilentSeats && (
+                <Form.Group controlId="vipHourlyPrice">
+                  <Form.Label>Silent seats hourly Price</Form.Label>
+                  <Form.Control
+                    type="number"
+                    placeholder="Enter hourly price EGP"
+                    value={vipHourlyPrice}
+                    onChange={(e) => setVipHourlyPrice(e.target.value)}
+                  />
+                </Form.Group>
+              )}
+              {isSilentSeats && (
+                <Form.Group controlId="numberOfSilentSeats">
+                  <Form.Label>Number of Silent Seats</Form.Label>
+                  <Form.Control
+                    type="number"
+                    minLength={1}
+                    placeholder="Enter the number of the silent seats"
+                    onChange={handleSilentSeatsChange}
+                  />
+                  {numberOfSilentSeats <= 0 && (
+                    <div>
+                      You can't choose that number of rooms if it's 0 please
+                      uncheck the room type above
                     </div>
                   )}
-                </div>
-              ))}
-            </div>
+                </Form.Group>
+              )}
+              <Form.Group controlId="isMeetingRoom">
+                <Form.Check
+                  type="checkbox"
+                  label="Meeting Room"
+                  checked={isMeetingRoom}
+                  onChange={(e) => {
+                    setIsMeetingRoom(e.target.checked);
+                    if (!e.target.checked) {
+                      setNumberOfMeetingRooms(0);
+                    }
+                  }}
+                />
+              </Form.Group>
+              {isMeetingRoom && (
+                <Form.Group controlId="numberOfMeetingRooms">
+                  <Form.Label>Number of Meeting Rooms</Form.Label>
+                  <Form.Control
+                    type="number"
+                    minLength={1}
+                    min={1}
+                    placeholder="Enter the Meeting Rooms number"
+                    onChange={handleMeetingRoomsChange}
+                  ></Form.Control>
+                  {/*{numberOfMeetingRooms <= 0 && (*/}
+                  {/*  <div>*/}
+                  {/*    You can't choose that number of rooms if it's 0 please*/}
+                  {/*    uncheck the room type above*/}
+                  {/*  </div>*/}
+                  {/*)}*/}
+                </Form.Group>
+              )}
+              {meetingRoomInputs}
+              <Form.Group controlId="isTrainingRoom">
+                <Form.Check
+                  type="checkbox"
+                  label="Training Room"
+                  checked={isTrainingRoom}
+                  onChange={(e) => {
+                    setIsTrainingRoom(e.target.checked);
+                    if (!e.target.checked) {
+                      setNumberOfTrainingRooms(0);
+                    }
+                  }}
+                />
+              </Form.Group>
+
+              {isTrainingRoom && (
+                <Form.Group controlId="numberOfTrainingRooms">
+                  <Form.Label>Number of Training Rooms</Form.Label>
+                  <Form.Control
+                    type="number"
+                    placeholder="Enter the Training Rooms number"
+                    onChange={handleTrainingRoomsChange}
+                  ></Form.Control>
+                  {numberOfTrainingRooms <= 0 && (
+                    <div>
+                      You can't choose that number of meeting rooms if it's 0
+                      please uncheck the room type above
+                    </div>
+                  )}
+                </Form.Group>
+              )}
+
+              {trainingRoomInputs}
+
+              {/* <WrokSpaceForm></WrokSpaceForm> */}
+
+              <Button variant="primary" type="submit">
+                Submit
+              </Button>
+            </Form>
           </div>
-          {/* ******************************* */}
-
-          <Form.Group controlId="hourlyPrice">
-            <Form.Label>Hourly Price</Form.Label>
-            <Form.Control
-              type="number"
-              placeholder="Enter hourly price EGP"
-              onChange={(e) => setHourlyPrice(e.target.value)}
-            />
-          </Form.Group>
-
-          <Form.Group controlId="isSilentSeats">
-            <Form.Check
-              type="checkbox"
-              label="Silent Seats"
-              checked={isSilentSeats}
-              className={`${styless.switch}`}
-              onChange={(e) => {
-                setIsSilentSeats(e.target.checked);
-                if (!e.target.checked) {
-                  setNumberOfSilentSeats(0);
-                }
-              }}
-            />
-          </Form.Group>
-          {isSilentSeats && (
-            <Form.Group controlId="vipHourlyPrice">
-              <Form.Label>Silent seats hourly Price</Form.Label>
-              <Form.Control
-                type="number"
-                placeholder="Enter hourly price EGP"
-                value={vipHourlyPrice}
-                onChange={(e) => setVipHourlyPrice(e.target.value)}
-              />
-            </Form.Group>
-          )}
-          {isSilentSeats && (
-            <Form.Group controlId="numberOfSilentSeats">
-              <Form.Label>Number of Silent Seats</Form.Label>
-              <Form.Control
-                type="number"
-                minLength={1}
-                placeholder="Enter the number of the silent seats"
-                onChange={handleSilentSeatsChange}
-              />
-              {numberOfSilentSeats <= 0 && (
-                <div>
-                  You can't choose that number of rooms if it's 0 please uncheck
-                  the room type above
-                </div>
-              )}
-            </Form.Group>
-          )}
-          <Form.Group controlId="isMeetingRoom">
-            <Form.Check
-              type="checkbox"
-              label="Meeting Room"
-              checked={isMeetingRoom}
-              onChange={(e) => {
-                setIsMeetingRoom(e.target.checked);
-                if (!e.target.checked) {
-                  setNumberOfMeetingRooms(0);
-                }
-              }}
-            />
-          </Form.Group>
-          {isMeetingRoom && (
-            <Form.Group controlId="numberOfMeetingRooms">
-              <Form.Label>Number of Meeting Rooms</Form.Label>
-              <Form.Control
-                type="number"
-                minLength={1}
-                placeholder="Enter the Meeting Rooms number"
-                onChange={handleMeetingRoomsChange}
-              ></Form.Control>
-              {numberOfMeetingRooms <= 0 && (
-                <div>
-                  You can't choose that number of rooms if it's 0 please uncheck
-                  the room type above
-                </div>
-              )}
-            </Form.Group>
-          )}
-          {meetingRoomInputs}
-          <Form.Group controlId="isTrainingRoom">
-            <Form.Check
-              type="checkbox"
-              label="Training Room"
-              checked={isTrainingRoom}
-              onChange={(e) => {
-                setIsTrainingRoom(e.target.checked);
-                if (!e.target.checked) {
-                  setNumberOfTrainingRooms(0);
-                }
-              }}
-            />
-          </Form.Group>
-
-          {isTrainingRoom && (
-            <Form.Group controlId="numberOfTrainingRooms">
-              <Form.Label>Number of Training Rooms</Form.Label>
-              <Form.Control
-                type="number"
-                placeholder="Enter the Training Rooms number"
-                onChange={handleTrainingRoomsChange}
-              ></Form.Control>
-              {numberOfTrainingRooms <= 0 && (
-                <div>
-                  You can't choose that number of meeting rooms if it's 0 please
-                  uncheck the room type above
-                </div>
-              )}
-            </Form.Group>
-          )}
-
-          {trainingRoomInputs}
-
-          {/* <WrokSpaceForm></WrokSpaceForm> */}
-
-          <Button variant="primary" type="submit">
-            Submit
-          </Button>
-        </Form>
         </div>
-        </div>
-        </div>
+      </div>
     </>
   );
 }

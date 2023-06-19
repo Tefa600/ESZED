@@ -224,7 +224,7 @@ export default function OwnerProfile({ children }) {
         </div>
 
         <div
-          className={`${styles.middleContainer} col-md-9 m-auto`}
+          className={`${styles.middleContainer} col-md-9 m-8 mx-5`}
           // style={{ marginTop: "50px", marginLeft: "50px" }}
         >
           <div className={`${styles.middleContainer} row`} style={{ flex: 1 }}>
@@ -261,6 +261,7 @@ export default function OwnerProfile({ children }) {
           </div>
         </div>
       </div>
+      <Amenities/>
     </div>
   );
 }

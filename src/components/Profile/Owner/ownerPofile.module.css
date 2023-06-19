@@ -35,7 +35,7 @@ main {
 }
 .sidebar {
   color: rgb(230, 233, 240);
-  height: 100vh;
+  height: 100%;
   width: 200px;
   transition: all 0.5s;
   background-color: #63ace5;
@@ -138,8 +138,10 @@ main {
 }  */
 
 .middleContainer {
-  margin-top: 7%;
+  margin-top: 1%;
   margin-right: 5px;
+  margin-right: 5px;
+
 }
 .btnSignUp:hover {
   background-color: #000;

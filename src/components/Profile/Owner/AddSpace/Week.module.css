@@ -60,6 +60,7 @@ input[type="checkbox"]:disabled + .checkControl {
 
 .week {
   /* background-color:#e5e5e5; */
+  width: auto;
   margin: auto;
   font-weight: 600;
   font-style: initial;

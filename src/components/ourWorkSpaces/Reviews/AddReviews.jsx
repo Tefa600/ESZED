@@ -5,12 +5,12 @@ function AddReviews() {
     return (<>
         <div className={`${styles.reviewAdd}`}>
             <h4>Add Review
-                <div className="rating">
-                    <i className="fa fa-star"/>
-                    <i className="fa fa-star"/>
-                    <i className="fa fa-star"/>
-                    <i className="fa fa-star"/>
-                    <i className="fa fa-star"/>
+                <div className="rating" >
+                    <i className="fa fa-star"  style={{color:"#CAAC13"}}/>
+                    <i className="fa fa-star"  style={{color:"#CAAC13"}}/>
+                    <i className="fa fa-star"  style={{color:"#CAAC13"}}/>
+                    <i className="fa fa-star"  style={{color:"#CAAC13"}}/>
+                    <i className="fa fa-star"  />
                 </div>
             </h4>
 

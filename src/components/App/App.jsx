@@ -22,6 +22,8 @@ import Booking from "../Booking/Booking";
 import BB from "../Booking/BB";
 import Payment from "../Booking/Payment";
 import WorkspaceForm from "../Profile/Owner/WorkspaceForm/WorkspaceForm";
+import EditSpace from "../Profile/Owner/EditSpace/EditSpace";
+import Voucher from "../Booking/Voucher";
 
 //className="App"
 function App() {
@@ -32,6 +34,9 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />}></Route>
           <Route path="Home" element={<Home />}></Route>
+          <Route path="EditSpace" element={<EditSpace />}></Route>
+          <Route path="Voucher" element={<Voucher />}></Route>
+
           <Route path="About" element={<About />}></Route>
           <Route path="Services" element={<Services />}></Route>
           <Route path="MeetingRoom" element={<MeetingRoom />} />

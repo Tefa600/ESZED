@@ -4,6 +4,27 @@ import pic4 from "../../images/coworking.jpg";
 import Footer from "../Footer/Footer";
 import Reviews from "./Reviews/Reviews";
 import axios from "../../api/axios";
+import Lottie from 'react-lottie';
+import * as loadingg from "../../images/69398-loading-animation.json";
+import * as donee from "../../images/95775-done-blue.json";
+
+const defaultOptions1 = {
+  loop: true,
+  autoplay: true,
+  animationData: loadingg.default,
+  rendererSettings: {
+    preserveAspectRatio: "xMidYMid slice",
+  },
+};
+
+const defaultOptions2 = {
+  loop: true,
+  autoplay: true,
+  animationData: donee.default,
+  rendererSettings: {
+    preserveAspectRatio: "xMidYMid slice",
+  },
+}; 
 
 export default function WorkSpace() {
   const pathSegments = window.location.pathname.split("/");
@@ -16,6 +37,26 @@ export default function WorkSpace() {
   const [spaceName, setSpaceName] = useState([]);
   const [bio, setBio] = useState([]);
   const [sArea, setSArea] = useState([]);
+  const [data, setData] = useState([]);
+  const [loadingScr, setLoadingScr] = useState(undefined);
+  const [completed, setcompleted] = useState(undefined);
+
+  useEffect(() => {
+    setTimeout(() => {
+      fetch("https://jsonplaceholder.typicode.com/posts")
+        .then((response) => response.json())
+        .then((json) => {
+          console.log(json);
+          setData(json);
+          setLoadingScr(true);
+
+          setTimeout(() => {
+            setcompleted(true);
+          }, 3000);
+        });
+    }, 4000);
+  }, []);
+ 
 
   useEffect(() => {
     axios.get(`api/places/${spaceId}`).then((response) => {
@@ -42,6 +83,16 @@ export default function WorkSpace() {
 
   return (
     <>
+     {!completed ?  (
+        <>
+        
+            <Lottie options={defaultOptions1} style={{
+             marginTop:"5rem", display:"flex" , justifyContent:"center", alignContent:"center"
+            }} height={300} width={300} />
+        
+        </>
+      ) : (
+        <>
       <div
         className="bg_image"
         style={{
@@ -214,6 +265,9 @@ export default function WorkSpace() {
         <Reviews id={spaceId} />
       </div>
       <Footer />
+      </>
+      )}
     </>
+
   );
 }

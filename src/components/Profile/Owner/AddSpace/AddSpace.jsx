@@ -389,6 +389,7 @@ function AddSpace() {
     <>
       <div className="form-container">
       <div className={`row `}>
+        <Form>
           <div className="col-md-7">
             
             <h2>Place Details</h2>
@@ -956,6 +957,7 @@ function AddSpace() {
               <Button variant="primary" type="submit">
                 Submit
               </Button>
+
             </Form>
           </div>
         </div>

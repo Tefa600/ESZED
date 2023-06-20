@@ -4,15 +4,15 @@ import Payment from "./Payment";
 import { Link } from "react-router-dom";
 import { differenceInHours, getTime } from "date-fns";
 import styless from "../Profile/Owner/AddSpace/Week.module.css";
-import axios from "axios";
+import axios from "../../api/axios";
 import Cookies from "js-cookie";
 
 export default function BB() {
-  const [startTime, setStartTime] = useState(0);
+  const [startTime, setStartTime] = useState("");
   const [date, setDate] = useState();
   const [rType, setRType] = useState("");
   const [pName, setPName] = useState("");
-  const [endTime, setEndTime] = useState(0);
+  const [endTime, setEndTime] = useState("");
   const [numOfSeats, setNumOfSeats] = useState(1);
   const [phone, setphone] = useState("");
   const [data, setData] = useState();
@@ -21,50 +21,15 @@ export default function BB() {
   const [paymentMethod, setPaymentMethod] = useState("");
   const pathSegments = window.location.pathname.split("/");
   const roomID = pathSegments[pathSegments.length - 1];
-  const [ddName, setDdName] = useState("");
-
-  console.log("id", roomID);
   useEffect(() => {
-    setDdName(getDayName(date));
-    console.log("DDDDD", ddName);
-    axios
-      .get(`https://spacezone-backend.onrender.com/api/places/${roomID}`)
-      .then((res) => {
-        setData(res.data.data);
-        console.log(res.data.data);
-        setPName(res.data.data.placeName);
-        // setRType(data.roomType);
-      });
+    axios.get(`api/places/${roomID}`).then((res) => {
+      setData(res.data.data);
+      console.log(res.data.data);
+      setPName(res.data.data.placeName);
+      // setRType(data.roomType);
+    });
   }, []);
 
-  const handleDateChange = (e) => {
-    const dd = new Date(e.target.value);
-    const ddd = dd.toISOString();
-    console.log("ddd", ddd);
-    setDate(ddd);
-
-    console.log("typo", typeof ddd);
-    // setDate(e.target.value);
-    // console.log("date", Date);
-  };
-
-  const getDayName = (dateString) => {
-    const daysOfWeek = [
-      "Sunday",
-      "Monday",
-      "Tuesday",
-      "Wednesday",
-      "Thursday",
-      "Friday",
-      "Saturday",
-    ];
-    const date = new Date(dateString);
-    const dayIndex = date.getDay();
-    const dayName = daysOfWeek[dayIndex];
-    return dayName;
-  };
-
-  console.log();
   let numberOfHours = 0;
   if (startTime && endTime) {
     numberOfHours = differenceInHours(
@@ -99,70 +64,42 @@ export default function BB() {
     return dates;
   };
 
+  const handleDateChange = (e) => {
+    setDate(e.target.value);
+    // console.log("date", Date);
+  };
+
   const handlePayment = (e) => {
     setPaymentMethod(e.target.value);
   };
   const token = Cookies.get("token");
   console.log("token  ", token);
 
-  // async function BookThisRoom(e) {
-  //   e.preventDefault();
-  //   const inputs = {
-  //     startTime: Number(startTime),
-  //     endTime: Number(endTime),
-  //     numberOfSeats: numOfSeats,
-  //     Date: date,
-  //     paymentMethod: paymentMethod,
-  //   };
-  //   console.log("data", data);
-  //   console.log("inputs ", inputs);
-  //   alert("data");
-  //
-  //   await axios
-  //     .post(
-  //       `https://spacezone-backend.onrender.com/api/booking/bookSeat/${roomID}`,
-  //       inputs,
-  //       {
-  //         headers: { Authorization: `Bearer ${Cookies.get("token")}` },
-  //       }
-  //     )
-  //     .then((res) => {
-  //       alert("done");
-  //       // setRType(data.roomType);
-  //     })
-  //     .catch((err) => {
-  //       console.log("error", err);
-  //       alert("doom");
-  //     });
-  // }
-
-  async function BookThisRoom(e) {
-    // e.preventDefault();
+  function BookThisRoom() {
     const inputs = {
-      startTime: Number(startTime),
-      endTime: Number(endTime),
+      startTime: startTime,
+      endTime: endTime,
       numberOfSeats: numOfSeats,
       Date: date,
       paymentMethod: paymentMethod,
     };
+    console.log("data", data);
     console.log("inputs ", inputs);
     alert("data");
-
-    try {
-      const response = await axios.post(
-        `https://spacezone-backend.onrender.com/api/booking/bookSeat/${roomID}`,
-        inputs,
-        {
+    useEffect(() => {
+      axios
+        .post(`api/booking/bookSeat/${roomID}`, inputs, {
           headers: { Authorization: `Bearer ${Cookies.get("token")}` },
-        }
-      );
-      console.log("response", response.data);
-      alert("done");
-      // setRType(data.roomType);
-    } catch (error) {
-      console.log("error", error);
-      alert("error occurred");
-    }
+        })
+        .then((res) => {
+          alert("done");
+          // setRType(data.roomType);
+        })
+        .catch((err) => {
+          console.log("error", err);
+          alert("doom");
+        });
+    }, []);
   }
 
   return (
@@ -209,7 +146,6 @@ export default function BB() {
                   
                           <option className={`${styless.selectArr}`} key={index} value={date.toISOString()}>
                             {date.toLocaleString().split(",")[0]}
-                            {/*{date.toISOString()}*/}
                           </option>
                         ))}
                       </select>

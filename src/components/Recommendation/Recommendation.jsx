@@ -5,7 +5,27 @@ import Footer from "../Footer/Footer";
 import Cards from "./Cards/Cards";
 import { Container, Row, Col } from "react-bootstrap";
 import axios from "axios";
+import Lottie from "react-lottie";
+import * as loadingg from "../../images/69398-loading-animation.json";
+import * as donee from "../../images/95775-done-blue.json";
 
+const defaultOptions1 = {
+  loop: true,
+  autoplay: true,
+  animationData: loadingg.default,
+  rendererSettings: {
+    preserveAspectRatio: "xMidYMid slice",
+  },
+};
+
+const defaultOptions2 = {
+  loop: true,
+  autoplay: true,
+  animationData: donee.default,
+  rendererSettings: {
+    preserveAspectRatio: "xMidYMid slice",
+  },
+};
 export default function Recommendation() {
   const [priceMin, setPriceMin] = useState("");
   const [pricMax, setPriceMax] = useState("");
@@ -20,8 +40,32 @@ export default function Recommendation() {
   const [selectedZone, setSelectedZone] = useState("");
   const [showModal, setShowModal] = useState(false);
   const zones = ["Dokki", "Zone 2", "Zone 3"]; // Sample zone data
-
   const [cardData, setCardData] = useState([]);
+  const [data, setData] = useState([]);
+  const [loadingScr, setLoadingScr] = useState(undefined);
+  const [completed, setcompleted] = useState(undefined);
+  // useEffect(() => {
+  //   setLoading(true);
+  //   setTimeout(() => {
+  //     setLoading(false);
+  //   }, 2000);
+  // }, []);
+
+  useEffect(() => {
+    setTimeout(() => {
+      fetch("https://jsonplaceholder.typicode.com/posts")
+        .then((response) => response.json())
+        .then((json) => {
+          console.log(json);
+          setData(json);
+          setLoadingScr(true);
+
+          setTimeout(() => {
+            setcompleted(true);
+          }, 500);
+        });
+    }, 1000);
+  }, []);
 
   const fetchSurfData = async () => {
     setLoading(true);
@@ -82,6 +126,8 @@ export default function Recommendation() {
   };
 
   const handleFilterSelect = (filter) => {
+    setLoading(true);
+
     if (filters.includes(filter)) {
       setFilters(filters.filter((f) => f !== filter));
       setSelectedZone(""); // Reset selected zone when unchecking the filter
@@ -92,123 +138,43 @@ export default function Recommendation() {
 
   return (
     <>
-      <Container fluid>
-        <Row>
-          <Col md={2} className="d-none d-md-block">
-            {/*<Filter />*/}
-            <div>
-              <div className="container my-component">
-                <h3 className="filter-title">Filters:</h3>
-                <div className="filter-scrollview-content">
-                  <button
-                    className={`btn btn-outline-primary filter-button ${
-                      filters.includes("price") && "selected-filter-button"
-                    }`}
-                    onClick={() => handleFilterSelect("price")}
-                  >
-                    <span
-                      className={`filter-button-text ${
-                        filters.includes("price") &&
-                        "selected-filter-button-text"
-                      }`}
-                    >
-                      Price
-                    </span>
-                  </button>
-                  {filters.includes("price") && (
-                    <div className="price-range-container">
-                      <input
-                        className="form-control price-input"
-                        type="number"
-                        placeholder="Min Price"
-                        value={priceRange.minPrice}
-                        onChange={(event) =>
-                          handlePriceChange("minPrice", event.target.value)
-                        }
-                      />
-                      <span className="price-range-separator">-</span>
-                      <input
-                        className="form-control price-input"
-                        type="number"
-                        placeholder="Max Price"
-                        value={priceRange.maxPrice}
-                        onChange={(event) =>
-                          handlePriceChange("maxPrice", event.target.value)
-                        }
-                      />
-                    </div>
-                  )}
-                  <button
-                    className={`btn btn-outline-primary filter-button ${
-                      filters.includes("Zone") && "selected-filter-button"
-                    }`}
-                    onClick={() => handleFilterSelect("Zone")}
-                  >
-                    <span
-                      className={`filter-button-text ${
-                        filters.includes("Zone") &&
-                        "selected-filter-button-text"
-                      }`}
-                    >
-                      Zone
-                    </span>
-                  </button>
-                  {filters.includes("Zone") && (
-                    <div className="zone-container">
-                      <div className="filter-container">
-                        <button
-                          className="btn btn-outline-primary zone-input"
-                          onClick={() => setShowModal(true)}
-                        >
-                          {selectedZone ? selectedZone : "Select Zone"}
-                        </button>
-
-                        {/* Zone Modal */}
-                        {showModal && (
-                          <div className="modal-container">
-                            <div className="modal-content">
-                              <h3 className="modal-title">Select Zone</h3>
-                              <ul className="list-group">
-                                {zones.map((zone) => (
-                                  <li key={zone} className="list-group-item">
-                                    <button
-                                      className="btn btn-primary"
-                                      onClick={() => handleZoneSelect(zone)}
-                                    >
-                                      {zone}
-                                    </button>
-                                  </li>
-                                ))}
-                              </ul>
-                              <button
-                                className="btn btn-secondary btn-close-modal"
-                                onClick={() => setShowModal(false)}
-                              >
-                                Close
-                              </button>
-                            </div>
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                  )}
-                  {/* Add more filters as needed */}
+      {!completed ? (
+        <>
+          {!loading ? (
+            <Lottie
+              options={defaultOptions1}
+              style={{
+                marginTop: "5rem",
+                display: "flex",
+                justifyContent: "center",
+                alignContent: "center",
+              }}
+              height={300}
+              width={300}
+            />
+          ) : (
+            <Lottie options={defaultOptions2} height={300} width={300} />
+          )}
+        </>
+      ) : (
+        <>
+          <div className=" row">
+            <div className="col-md-2" style={{ fontSize: "12px" }}>
+              <Filter />
+            </div>
+            <div className="col-md-10">
+              <div className={`text-center ${styles.client}`}>
+                <div className="text-center position-relative d-flex justify-content-center align-items-center">
+                  <h2 className=" mb-0 position-absolute">Workspaces</h2>
+                  <h3 className=" mb-0">W</h3>
                 </div>
               </div>
+              <Cards />
             </div>
-          </Col>
-          <Col md={10}>
-            <div className={`text-center ${styles.client}`}>
-              <div className="text-center position-relative d-flex justify-content-center align-items-center">
-                <h2 className="mb-0 position-absolute">Workspaces</h2>
-                <h3 className="mb-0">W</h3>
-              </div>
-            </div>
-            <Cards />
-          </Col>
-        </Row>
-      </Container>
-      <Footer />
+          </div>
+          <Footer />
+        </>
+      )}
     </>
   );
 }

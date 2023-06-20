@@ -3,7 +3,7 @@ import styles from "./Workspace.module.css";
 import pic4 from "../../images/coworking.jpg";
 import Footer from "../Footer/Footer";
 import Reviews from "./Reviews/Reviews";
-import axios from "../../api/axios";
+import axios from "axios";
 
 export default function WorkSpace() {
   const pathSegments = window.location.pathname.split("/");
@@ -18,23 +18,25 @@ export default function WorkSpace() {
   const [sArea, setSArea] = useState([]);
 
   useEffect(() => {
-    axios.get(`api/places/${spaceId}`).then((response) => {
-      setRrooms(response.data.data.rooms);
-      setRules(response.data.data.rules);
-      setAddress(response.data.data.address);
-      setDailyRoutine(response.data.data.openingHours);
-      setSpaceName(response.data.data.placeName);
-      setBio(response.data.data.bio);
-      setSArea(response.data.data);
+    axios
+      .get(`https://spacezone-backend.onrender.com/api/places/${spaceId}`)
+      .then((response) => {
+        setRrooms(response.data.data.rooms);
+        setRules(response.data.data.rules);
+        setAddress(response.data.data.address);
+        setDailyRoutine(response.data.data.openingHours);
+        setSpaceName(response.data.data.placeName);
+        setBio(response.data.data.bio);
+        setSArea(response.data.data);
 
-      // console.log("workspace")
-      // console.log(response.data.data);
-      // console.log(response.data.data.rooms);
-      setPicture(response.data.data.placePhotos);
-      // console.log(rr);
-      console.log(response.data.data);
-      // console.log(response.data.data);
-    });
+        // console.log("workspace")
+        // console.log(response.data.data);
+        // console.log(response.data.data.rooms);
+        setPicture(response.data.data.placePhotos);
+        // console.log(rr);
+        console.log(response.data.data);
+        // console.log(response.data.data);
+      });
   }, []);
 
   // rooms, rules, address, dailyRoutine, spaceName, bio, sArea

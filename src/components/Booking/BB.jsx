@@ -16,6 +16,8 @@ export default function BB() {
   const [numOfSeats, setNumOfSeats] = useState(1);
   const [phone, setphone] = useState("");
   const [data, setData] = useState();
+  const [showDiv, setShowDiv] = useState(false);
+
   const [paymentMethod, setPaymentMethod] = useState("");
   const pathSegments = window.location.pathname.split("/");
   const roomID = pathSegments[pathSegments.length - 1];
@@ -35,6 +37,9 @@ export default function BB() {
       new getTime(endTime)
     );
   }
+  const handleClick = () => {
+    setShowDiv(!showDiv);
+  };
 
   //and here will put the api
 
@@ -247,7 +252,8 @@ export default function BB() {
 
                   <div className={`${styles.formBtn}`}>
                     <button
-                      onClick={BookThisRoom}
+                    onClick={handleClick}
+                      // onClick={BookThisRoom}
                       className={`${styles.submitBtn}`}
                     >
                       cash
@@ -256,6 +262,7 @@ export default function BB() {
                         // * place.price
                       )}
                     </button>
+                    {showDiv && <div><h2>DONEEEEEEEEEE</h2></div>}
                     <div className={`py-2 ${styles.separator}`}>
                       <hr className={`${styles.line}`} />
                       <p>OR</p>

@@ -140,7 +140,7 @@ export default function Recommendation() {
     <>
       {!completed ?  (
         <>
-          {!loadingScr ? (
+          {!loading ? (
             <Lottie options={defaultOptions1} style={{
              marginTop:"5rem", display:"flex" , justifyContent:"center", alignContent:"center"
             }} height={300} width={300} />
@@ -162,7 +162,7 @@ export default function Recommendation() {
             <h3 className=" mb-0">W</h3>
           </div>
         </div>
-       {(!loading && loadingScr )  && <Cards />}
+       <Cards />
         </div>
       </div>
       <Footer />

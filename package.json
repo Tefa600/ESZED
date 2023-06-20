@@ -31,6 +31,7 @@
     "react-router-dom": "^6.13.0",
     "react-router-hash-link": "^2.4.3",
     "react-scripts": "^5.0.1",
+    "reapop": "^4.2.1",
     "resuite": "^0.0.2",
     "rsuite": "^5.33.0",
     "useref": "^1.4.4",

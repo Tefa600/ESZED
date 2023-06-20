@@ -7,8 +7,8 @@ import { BsTelephone } from "react-icons/bs";
 function CardsUI(props) {
   console.log(props);
   return (
-    <div className={`${styles.cardContainer} col-lg-4 `}>
-      <div key={props._id} className={`my-3 mx-4 shadow ${styles.cardofws}`}>
+    <div className={`${styles.cardContainer} col-lg-6 `}>
+      <div key={props._id} className={`my-2 mx-1 shadow ${styles.cardofws}`}>
         <div className={`${styles.cardImgg}`}>
           <img
             src={props.imgsrc[0]}

@@ -54,9 +54,9 @@ export default function OwnerProfile({ children }) {
       name: "Expand Owner Details",
       icon: <FaUserCircle />,
     },
-    {
+   {
       function: () => {
-        setIsOwnerDetailActive(false);
+         setIsOwnerDetailActive(false);
         setIsOwnerHistoryActive(false);
         setWorkspaceFormActive(false);
         setIsShowSpacesActive(true);
@@ -98,11 +98,6 @@ export default function OwnerProfile({ children }) {
       function: "",
       name: "Reports",
       icon: <TbFileReport />,
-    },
-    {
-      function: "",
-      name: "",
-      icon: "",
     },
     {
       function: "/Home",

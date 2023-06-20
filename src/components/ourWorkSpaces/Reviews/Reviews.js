@@ -33,7 +33,7 @@ function Reviews(props) {
                 </div>
                 <div className={`${styles.revText}`}>
                     <div className="rating">
-                        {feed.feedbackNumber === 1 ? <i className="fa fa-star"/> : <></>}
+                        {feed.feedbackNumber === 1 ? <i className="fa fa-star" /> : <></>}
                         {feed.feedbackNumber === 2 ?
                             <div><i className="fa fa-star"/><i className="fa fa-star"/></div> : <></>}
                         {feed.feedbackNumber === 3 ?

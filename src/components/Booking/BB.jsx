@@ -16,6 +16,8 @@ export default function BB() {
   const [numOfSeats, setNumOfSeats] = useState(1);
   const [phone, setphone] = useState("");
   const [data, setData] = useState();
+  const [showDiv, setShowDiv] = useState(false);
+
   const [paymentMethod, setPaymentMethod] = useState("");
   const pathSegments = window.location.pathname.split("/");
   const roomID = pathSegments[pathSegments.length - 1];
@@ -70,6 +72,9 @@ export default function BB() {
       new getTime(endTime)
     );
   }
+  const handleClick = () => {
+    setShowDiv(!showDiv);
+  };
 
   //and here will put the api
 
@@ -198,19 +203,20 @@ export default function BB() {
                     {/*</div>*/}
                     <div>
                       <h1>Date</h1>
-                      <select onChange={handleDateChange}>
+                      <select    className={`w-175 ${styless.checkControl}`} onChange={handleDateChange}>
                         <option> Select a date</option>
                         {getNextSevenDays().map((date, index) => (
-                          <option key={index} value={date.toISOString()}>
+                  
+                          <option className={`${styless.selectArr}`} key={index} value={date.toISOString()}>
                             {date.toLocaleString().split(",")[0]}
                             {/*{date.toISOString()}*/}
                           </option>
                         ))}
                       </select>
                     </div>
-                    <div className="col-md-4">
+                    <div className="col-md-4 mt-2">
                       <span className={`${styles.formLabel}`}>Start</span>
-                      <div className="col-lg-2 my-2">
+                      <div className="col-lg-2">
                         <select
                           className={`w-175 ${styless.checkControl}`}
                           required
@@ -260,8 +266,8 @@ export default function BB() {
                           required
                           onChange={handlePayment}
                         >
-                          <span className={`${styles.selectArrow}`} />
-                          <option value selected hidden>
+                          <span className={`${styles.selectArr}`} />
+                          <option  className={` ${styless.checkControl}`}  value selected hidden>
                             Select Payment Method
                           </option>
                           <option>Cash </option>
@@ -315,7 +321,8 @@ export default function BB() {
 
                   <div className={`${styles.formBtn}`}>
                     <button
-                      onClick={BookThisRoom}
+                    onClick={handleClick}
+                      // onClick={BookThisRoom}
                       className={`${styles.submitBtn}`}
                     >
                       cash
@@ -324,6 +331,7 @@ export default function BB() {
                         // * place.price
                       )}
                     </button>
+                    {showDiv && <div><h2>DONEEEEEEEEEE</h2></div>}
                     <div className={`py-2 ${styles.separator}`}>
                       <hr className={`${styles.line}`} />
                       <p>OR</p>

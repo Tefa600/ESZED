@@ -51,7 +51,8 @@ const [profileData, setProfileData] = useState({
  
   return (
   
-  <div className="detailsContainer" style={{"background-color": "aliceblue", "borderRadius":"5%", "padding":"1rem"}}>
+  <div className="detailsContainer"
+   style={{"background-color": "aliceblue", "borderRadius":"5%", "padding":"1rem"}}>
       <h1 className="my-4">Profile Settings</h1>
       <div className={`row`}>
         <div className={`col-lg-5`}>

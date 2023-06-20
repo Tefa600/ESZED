@@ -2,7 +2,7 @@ body {
   text-decoration: none;
 }
 .breadcrumbSection {
-  padding-top: 70px;
+  padding-top: 20px;
   padding-bottom: 30px;
 }
 .breadcrumbText {
@@ -38,18 +38,19 @@ body {
 
 .roomDetailsSection {
   padding-top: 0;
-  padding-bottom: 80px;
+  padding-bottom: 30px;
 }
 .roomDetailsItem {
   margin-bottom: 50px;
 }
 .roomDetailsImg {
   width: 100%;
-  margin-bottom: 30px;
 }
 .rdText .rdTitle {
   overflow: hidden;
-  margin-bottom: 8px;
+  margin-bottom: 2px;
+  font-size: 20px;
+  font-weight: 700;
 }
 .rdText .rdTitle h3 {
   color: #2a4d69;
@@ -84,7 +85,7 @@ body {
 .rdText h2 {
   color: #4b86b4;
   font-weight: 700;
-  margin-bottom: 25px;
+  margin-bottom: 10px;
 }
 .rdText h2 span {
   font-family: "Cabin", sans-serif;
@@ -93,7 +94,7 @@ body {
   color: #19191a;
 }
 .rdText table {
-  margin-bottom: 32px;
+  margin-bottom: 20px;
 }
 .rdText table tbody tr td {
   font-size: 16px;
@@ -155,7 +156,7 @@ body {
   bottom: 17px;
 }
 .selectOption {
-  margin-bottom: 15px;
+  margin-bottom: 10px;
 }
 .selectOption label {
   font-size: 14px;

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import styles from "./Navbar.module.css";
 import Logo from "../../images/SpaceZone.svg";
@@ -6,8 +6,26 @@ import axios from "../../api/axios";
 import Cookies from "js-cookie";
 import { HashLink } from "react-router-hash-link";
 
-export default function Navbar() {
+export default function Navbar({ loginData }) {
+  console.log(loginData);
+
   const [userData, setUserData] = useState([]);
+  useEffect(() => {
+    axios
+      .get("api/user/me", {
+        headers: { Authorization: `Bearer ${sessionStorage.getItem("token")}` },
+      })
+      .then((e) => {
+        // axios.defaults.headers.common["Authorization"] = `Bearer ${e.data.token}`;
+        setUserData(e.data.data);
+        console.log(userData);
+      });
+  }, []);
+
+  function deleteCookie(name) {
+    document.cookie =
+      name + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+  }
 
   function Logout() {
     Cookies.remove("token");
@@ -22,6 +40,15 @@ export default function Navbar() {
 
   console.log(Cookies.expires);
 
+  deleteCookie("login_data");
+  axios
+    .post("api/user/logout")
+    .then((e) => {
+      console.log(e.status);
+    })
+    .catch();
+
+  console.log(Cookies.expires);
   return (
     // fixed-top add it to class name to make it fixed
     <nav
@@ -55,76 +82,28 @@ export default function Navbar() {
                 Home <span className="sr-only">(current)</span>
               </Link>
             </li>
-            {/*<li className="nav-item">*/}
-            {/*    <Link className="nav-link text-white" to="About">*/}
-            {/*        About*/}
-            {/*    </Link>*/}
-            {/*</li>*/}
-            {/*<li className="nav-item">*/}
-            {/*    <Link className="nav-link text-white" to="Services">*/}
-            {/*        Services*/}
-            {/*    </Link>*/}
-            {/*</li>*/}
-            {/*<li className="nav-item">*/}
-            {/*    <Link className="nav-link text-white" to="WorkSpace">*/}
-            {/*        Workspaces*/}
-            {/*    </Link>*/}
-            {/*</li>*/}
-
             <li className="nav-item">
-              <Link className="nav-link text-white" to="Recommendation">
-                Surf
+              <Link className="nav-link text-white" to="About">
+                About
               </Link>
             </li>
             <li className="nav-item">
-              <HashLink
-                className="nav-link text-white"
-                smooth
-                to={"Home/#About"}
-              >
-                About us
-              </HashLink>
-            </li>
-            <li className="nav-item">
-              <HashLink
-                className="nav-link text-white"
-                smooth
-                to="Home/#Our-Services"
-              >
+              <Link className="nav-link text-white" to="Services">
                 Services
-              </HashLink>
+              </Link>
             </li>
             <li className="nav-item">
-              <HashLink
-                className="nav-link  text-white"
-                smooth
-                to="Home/#Become-Partner"
-              >
-                Become Partner
-              </HashLink>
+              <Link className="nav-link text-white" to="Recommendation">
+                Workspaces
+              </Link>
             </li>
             <li className="nav-item">
-              <HashLink
-                className="nav-link  text-white"
-                smooth
-                to="Home/#Contact-us"
-              >
+              <Link className="nav-link  text-white" to="Contact">
                 Contact Us
-              </HashLink>
+              </Link>
             </li>
-            {/*<li className="nav-item">*/}
-            {/*    <Link className="nav-link  text-white" to="Contact">*/}
-            {/*        Contact Us*/}
-            {/*    </Link>*/}
-            {/*</li>*/}
           </ul>
           <ul className="list-unstyled d-flex mb-lg-0">
-            <div className="social-Links d-flex align-items-center">
-              <i className="fab fa-facebook"></i>
-              <i className="fab fa-instagram mx-3"></i>
-              <i className="fab fa-twitter"></i>
-            </div>
-
             <li className="nav-item mx-2">
               <Link className="nav-link fa fa-user" to="UserProfile"></Link>
             </li>
@@ -135,33 +114,41 @@ export default function Navbar() {
               ></Link>
             </li>
 
-            <li>
-              <div className={`${styles.dropdown}`}>
-                <button className={` px-2 ${styles.dropbtn}`}>
-                  Login
-                  <i className="fa fa-caret-down px-1 " />
-                </button>
-                <div className={`${styles.dropdownContent}`}>
-                  <a href="/Login">as a guest</a>
-                  <a href="/Ologin">as a owner</a>
-                </div>
-              </div>
-            </li>
-            <li>
-              <div className={`${styles.dropdown}`}>
-                <button className={`px-2 ${styles.dropbtn}`}>
-                  Sign up
-                  <i className="fa fa-caret-down px-1" />
-                </button>
-                <div className={`${styles.dropdownContent}`}>
-                  <a href="/Register">as a guest</a>
-                  <a href="/Osignup">as a owner</a>
-                </div>
-              </div>
-            </li>
-            <Link className="nav-link" onClick={Logout} to="/Login">
-              Logout
-            </Link>
+            {!loginData ? (
+              <>
+                {" "}
+                <li>
+                  <div className={`${styles.dropdown}`}>
+                    <button className={` px-2 ${styles.dropbtn}`}>
+                      Login
+                      <i className="fa fa-caret-down px-1 " />
+                    </button>
+                    <div className={`${styles.dropdownContent}`}>
+                      <a href="Login">as a guest</a>
+                      <a href="Ologin">as a owner</a>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <div className={`${styles.dropdown}`}>
+                    <button className={`px-2 ${styles.dropbtn}`}>
+                      Sign up
+                      <i className="fa fa-caret-down px-1" />
+                    </button>
+                    <div className={`${styles.dropdownContent}`}>
+                      <a href="Register">as a guest</a>
+                      <a href="Osignup">as a owner</a>
+                    </div>
+                  </div>
+                </li>
+              </>
+            ) : (
+              <li className="nav-item mx-2">
+                <Link className="nav-link" onClick={Logout} to="Login">
+                  Logout
+                </Link>
+              </li>
+            )}
           </ul>
         </div>
       </div>

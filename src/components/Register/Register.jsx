@@ -5,6 +5,7 @@ import { useNavigate } from "react-router";
 import RegBg from "../../images/3.jpg";
 import "./Register.css"
 import "../Login/Login.css"
+import { useNotifications } from 'reapop'
 
 export default function Register() {
   let [user, setUser] = useState({
@@ -18,6 +19,15 @@ export default function Register() {
   let [errorMsg, setErrorMsg] = useState("");
   let [errorList, setErrorList] = useState([]);
   let [loading, setLoading] = useState(false);
+    const { notify } = useNotifications()
+
+    const notification1 = {
+        id: '1',
+        title: 'Notification 1!',
+        message: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+        dismissible: true,
+        dismissAfter: 3,
+    }
   // let isShownRepeated;
   // let isShown;
   const navigate = useNavigate();
@@ -47,6 +57,7 @@ export default function Register() {
       setLoading(false);
     }
   }
+  
   function validateForm() {
     const schema = Joi.object({
       userName: Joi.string().required().min(3).max(25),
@@ -150,7 +161,7 @@ export default function Register() {
                             onChange={getFormValue}
                             name="number" maxLength={11}/>
                   </div>
-                  <button id="button">Sign Up
+                  <button id="button" onClick={() => alert('Registration done successfully')}>Sign Up
                     {loading ? (<i className="fa fa-spinner fa-spin text-white ps-2"></i>) : (Register)}</button>
                   <div className="signupContainer mt-1">
                     <p className="pt-3">Already have an acount?</p>
